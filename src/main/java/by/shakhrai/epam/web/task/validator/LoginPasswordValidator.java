@@ -5,18 +5,18 @@ public class LoginPasswordValidator {
 
 
     public static boolean validatoinLogin(String login) {
-        if (!login.matches(LOGIN_PASS_PATTERN)) {
-            return false;
+        if (login.matches(LOGIN_PASS_PATTERN)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 
     public static boolean validatoinPassword(String password) {
-        if (!password.matches(LOGIN_PASS_PATTERN)) {
-            return false;
+        if (password.matches(LOGIN_PASS_PATTERN)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 }
