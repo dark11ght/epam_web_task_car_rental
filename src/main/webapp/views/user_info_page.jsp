@@ -47,7 +47,7 @@
             <td>${user.login}</td>
             <td>${user.password}</td>
            <%-- <td>${user.email}</td>--%>
-            <td>${user.role}</td>
+            <td>${user.role.role}</td>
             <td>${user.activeStatus}</td>
            <%-- <td>${user.firstName}</td>
             <td>${user.lastName}</td>

@@ -23,7 +23,7 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
     public User getUserByLogin(String login) {
         User user = new User();
         String query = "SELECT user.id, login, password, role, active_status FROM user " +
-                "INNER JOIN role r on user.role_id = r.id WHERE user.login = ";
+                "INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
 
         try (
                 Connection connection = ConnectionJDBC.getConnection();
@@ -48,8 +48,6 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
             e.printStackTrace();
         }
 
-
-        System.out.println(user);
         return user;
 
     }

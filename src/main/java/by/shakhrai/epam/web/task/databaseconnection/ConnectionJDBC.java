@@ -20,7 +20,6 @@ public class ConnectionJDBC {
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            System.out.println("Loading driver ERROR " + e);
         }
     }
 
@@ -33,7 +32,6 @@ public class ConnectionJDBC {
         } catch (SQLException e) {
             throw new ConnectionException();
         }
-        System.out.println("get connect" + connection);
         return connection;
     }
 

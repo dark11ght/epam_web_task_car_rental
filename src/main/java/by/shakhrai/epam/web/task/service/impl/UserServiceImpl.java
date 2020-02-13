@@ -9,7 +9,7 @@ import by.shakhrai.epam.web.task.service.UserService;
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl instance;
     private ConnectionJDBC connectionJDBC;
-    private UserDAOImpl userDAO = new UserDAOImpl(connectionJDBC);
+    private UserDAO userDAO = new UserDAOImpl(connectionJDBC);
 
 
     public static UserServiceImpl getInstance(){
