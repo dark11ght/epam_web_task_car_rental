@@ -122,4 +122,7 @@ ALTER TABLE `order`
 ADD CONSTRAINT order_car_id_fk
 FOREIGN KEY (car_id) REFERENCES car (id);
 
+ALTER TABLE car MODIFY price DECIMAL NOT NULL;
+
+ALTER TABLE `order` MODIFY total_price DECIMAL NOT NULL;
 

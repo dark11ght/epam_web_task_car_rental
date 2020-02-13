@@ -1,10 +1,16 @@
 package by.shakhrai.epam.web.task.service.impl;
 
+import by.shakhrai.epam.web.task.dao.UserDAO;
+import by.shakhrai.epam.web.task.dao.impl.UserDAOImpl;
+import by.shakhrai.epam.web.task.databaseconnection.ConnectionJDBC;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.service.UserService;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl instance;
+    private ConnectionJDBC connectionJDBC;
+    private UserDAOImpl userDAO = new UserDAOImpl(connectionJDBC);
+
 
     public static UserServiceImpl getInstance(){
         if (instance == null){
@@ -16,11 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User signIn(String login, String password) {
-        //TODO delete this code.
-        User user = new User();
-        user.setId(1);
-        user.setLogin("pavel");
-        user.setPassword("pass");
+        User user = userDAO.getUserByLogin(login);
         if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
             return user;
         }
