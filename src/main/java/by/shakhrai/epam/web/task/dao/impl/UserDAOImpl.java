@@ -1,6 +1,5 @@
 package by.shakhrai.epam.web.task.dao.impl;
 
-import by.shakhrai.epam.web.task.dao.AbstractGenericDAO;
 import by.shakhrai.epam.web.task.dao.UserDAO;
 import by.shakhrai.epam.web.task.databaseconnection.ConnectionJDBC;
 import by.shakhrai.epam.web.task.entity.Role;
@@ -12,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
+public class UserDAOImpl implements UserDAO {
     private ConnectionJDBC connectionJDBC;
 
     public UserDAOImpl(ConnectionJDBC connectionJDBC) {

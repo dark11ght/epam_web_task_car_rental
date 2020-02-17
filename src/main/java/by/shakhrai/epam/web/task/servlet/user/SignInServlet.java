@@ -1,4 +1,4 @@
-package by.shakhrai.epam.web.task.servlet;
+package by.shakhrai.epam.web.task.servlet.user;
 
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.service.UserService;
@@ -22,18 +22,24 @@ public class SignInServlet extends HttpServlet {
         UserService userService = new UserServiceImpl();
         HttpSession session = request.getSession();
 
-
-
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-
 
         User user = userService.signIn(login, password);
         if (user != null) {
             request.setAttribute("user", user);
-            request.getRequestDispatcher("views/user_info_page.jsp").forward(request, response);
-            long userId = user.getId();
-            session.setAttribute("userId", userId);
+            if (user.getRole().getRole().equals("admin")) {
+                Long userId = user.getId();
+                session.setAttribute("id", userId);
+                request.setAttribute("user", user);
+                request.getRequestDispatcher("views/admin_page.jsp").forward(request, response);
+            } else {
+                Long id = user.getId();
+                session.setAttribute("id", id);
+                request.setAttribute("user", user);
+                request.getRequestDispatcher("views/user_page.jsp").forward(request, response);
+            }
+
         } else {
 
             String message = "User not found";

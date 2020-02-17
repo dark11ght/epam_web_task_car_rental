@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class CarModel implements Serializable {
     private int id;
+    private String modelName;
     private CarMark carMark;
 
     public CarModel() {
@@ -16,6 +17,14 @@ public class CarModel implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 
     public CarMark getCarMark() {
@@ -32,18 +41,20 @@ public class CarModel implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         CarModel carModel = (CarModel) o;
         return id == carModel.id &&
+                Objects.equals(modelName, carModel.modelName) &&
                 Objects.equals(carMark, carModel.carMark);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, carMark);
+        return Objects.hash(id, modelName, carMark);
     }
 
     @Override
     public String toString() {
         return "CarModel{" +
                 "id=" + id +
+                ", modelName='" + modelName + '\'' +
                 ", carMark=" + carMark +
                 '}';
     }

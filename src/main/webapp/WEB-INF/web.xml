@@ -14,7 +14,7 @@
     <resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
   </resource-env-ref>
 
-  <error-page>
+  <!--<error-page>
     <error-code>404</error-code>
     <location>/views/404.jsp</location>
   </error-page>
@@ -32,7 +32,7 @@
   <error-page>
     <exception-type>java.lang.Throwable</exception-type>
     <location>/views/informer.jsp</location>
-  </error-page>
+  </error-page>-->
 
   <session-config>
     <session-timeout>5</session-timeout>
@@ -43,7 +43,7 @@
   <!--SignInServlet-->
   <servlet>
     <servlet-name>SignInServlet</servlet-name>
-    <servlet-class>by.shakhrai.epam.web.task.servlet.SignInServlet</servlet-class>
+    <servlet-class>by.shakhrai.epam.web.task.servlet.user.SignInServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -51,6 +51,18 @@
     <url-pattern>/SignInServlet</url-pattern>
   </servlet-mapping>
   <!--SignInServlet-->
+
+  <!--GetAllCarsServlet-->
+  <servlet>
+    <servlet-name>GetAllCarsServlet</servlet-name>
+    <servlet-class>by.shakhrai.epam.web.task.servlet.car.GetAllCarsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>GetAllCarsServlet</servlet-name>
+    <url-pattern>/GetAllCarsServlet</url-pattern>
+  </servlet-mapping>
+  <!--GetAllCarsServlet-->
 
 
 </web-app>

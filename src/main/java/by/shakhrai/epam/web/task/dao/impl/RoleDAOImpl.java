@@ -1,7 +1,6 @@
 package by.shakhrai.epam.web.task.dao.impl;
 
-import by.shakhrai.epam.web.task.dao.AbstractGenericDAO;
-import by.shakhrai.epam.web.task.entity.Role;
+import by.shakhrai.epam.web.task.dao.RoleDAO;
 
-public class RoleDAOImpl extends AbstractGenericDAO<Role> implements RoleDAO{
+public class RoleDAOImpl implements RoleDAO {
 }

@@ -126,3 +126,29 @@ ALTER TABLE car MODIFY price DECIMAL NOT NULL;
 
 ALTER TABLE `order` MODIFY total_price DECIMAL NOT NULL;
 
+INSERT INTO `car_renta`.`country_of_manufacture` (`id`, `country`) VALUES (1, 'germany');
+INSERT INTO `car_renta`.`country_of_manufacture` (`id`, `country`) VALUES (2, 'france');
+INSERT INTO `car_renta`.`country_of_manufacture` (`id`, `country`) VALUES (3, 'russia');
+INSERT INTO `car_renta`.`car_mark` (`id`, `mark`, `country_of_manufacture_id`) VALUES (1, 'volkswagen', 1);
+INSERT INTO `car_renta`.`car_mark` (`id`, `mark`, `country_of_manufacture_id`) VALUES (2, 'citroen', 2);
+INSERT INTO `car_renta`.`car_mark` (`id`, `mark`, `country_of_manufacture_id`) VALUES (3, 'renault', 2);
+INSERT INTO `car_renta`.`car_mark` (`id`, `mark`, `country_of_manufacture_id`) VALUES (4, 'lada', 3);
+INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (1, 'polo');
+INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (2, 'c4');
+INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (3, 'c5');
+INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (4, 'vesta');
+INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (5, 'granta');
+INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (6, 'logan')
+INSERT INTO `car_renta`.`car_status` (`id`, `car_status`) VALUES (1, 'free');
+INSERT INTO `car_renta`.`car_status` (`id`, `car_status`) VALUES (2, 'busy');
+INSERT INTO `car_renta`.`car_status` (`id`, `car_status`) VALUES (3, 'service');
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (1, 1, 1, 2563, 10, 1);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (2, 1, 1, 9564, 10, 2);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (3, 2, 2, 7896, 7, 1);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (4, 2, 2, 10269, 7, 1);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (5, 2, 3, 5697, 15, 1);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (6, 4, 4, 56897, 10, 2);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (7, 4, 4, 2356, 10, 1);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (8, 4, 5, 12131, 5, 1);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (9, 4, 5, 12345, 5, 3);
+INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (10, 3, 6, 1564, 8, 1);

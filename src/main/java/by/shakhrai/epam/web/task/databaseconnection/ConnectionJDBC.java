@@ -20,6 +20,7 @@ public class ConnectionJDBC {
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
+
         }
     }
 
