@@ -2,14 +2,14 @@ package by.shakhrai.epam.web.task.service.impl;
 
 import by.shakhrai.epam.web.task.dao.UserDAO;
 import by.shakhrai.epam.web.task.dao.impl.UserDAOImpl;
-import by.shakhrai.epam.web.task.databaseconnection.ConnectionJDBC;
 import by.shakhrai.epam.web.task.entity.User;
+import by.shakhrai.epam.web.task.factory.DaoFactory;
 import by.shakhrai.epam.web.task.service.UserService;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl instance;
-    private ConnectionJDBC connectionJDBC;
-    private UserDAO userDAO = new UserDAOImpl(connectionJDBC);
+    private DaoFactory daoFactory = DaoFactory.getInstance();
+    private UserDAO userDAO = daoFactory.getUserDao();
 
 
     public static UserServiceImpl getInstance(){

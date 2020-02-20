@@ -1,3 +1,4 @@
+/*
 package by.shakhrai.epam.web.task.databaseconnection;
 
 import by.shakhrai.epam.web.task.exception.ConnectionException;
@@ -6,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static by.shakhrai.epam.web.task.databaseconnection.MySQLInit.*;
+import static by.shakhrai.epam.web.task.databaseconnection.impl.MySQLInit.*;
 
 public class ConnectionJDBC {
 
@@ -38,3 +39,4 @@ public class ConnectionJDBC {
 
 
 }
+*/

@@ -1,21 +1,20 @@
 package by.shakhrai.epam.web.task.dao.impl;
 
 import by.shakhrai.epam.web.task.dao.UserDAO;
-import by.shakhrai.epam.web.task.databaseconnection.ConnectionJDBC;
+import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
+import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolImpl;
 import by.shakhrai.epam.web.task.entity.Role;
 import by.shakhrai.epam.web.task.entity.User;
-import by.shakhrai.epam.web.task.exception.ConnectionException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAOImpl implements UserDAO {
-    private ConnectionJDBC connectionJDBC;
+    private ConnectionPool connectionPool = new ConnectionPoolImpl();
+    //private Connection connection = connectionPool.getConnection();
 
-    public UserDAOImpl(ConnectionJDBC connectionJDBC) {
-        this.connectionJDBC = connectionJDBC;
+    public UserDAOImpl() {
     }
 
     @Override
@@ -25,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
                 "INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
 
         try (
-                Connection connection = ConnectionJDBC.getConnection();
+                Connection connection = connectionPool.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query + "\'" + login + "\'");
                 ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -41,8 +40,6 @@ public class UserDAOImpl implements UserDAO {
                 user.setActiveStatus(resultSet.getBoolean("active_status"));
             }
 
-        } catch (ConnectionException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }

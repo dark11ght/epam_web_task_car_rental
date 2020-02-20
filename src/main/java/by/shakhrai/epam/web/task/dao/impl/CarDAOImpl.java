@@ -1,12 +1,12 @@
 package by.shakhrai.epam.web.task.dao.impl;
 
 import by.shakhrai.epam.web.task.dao.CarDAO;
-import by.shakhrai.epam.web.task.databaseconnection.ConnectionJDBC;
+import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
+import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolImpl;
 import by.shakhrai.epam.web.task.entity.Car;
 import by.shakhrai.epam.web.task.entity.CarMark;
 import by.shakhrai.epam.web.task.entity.CarModel;
 import by.shakhrai.epam.web.task.entity.CarStatus;
-import by.shakhrai.epam.web.task.exception.ConnectionException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,10 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAOImpl implements CarDAO {
-    private ConnectionJDBC connectionJDBC;
+    private ConnectionPool connectionPool = new ConnectionPoolImpl();
 
-    public CarDAOImpl(ConnectionJDBC connectionJDBC) {
-        this.connectionJDBC = connectionJDBC;
+    public CarDAOImpl() {
     }
 
     @Override
@@ -31,7 +30,7 @@ public class CarDAOImpl implements CarDAO {
 
         try {
             try (
-                    Connection connection = ConnectionJDBC.getConnection();
+                    Connection connection = connectionPool.getConnection();
                     PreparedStatement preparedStatement = connection.prepareStatement(query);
                     ResultSet resultSet = preparedStatement.executeQuery();
             ) {
@@ -52,8 +51,6 @@ public class CarDAOImpl implements CarDAO {
                     car.setCarStatus(carStatus);
                     cars.add(car);
                 }
-            } catch (ConnectionException e) {
-                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();

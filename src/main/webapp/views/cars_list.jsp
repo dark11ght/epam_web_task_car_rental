@@ -17,7 +17,7 @@
             <a class="nav-link" href="sign_page.jsp">Вход</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="regpage.jsp">Регистрация</a>
+            <a class="nav-link" href="views/regpage.jsp">Регистрация</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="LogoutServlet">Выход</a>
@@ -49,7 +49,7 @@
                             <li>Цена - ${car.price}</li>
                             <li>Статус - ${car.carStatus.carStatus}</li>
                         </ul>
-                       <%-- <c:if test="${car.carStatus.carStatus.equals('free')}">
+                        <c:if test="${car.carStatus.carStatus.equals('free')}">
                         <form action="PreCreateOrderServlet" method="get">
                         <button type="submit" name="car_id" value="${car.id}" class="btn btn-lg btn-block btn-outline-primary">Заказать</button>
                         </form>
@@ -58,7 +58,7 @@
                             <form action="PreCreateOrderServlet" method="get">
                                 <button type="submit" class="btn btn-lg btn-block btn-outline-secondary" disabled>Заказать</button>
                             </form>
-                        </c:if>--%>
+                        </c:if>
                         <form action="GetCarByIdServlet" method="get">
                             <button type="submit" name="car_id" value="${car.id}" class="btn btn-lg btn-block btn-outline-primary">Просмотр</button>
                         </form>
