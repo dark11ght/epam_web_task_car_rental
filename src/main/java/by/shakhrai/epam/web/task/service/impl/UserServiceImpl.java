@@ -8,6 +8,7 @@ import by.shakhrai.epam.web.task.service.UserService;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl instance;
+
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private UserDAO userDAO = daoFactory.getUserDao();
 

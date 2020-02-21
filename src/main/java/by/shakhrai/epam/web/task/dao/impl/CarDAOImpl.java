@@ -1,8 +1,9 @@
+/*
 package by.shakhrai.epam.web.task.dao.impl;
 
 import by.shakhrai.epam.web.task.dao.CarDAO;
 import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
-import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolImpl;
+import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPool;
 import by.shakhrai.epam.web.task.entity.Car;
 import by.shakhrai.epam.web.task.entity.CarMark;
 import by.shakhrai.epam.web.task.entity.CarModel;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAOImpl implements CarDAO {
-    private ConnectionPool connectionPool = new ConnectionPoolImpl();
+    private ConnectionPool connectionPool = new ConnectionPool();
 
     public CarDAOImpl() {
     }
@@ -58,3 +59,4 @@ public class CarDAOImpl implements CarDAO {
         return cars;
     }
 }
+*/

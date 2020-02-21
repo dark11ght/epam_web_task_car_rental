@@ -11,7 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static by.shakhrai.epam.web.task.databaseconnection.impl.MySQLInit.DB_DRIVER;
+
 public class SignInServlet extends HttpServlet {
+
+  /*  @Override
+    public void init() throws ServletException {
+        try {
+            Class.forName(DB_DRIVER).newInstance();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
+        }
+    }*/
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         super.doGet(request, response);

@@ -1,3 +1,4 @@
+/*
 package by.shakhrai.epam.web.task.service.impl;
 
 import by.shakhrai.epam.web.task.dao.CarDAO;
@@ -31,3 +32,4 @@ public class CarServiceImpl implements CarService {
         return new ArrayList<>(carsDAO);
     }
 }
+*/

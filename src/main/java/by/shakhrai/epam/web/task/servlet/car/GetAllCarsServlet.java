@@ -1,3 +1,4 @@
+/*
 package by.shakhrai.epam.web.task.servlet.car;
 
         import by.shakhrai.epam.web.task.entity.Car;
@@ -32,3 +33,4 @@ public class GetAllCarsServlet extends HttpServlet {
         super.doPost(request, response);
     }
 }
+*/

@@ -1,18 +1,17 @@
 package by.shakhrai.epam.web.task.dao.impl;
 
 import by.shakhrai.epam.web.task.dao.UserDAO;
-import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
-import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolImpl;
+import by.shakhrai.epam.web.task.databaseconnection.impl.DataSource;
 import by.shakhrai.epam.web.task.entity.Role;
 import by.shakhrai.epam.web.task.entity.User;
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class UserDAOImpl implements UserDAO {
-    private ConnectionPool connectionPool = new ConnectionPoolImpl();
-    //private Connection connection = connectionPool.getConnection();
 
     public UserDAOImpl() {
     }
@@ -22,15 +21,14 @@ public class UserDAOImpl implements UserDAO {
         User user = new User();
         String query = "SELECT user.id, login, password, role, active_status FROM user " +
                 "INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
+        Connection connection = DataSource.getConnection();
+        System.out.println("DataSource.getConnection() " + DataSource.getConnection());
 
         try (
-                Connection connection = connectionPool.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query + "\'" + login + "\'");
                 ResultSet resultSet = preparedStatement.executeQuery();
-
         ) {
-
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 Role role = new Role();
                 role.setRole(resultSet.getString("role"));
                 user.setId(resultSet.getLong("id"));
@@ -42,8 +40,11 @@ public class UserDAOImpl implements UserDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DataSource.releaseConnection(connection);
         }
 
+        System.out.println("user " + user);
         return user;
 
     }
