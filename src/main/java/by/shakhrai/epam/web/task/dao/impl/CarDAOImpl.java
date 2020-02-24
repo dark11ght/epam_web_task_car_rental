@@ -1,9 +1,7 @@
-/*
 package by.shakhrai.epam.web.task.dao.impl;
 
 import by.shakhrai.epam.web.task.dao.CarDAO;
-import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
-import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPool;
+import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolUse;
 import by.shakhrai.epam.web.task.entity.Car;
 import by.shakhrai.epam.web.task.entity.CarMark;
 import by.shakhrai.epam.web.task.entity.CarModel;
@@ -17,21 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAOImpl implements CarDAO {
-    private ConnectionPool connectionPool = new ConnectionPool();
 
     public CarDAOImpl() {
     }
 
     @Override
-    public List<Car> getAllCar(){
+    public List<Car> getAllCar() {
         List<Car> cars = new ArrayList<>();
         String query = "SELECT car.id, m2.mark, a.model, millage, price, auto.car_status from car\n" +
                 "join car_mark m2 on car.mark_id = m2.id join car_model a on\n" +
                 "car.model_id = a.id join car_status auto on car.car_status_id = auto.id;";
-
+        Connection connection = ConnectionPoolUse.getConnection();
         try {
             try (
-                    Connection connection = connectionPool.getConnection();
                     PreparedStatement preparedStatement = connection.prepareStatement(query);
                     ResultSet resultSet = preparedStatement.executeQuery();
             ) {
@@ -55,8 +51,9 @@ public class CarDAOImpl implements CarDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            ConnectionPoolUse.releaseConnection(connection);
         }
         return cars;
     }
 }
-*/

@@ -1,7 +1,6 @@
 package by.shakhrai.epam.web.task.service.impl;
 
 import by.shakhrai.epam.web.task.dao.UserDAO;
-import by.shakhrai.epam.web.task.dao.impl.UserDAOImpl;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.factory.DaoFactory;
 import by.shakhrai.epam.web.task.service.UserService;

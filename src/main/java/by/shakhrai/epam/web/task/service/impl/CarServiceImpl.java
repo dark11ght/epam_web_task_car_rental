@@ -1,12 +1,9 @@
-/*
 package by.shakhrai.epam.web.task.service.impl;
 
 import by.shakhrai.epam.web.task.dao.CarDAO;
 import by.shakhrai.epam.web.task.dao.UserDAO;
-import by.shakhrai.epam.web.task.dao.impl.CarDAOImpl;
-import by.shakhrai.epam.web.task.dao.impl.UserDAOImpl;
-import by.shakhrai.epam.web.task.databaseconnection.ConnectionJDBC;
 import by.shakhrai.epam.web.task.entity.Car;
+import by.shakhrai.epam.web.task.factory.DaoFactory;
 import by.shakhrai.epam.web.task.service.CarService;
 
 import java.util.ArrayList;
@@ -14,12 +11,11 @@ import java.util.List;
 
 public class CarServiceImpl implements CarService {
     private static CarServiceImpl instance;
-    private ConnectionJDBC connectionJDBC;
-    private CarDAO userDAO = new CarDAOImpl(connectionJDBC);
+    private DaoFactory daoFactory = DaoFactory.getInstance();
+    private CarDAO carDAOImpl = daoFactory.getCarDao();
 
-
-    public static CarServiceImpl getInstance(){
-        if (instance == null){
+    public static CarServiceImpl getInstance() {
+        if (instance == null) {
             instance = new CarServiceImpl();
         }
         return instance;
@@ -27,9 +23,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public ArrayList<Car> getAllCars() {
-        List<Car> carsDAO = userDAO.getAllCar();
+        List<Car> carsDAO = carDAOImpl.getAllCar();
 
         return new ArrayList<>(carsDAO);
     }
 }
-*/

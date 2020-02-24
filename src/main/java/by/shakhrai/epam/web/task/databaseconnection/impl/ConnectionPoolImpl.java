@@ -1,7 +1,6 @@
 package by.shakhrai.epam.web.task.databaseconnection.impl;
 
 import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
-
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -13,9 +12,6 @@ import static by.shakhrai.epam.web.task.databaseconnection.impl.MySQLInit.*;
 
 
 public class ConnectionPoolImpl implements ConnectionPool {
-    private String url;
-    private String user;
-    private String pass;
 
     private List<Connection> connectionPoll;
     private List<Connection> usedConnection = new ArrayList<>();
@@ -44,7 +40,6 @@ public class ConnectionPoolImpl implements ConnectionPool {
 
     @Override
     public Connection getConnection() {
-        System.out.println(" get connection ");
         Connection connection = connectionPoll.remove(connectionPoll.size() - 1);
         usedConnection.add(connection);
         return connection;
