@@ -14,7 +14,7 @@
     <resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
   </resource-env-ref>
 
-  <error-page>
+  <!--<error-page>
     <error-code>404</error-code>
     <location>/views/404.jsp</location>
   </error-page>
@@ -32,7 +32,7 @@
   <error-page>
     <exception-type>java.lang.Throwable</exception-type>
     <location>/views/informer.jsp</location>
-  </error-page>
+  </error-page>-->
 
   <session-config>
     <session-timeout>5</session-timeout>

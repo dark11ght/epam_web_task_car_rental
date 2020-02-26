@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static by.shakhrai.epam.web.task.databaseconnection.impl.MySQLInit.*;
 
@@ -15,6 +16,8 @@ public class ConnectionPoolImpl implements ConnectionPool {
 
     private List<Connection> connectionPoll;
     private List<Connection> usedConnection = new ArrayList<>();
+    private static AtomicBoolean isNullConnectionPool = new AtomicBoolean(true);
+    private static ConnectionPoolImpl connectionPool;
 
     private static void init() {
         try {
@@ -25,13 +28,19 @@ public class ConnectionPoolImpl implements ConnectionPool {
     }
 
 
-    public static ConnectionPoolImpl create() {
-        ConnectionPoolImpl.init();
-        List<Connection> pool = new ArrayList<>(MAX_POOL);
-        for (int i = 0; i < MAX_POOL; i++) {
-            pool.add(createConnection());
+    static ConnectionPoolImpl create() {
+        if (isNullConnectionPool.get()){
+            System.out.println(isNullConnectionPool.toString());
+            ConnectionPoolImpl.init();
+            List<Connection> pool = new ArrayList<>(MAX_POOL);
+            for (int i = 0; i < MAX_POOL; i++) {
+                pool.add(createConnection());
+            }
+            isNullConnectionPool.set(false);
+            connectionPool = new ConnectionPoolImpl(pool);
+            return connectionPool;
         }
-        return new ConnectionPoolImpl(pool);
+        return connectionPool;
     }
 
     private ConnectionPoolImpl(List<Connection> connectionPoll) {
