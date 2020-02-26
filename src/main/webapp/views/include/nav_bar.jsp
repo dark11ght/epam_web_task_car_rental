@@ -33,6 +33,7 @@
                         </li>
                     </c:if>
 
+
                     <c:if test="${user.role.role.equals('user')}">
                         <li class="nav-item">
                             <a class="nav-link" href="get_user_info_page">Профиль</a>
