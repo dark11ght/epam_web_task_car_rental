@@ -138,7 +138,7 @@ INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (2, 'c4');
 INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (3, 'c5');
 INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (4, 'vesta');
 INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (5, 'granta');
-INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (6, 'logan')
+INSERT INTO `car_renta`.`car_model` (`id`, `model`) VALUES (6, 'logan');
 INSERT INTO `car_renta`.`car_status` (`id`, `car_status`) VALUES (1, 'free');
 INSERT INTO `car_renta`.`car_status` (`id`, `car_status`) VALUES (2, 'busy');
 INSERT INTO `car_renta`.`car_status` (`id`, `car_status`) VALUES (3, 'service');
@@ -152,3 +152,7 @@ INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, 
 INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (8, 4, 5, 12131, 5, 1);
 INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (9, 4, 5, 12345, 5, 3);
 INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (10, 3, 6, 1564, 8, 1);
+INSERT INTO `car_renta`.`role` (`id`, `role`) VALUES (1, 'user');
+INSERT INTO `car_renta`.`role` (`id`, `role`) VALUES (2, 'admin');
+INSERT INTO `car_renta`.`user` (`id`, `login`, `password`, `role_id`, `active_status`) VALUES (1, 'pavel', 'pass', 2, DEFAULT);
+INSERT INTO `car_renta`.`user` (`id`, `login`, `password`, `role_id`, `active_status`) VALUES (2, 'ivan', 'qqqwww', DEFAULT, DEFAULT);
