@@ -1,6 +1,8 @@
 package by.shakhrai.epam.web.task.databaseconnection.impl;
 
 import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
+import by.shakhrai.epam.web.task.exception.ConnectionException;
+
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -19,32 +21,48 @@ public class ConnectionPoolImpl implements ConnectionPool {
     private static AtomicBoolean isNullConnectionPool = new AtomicBoolean(true);
     private static ConnectionPoolImpl connectionPool;
 
-    private static void init() {
+
+    private ConnectionPoolImpl(List<Connection> connectionPoll) {
+        this.connectionPoll = connectionPoll;
+    }
+
+    private static void init() throws ConnectionException {
         try {
             Class.forName(DB_DRIVER);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new ConnectionException("DB_Driver not found");
         }
     }
 
-
-    static ConnectionPoolImpl create() {
-        if (isNullConnectionPool.get()){
-            System.out.println(isNullConnectionPool.toString());
+    static ConnectionPoolImpl initConnectionPool() throws ConnectionException {
+        if (isNullConnectionPool.get()) {
             ConnectionPoolImpl.init();
-            List<Connection> pool = new ArrayList<>(MAX_POOL);
-            for (int i = 0; i < MAX_POOL; i++) {
-                pool.add(createConnection());
-            }
-            isNullConnectionPool.set(false);
-            connectionPool = new ConnectionPoolImpl(pool);
-            return connectionPool;
+            return ConnectionPoolImpl.create();
         }
         return connectionPool;
     }
 
-    private ConnectionPoolImpl(List<Connection> connectionPoll) {
-        this.connectionPoll = connectionPoll;
+    private static ConnectionPoolImpl create() throws ConnectionException {
+        List<Connection> pool = new ArrayList<>(MAX_POOL);
+        for (int i = 0; i < MAX_POOL; i++) {
+            pool.add(createConnection());
+        }
+
+        return connectionPool = new ConnectionPoolImpl(pool);
+    }
+
+    private static Connection createConnection() throws ConnectionException {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, USER_LOGIN, USER_PASS);
+        } catch (SQLException e) {
+            throw new ConnectionException("Connection is fail");
+        }
+        return connection;
+    }
+
+    public int getSize() {
+        return connectionPoll.size() + usedConnection.size();
     }
 
     @Override
@@ -60,17 +78,4 @@ public class ConnectionPoolImpl implements ConnectionPool {
         return usedConnection.remove(connection);
     }
 
-    private static Connection createConnection() {
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(DB_URL, USER_LOGIN, USER_PASS);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
-
-    public int getSize() {
-        return connectionPoll.size() + usedConnection.size();
-    }
 }

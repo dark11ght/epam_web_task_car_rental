@@ -1,11 +1,20 @@
 package by.shakhrai.epam.web.task.databaseconnection.impl;
 
 import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
+import by.shakhrai.epam.web.task.exception.ConnectionException;
 
 import java.sql.Connection;
 
-public class ConnectionPoolUse {
-    private static ConnectionPool connectionPool = ConnectionPoolImpl.create();
+public class ConnectionPoolProxy {
+    private static ConnectionPool connectionPool;
+
+    static {
+        try {
+            connectionPool = ConnectionPoolImpl.initConnectionPool();
+        } catch (ConnectionException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Connection getConnection() {
         return connectionPool.getConnection();

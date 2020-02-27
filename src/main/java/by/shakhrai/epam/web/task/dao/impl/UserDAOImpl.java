@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.dao.impl;
 
 import by.shakhrai.epam.web.task.dao.UserDAO;
-import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolUse;
+import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolProxy;
 import by.shakhrai.epam.web.task.entity.Role;
 import by.shakhrai.epam.web.task.entity.User;
 import java.sql.Connection;
@@ -21,7 +21,7 @@ public class UserDAOImpl implements UserDAO {
         User user = new User();
         String query = "SELECT user.id, login, password, role, active_status FROM user " +
                 "INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
-        Connection connection = ConnectionPoolUse.getConnection();
+        Connection connection = ConnectionPoolProxy.getConnection();
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(query + "\'" + login + "\'");
@@ -40,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionPoolUse.releaseConnection(connection);
+            ConnectionPoolProxy.releaseConnection(connection);
         }
 
         return user;
