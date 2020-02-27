@@ -6,6 +6,8 @@ import by.shakhrai.epam.web.task.entity.Car;
 import by.shakhrai.epam.web.task.entity.CarMark;
 import by.shakhrai.epam.web.task.entity.CarModel;
 import by.shakhrai.epam.web.task.entity.CarStatus;
+import by.shakhrai.epam.web.task.exception.ConnectionException;
+import by.shakhrai.epam.web.task.exception.DAOException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,17 +17,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAOImpl implements CarDAO {
-
+    ConnectionPoolProxy connectionPoolProxy;
     public CarDAOImpl() {
     }
 
     @Override
-    public List<Car> getAllCar() {
+    public List<Car> getAllCar() throws DAOException {
         List<Car> cars = new ArrayList<>();
         String query = "SELECT car.id, m2.mark, a.model, millage, price, auto.car_status from car\n" +
                 "join car_mark m2 on car.mark_id = m2.id join car_model a on\n" +
                 "car.model_id = a.id join car_status auto on car.car_status_id = auto.id;";
-        Connection connection = ConnectionPoolProxy.getConnection();
+        Connection connection = null;
+        try {
+            connection = connectionPoolProxy.getConnection();
+        } catch (ConnectionException e) {
+            throw new DAOException("Not found free connection");
+        }
         try {
             try (
                     PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -52,7 +59,7 @@ public class CarDAOImpl implements CarDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionPoolProxy.releaseConnection(connection);
+            connectionPoolProxy.releaseConnection(connection);
         }
         return cars;
     }

@@ -2,6 +2,7 @@ package by.shakhrai.epam.web.task.service.impl;
 
 import by.shakhrai.epam.web.task.dao.UserDAO;
 import by.shakhrai.epam.web.task.entity.User;
+import by.shakhrai.epam.web.task.exception.DAOException;
 import by.shakhrai.epam.web.task.factory.DaoFactory;
 import by.shakhrai.epam.web.task.service.UserService;
 
@@ -22,7 +23,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User signIn(String login, String password) {
-        User user = userDAO.getUserByLogin(login);
+        User user = null;
+        try {
+            user = userDAO.getUserByLogin(login);
+        } catch (DAOException e) {
+            e.printStackTrace();//TODO write Exception
+        }
         if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
             return user;
         }

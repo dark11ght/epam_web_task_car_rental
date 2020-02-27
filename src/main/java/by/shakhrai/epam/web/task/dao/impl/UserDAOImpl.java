@@ -4,6 +4,9 @@ import by.shakhrai.epam.web.task.dao.UserDAO;
 import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolProxy;
 import by.shakhrai.epam.web.task.entity.Role;
 import by.shakhrai.epam.web.task.entity.User;
+import by.shakhrai.epam.web.task.exception.ConnectionException;
+import by.shakhrai.epam.web.task.exception.DAOException;
+
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -12,16 +15,21 @@ import java.sql.SQLException;
 
 
 public class UserDAOImpl implements UserDAO {
-
+    private ConnectionPoolProxy connectionPoolProxy;
     public UserDAOImpl() {
     }
 
     @Override
-    public User getUserByLogin(String login) {
+    public User getUserByLogin(String login) throws DAOException {
         User user = new User();
         String query = "SELECT user.id, login, password, role, active_status FROM user " +
                 "INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
-        Connection connection = ConnectionPoolProxy.getConnection();
+        Connection connection = null;
+        try {
+            connection = connectionPoolProxy.getConnection();
+        } catch (ConnectionException e) {
+            throw new DAOException("Not found free connection");
+        }
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(query + "\'" + login + "\'");
@@ -40,7 +48,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionPoolProxy.releaseConnection(connection);
+            connectionPoolProxy.releaseConnection(connection);
         }
 
         return user;

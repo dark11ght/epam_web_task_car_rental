@@ -3,6 +3,7 @@ package by.shakhrai.epam.web.task.service.impl;
 import by.shakhrai.epam.web.task.dao.CarDAO;
 import by.shakhrai.epam.web.task.dao.UserDAO;
 import by.shakhrai.epam.web.task.entity.Car;
+import by.shakhrai.epam.web.task.exception.DAOException;
 import by.shakhrai.epam.web.task.factory.DaoFactory;
 import by.shakhrai.epam.web.task.service.CarService;
 
@@ -23,7 +24,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public ArrayList<Car> getAllCars() {
-        List<Car> carsDAO = carDAOImpl.getAllCar();
+        List<Car> carsDAO = null;
+        try {
+            carsDAO = carDAOImpl.getAllCar();
+        } catch (DAOException e) {
+            e.printStackTrace();//TODO write Exception
+        }
 
         return new ArrayList<>(carsDAO);
     }

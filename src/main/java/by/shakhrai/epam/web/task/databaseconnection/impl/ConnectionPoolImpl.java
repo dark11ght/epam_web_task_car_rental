@@ -15,16 +15,26 @@ import static by.shakhrai.epam.web.task.databaseconnection.impl.MySQLInit.*;
 
 
 public class ConnectionPoolImpl implements ConnectionPool {
+    private static ConnectionPoolImpl instance;
 
     private List<Connection> connectionPoll;
     private List<Connection> usedConnection = new ArrayList<>();
     private static AtomicBoolean isNullConnectionPool = new AtomicBoolean(true);
-    private static ConnectionPoolImpl connectionPool;
+
 
 
     private ConnectionPoolImpl(List<Connection> connectionPoll) {
         this.connectionPoll = connectionPoll;
     }
+
+    static ConnectionPoolImpl initConnectionPool() throws ConnectionException {
+        if (isNullConnectionPool.get()) {
+            ConnectionPoolImpl.init();
+            return ConnectionPoolImpl.create();
+        }
+        return instance;
+    }
+
 
     private static void init() throws ConnectionException {
         try {
@@ -34,21 +44,13 @@ public class ConnectionPoolImpl implements ConnectionPool {
         }
     }
 
-    static ConnectionPoolImpl initConnectionPool() throws ConnectionException {
-        if (isNullConnectionPool.get()) {
-            ConnectionPoolImpl.init();
-            return ConnectionPoolImpl.create();
-        }
-        return connectionPool;
-    }
-
     private static ConnectionPoolImpl create() throws ConnectionException {
         List<Connection> pool = new ArrayList<>(MAX_POOL);
         for (int i = 0; i < MAX_POOL; i++) {
             pool.add(createConnection());
         }
 
-        return connectionPool = new ConnectionPoolImpl(pool);
+        return instance = new ConnectionPoolImpl(pool);
     }
 
     private static Connection createConnection() throws ConnectionException {
@@ -66,10 +68,13 @@ public class ConnectionPoolImpl implements ConnectionPool {
     }
 
     @Override
-    public Connection getConnection() {
-        Connection connection = connectionPoll.remove(connectionPoll.size() - 1);
-        usedConnection.add(connection);
-        return connection;
+    public Connection getConnection() throws ConnectionException {
+        if (connectionPoll.size() != 0){
+            Connection connection = connectionPoll.remove(connectionPoll.size() - 1);
+            usedConnection.add(connection);
+            return connection;
+        }
+        throw new ConnectionException("ConnectionPool is empty");
     }
 
     @Override

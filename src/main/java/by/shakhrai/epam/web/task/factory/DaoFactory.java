@@ -9,6 +9,7 @@ import by.shakhrai.epam.web.task.dao.impl.UserDAOImpl;
 
 
 public final class DaoFactory {
+
     private static final DaoFactory instance = new DaoFactory();
     private UserDAO userDAOImpl = new UserDAOImpl();
     private CarDAO carDAOImpl = new CarDAOImpl();

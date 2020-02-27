@@ -16,7 +16,7 @@ public class ConnectionPoolProxy {
         }
     }
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws ConnectionException {
         return connectionPool.getConnection();
     }
 
