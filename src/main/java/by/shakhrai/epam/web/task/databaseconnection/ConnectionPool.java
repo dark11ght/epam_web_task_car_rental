@@ -76,10 +76,12 @@ public enum ConnectionPool {
 
     public void releaseConnection(Connection connection) {
         try {
-            if (!usedConnection.remove(connection)) {
-                LOGGER.warn("Connection do not remove from usedConnection");
+            if (connection != null) {
+                if (!usedConnection.remove(connection)) {
+                    LOGGER.warn("Connection do not remove from usedConnection");
+                }
+                availableConnections.put(connection);
             }
-            availableConnections.put(connection);
         } catch (InterruptedException e) {
             LOGGER.warn(e);
         }
@@ -108,9 +110,9 @@ public enum ConnectionPool {
     }
 
     private void closeConnection(ArrayList<Connection> connections) {
-        for (int i = 0; i < connections.size(); i++) {
+        for (Connection connection : connections) {
             try {
-                connections.get(i).close();
+                connection.close();
             } catch (SQLException e) {
                 LOGGER.warn("Cant close connection", e);
             }

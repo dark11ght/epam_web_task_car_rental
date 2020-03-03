@@ -1,16 +1,16 @@
 package by.shakhrai.epam.web.task.servlet.car;
 
-        import by.shakhrai.epam.web.task.entity.Car;
-        import by.shakhrai.epam.web.task.service.CarService;
-        import by.shakhrai.epam.web.task.service.impl.CarServiceImpl;
+import by.shakhrai.epam.web.task.entity.Car;
+import by.shakhrai.epam.web.task.factory.ServiceFactory;
+import by.shakhrai.epam.web.task.service.CarService;
 
-        import javax.servlet.ServletException;
-        import javax.servlet.http.HttpServlet;
-        import javax.servlet.http.HttpServletRequest;
-        import javax.servlet.http.HttpServletResponse;
-        import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 
 public class GetAllCarsServlet extends HttpServlet {
@@ -18,7 +18,7 @@ public class GetAllCarsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CarService carServiceImpl = new CarServiceImpl();
+        CarService carServiceImpl = ServiceFactory.INSTANCE.getCarService();
 
         ArrayList<Car> cars = carServiceImpl.getAllCars();
 

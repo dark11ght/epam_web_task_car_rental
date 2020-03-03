@@ -18,9 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAOImpl implements CarDAO {
-    private ConnectionPool connectionPool = ConnectionPool.INSTANCE;
-    private ConnectionProxy connectionProxy = new ConnectionProxy(connectionPool.getConnection());
-    public CarDAOImpl() {
+
+      public CarDAOImpl() {
     }
 
     @Override
@@ -32,7 +31,8 @@ public class CarDAOImpl implements CarDAO {
 
         try {
             try (
-                    PreparedStatement preparedStatement = connectionProxy.prepareStatement(query);
+                    ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
                     ResultSet resultSet = preparedStatement.executeQuery();
             ) {
                 while (resultSet.next()) {
@@ -55,8 +55,6 @@ public class CarDAOImpl implements CarDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connectionProxy.close();
         }
         return cars;
     }

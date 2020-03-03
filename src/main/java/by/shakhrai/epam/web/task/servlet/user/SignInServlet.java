@@ -2,6 +2,7 @@ package by.shakhrai.epam.web.task.servlet.user;
 
 import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
 import by.shakhrai.epam.web.task.entity.User;
+import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.UserService;
 import by.shakhrai.epam.web.task.service.impl.UserServiceImpl;
 
@@ -18,7 +19,6 @@ public class SignInServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         ConnectionPool.INSTANCE.initPool();
-        System.out.println("initPool");
     }
 
     @Override
@@ -28,9 +28,8 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService userService = new UserServiceImpl();
+        UserService userService = ServiceFactory.INSTANCE.getUserService();
         HttpSession session = request.getSession();
-        System.out.println("User servlet");
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");

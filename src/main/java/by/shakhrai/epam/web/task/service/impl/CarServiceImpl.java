@@ -1,25 +1,18 @@
 package by.shakhrai.epam.web.task.service.impl;
 
 import by.shakhrai.epam.web.task.dao.CarDAO;
-import by.shakhrai.epam.web.task.dao.UserDAO;
 import by.shakhrai.epam.web.task.entity.Car;
 import by.shakhrai.epam.web.task.exception.DAOException;
-import by.shakhrai.epam.web.task.factory.DaoFactory;
+import by.shakhrai.epam.web.task.factory.DAOFactory;
 import by.shakhrai.epam.web.task.service.CarService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CarServiceImpl implements CarService {
-    private static CarServiceImpl instance;
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private CarDAO carDAOImpl = daoFactory.getCarDao();
+    private CarDAO carDAOImpl = DAOFactory.INSTANCE.getCarDao();
 
-    public static CarServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new CarServiceImpl();
-        }
-        return instance;
+    public CarServiceImpl() {
     }
 
     @Override

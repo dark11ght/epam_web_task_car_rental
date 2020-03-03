@@ -12,22 +12,19 @@ import java.sql.SQLException;
 
 
 public class UserDAOImpl implements UserDAO {
-    private ConnectionPool connectionPool = ConnectionPool.INSTANCE;
-    private ConnectionProxy connectionProxy = new ConnectionProxy(connectionPool.getConnection());
-
 
     public UserDAOImpl() {
     }
 
     @Override
     public User getUserByLogin(String login) {
-        System.out.println("getUser");
         User user = new User();
         String query = "SELECT user.id, login, password, role, active_status FROM user " +
                 "INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
 
         try (
-                PreparedStatement preparedStatement = connectionProxy.prepareStatement(query + "\'" + login + "\'");
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(query + "\'" + login + "\'");
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             if (resultSet.next()) {
@@ -42,8 +39,6 @@ public class UserDAOImpl implements UserDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connectionProxy.close();
         }
 
         return user;
