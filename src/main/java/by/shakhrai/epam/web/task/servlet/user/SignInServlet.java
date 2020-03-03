@@ -23,6 +23,7 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService userService = new UserServiceImpl();
         HttpSession session = request.getSession();
+        System.out.println("User servlet");
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");

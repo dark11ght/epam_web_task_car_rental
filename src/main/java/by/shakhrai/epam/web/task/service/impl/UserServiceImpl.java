@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     public User signIn(String login, String password) {
         User user = null;
         try {
+            System.out.println("Service getUserByLogin");
             user = userDAO.getUserByLogin(login);
         } catch (DAOException e) {
             e.printStackTrace();//TODO write Exception

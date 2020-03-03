@@ -1,4 +1,4 @@
-package by.shakhrai.epam.web.task.databaseconnection.impl;
+package by.shakhrai.epam.web.task.databaseconnection;
 
 class MySQLInit {
         static final String DB_DRIVER = "com.mysql.jdbc.Driver";

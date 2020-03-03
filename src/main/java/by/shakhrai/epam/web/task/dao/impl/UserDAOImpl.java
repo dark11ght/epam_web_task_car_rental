@@ -1,7 +1,8 @@
 package by.shakhrai.epam.web.task.dao.impl;
 
 import by.shakhrai.epam.web.task.dao.UserDAO;
-import by.shakhrai.epam.web.task.databaseconnection.impl.ConnectionPoolProxy;
+import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
+import by.shakhrai.epam.web.task.databaseconnection.ConnectionProxy;
 import by.shakhrai.epam.web.task.entity.Role;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.ConnectionException;
@@ -15,24 +16,22 @@ import java.sql.SQLException;
 
 
 public class UserDAOImpl implements UserDAO {
-    private ConnectionPoolProxy connectionPoolProxy;
+    private ConnectionPool connectionPool;
+    private ConnectionProxy connectionProxy = new ConnectionProxy(connectionPool.getConnection());
+
+
     public UserDAOImpl() {
     }
 
     @Override
-    public User getUserByLogin(String login) throws DAOException {
+    public User getUserByLogin(String login) {
+        System.out.println("getUser");
         User user = new User();
         String query = "SELECT user.id, login, password, role, active_status FROM user " +
                 "INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
-        Connection connection = null;
-        try {
-            connection = connectionPoolProxy.getConnection();
-        } catch (ConnectionException e) {
-            throw new DAOException("Not found free connection");
-        }
 
         try (
-                PreparedStatement preparedStatement = connection.prepareStatement(query + "\'" + login + "\'");
+                PreparedStatement preparedStatement = connectionProxy.prepareStatement(query + "\'" + login + "\'");
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             if (resultSet.next()) {
@@ -48,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            connectionPoolProxy.releaseConnection(connection);
+            connectionProxy.close();
         }
 
         return user;
