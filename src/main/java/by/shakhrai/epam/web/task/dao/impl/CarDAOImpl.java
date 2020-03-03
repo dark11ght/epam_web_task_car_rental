@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAOImpl implements CarDAO {
-    private ConnectionPool connectionPool;
+    private ConnectionPool connectionPool = ConnectionPool.INSTANCE;
     private ConnectionProxy connectionProxy = new ConnectionProxy(connectionPool.getConnection());
     public CarDAOImpl() {
     }

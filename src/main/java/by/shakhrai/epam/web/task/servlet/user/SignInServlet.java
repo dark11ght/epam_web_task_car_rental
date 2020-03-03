@@ -1,5 +1,6 @@
 package by.shakhrai.epam.web.task.servlet.user;
 
+import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.service.UserService;
 import by.shakhrai.epam.web.task.service.impl.UserServiceImpl;
@@ -13,6 +14,12 @@ import java.io.IOException;
 
 
 public class SignInServlet extends HttpServlet {
+
+    @Override
+    public void init() throws ServletException {
+        ConnectionPool.INSTANCE.initPool();
+        System.out.println("initPool");
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

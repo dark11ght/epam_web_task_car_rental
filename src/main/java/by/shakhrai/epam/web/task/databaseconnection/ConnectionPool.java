@@ -16,7 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public enum ConnectionPool {
-    INSTANSE;
+    INSTANCE;
 
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static final int POOL_CAPACITY = 20;

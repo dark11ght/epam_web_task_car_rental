@@ -5,10 +5,6 @@ import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
 import by.shakhrai.epam.web.task.databaseconnection.ConnectionProxy;
 import by.shakhrai.epam.web.task.entity.Role;
 import by.shakhrai.epam.web.task.entity.User;
-import by.shakhrai.epam.web.task.exception.ConnectionException;
-import by.shakhrai.epam.web.task.exception.DAOException;
-
-import java.sql.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +12,7 @@ import java.sql.SQLException;
 
 
 public class UserDAOImpl implements UserDAO {
-    private ConnectionPool connectionPool;
+    private ConnectionPool connectionPool = ConnectionPool.INSTANCE;
     private ConnectionProxy connectionProxy = new ConnectionProxy(connectionPool.getConnection());
 
 
