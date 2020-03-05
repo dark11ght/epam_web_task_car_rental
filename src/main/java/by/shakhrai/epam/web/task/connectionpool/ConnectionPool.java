@@ -1,4 +1,4 @@
-package by.shakhrai.epam.web.task.databaseconnection;
+package by.shakhrai.epam.web.task.connectionpool;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -27,7 +27,6 @@ public enum ConnectionPool {
     private static final String DATABASE_URL_PROPERTY = "db.url";
     private AtomicBoolean isPoolAlreadyInitiated = new AtomicBoolean(false);
 
-
     private BlockingQueue<Connection> availableConnections;
     private List<Connection> usedConnection;
 
@@ -55,13 +54,12 @@ public enum ConnectionPool {
                 isPoolAlreadyInitiated.set(true);
 
             } catch (ClassNotFoundException | IOException e) {
-                e.printStackTrace();
+                LOGGER.fatal(e);
             } catch (SQLException e) {
                 LOGGER.warn(e);
             }
         }
     }
-
 
     public Connection getConnection() {
         Connection connection = null;
@@ -87,17 +85,17 @@ public enum ConnectionPool {
         }
     }
 
-    public void deletePool() {
+    public void closePool() {
         if (isPoolAlreadyInitiated.get()) {
             if (!usedConnection.isEmpty()) {
                 LOGGER.warn("Connection used");
             }
-            closeConnection(availableConnections);
-            closeConnection((ArrayList<Connection>) usedConnection);
+            closeAvailableConnection(availableConnections);
+            closeUsedConnection(usedConnection);
         }
     }
 
-    private void closeConnection(BlockingQueue<Connection> connections) {
+    private void closeAvailableConnection(BlockingQueue<Connection> connections) {
         while (!connections.isEmpty()) {
             try {
                 connections.take().close();
@@ -109,7 +107,7 @@ public enum ConnectionPool {
         }
     }
 
-    private void closeConnection(ArrayList<Connection> connections) {
+    private void closeUsedConnection(List<Connection> connections) {
         for (Connection connection : connections) {
             try {
                 connection.close();

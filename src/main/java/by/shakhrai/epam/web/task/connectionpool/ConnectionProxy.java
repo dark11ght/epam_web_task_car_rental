@@ -1,4 +1,4 @@
-package by.shakhrai.epam.web.task.databaseconnection;
+package by.shakhrai.epam.web.task.connectionpool;
 
 import java.sql.*;
 import java.util.Map;
@@ -12,21 +12,15 @@ public class ConnectionProxy implements Connection {
         this.connection = connection;
     }
 
-
     @Override
-    public void close(){
+    public void close() {
         ConnectionPool.INSTANCE.releaseConnection(connection);
     }
-    public void closeInitPool() throws SQLException {
-        connection.close();
-    }
-
 
     @Override
     public boolean isClosed() throws SQLException {
         return connection.isClosed();
     }
-
 
     @Override
     public Statement createStatement() throws SQLException {
@@ -68,6 +62,9 @@ public class ConnectionProxy implements Connection {
         connection.rollback();
     }
 
+    public void closeInitPool() throws SQLException {
+        connection.close();
+    }
 
     @Override
     public DatabaseMetaData getMetaData() throws SQLException {

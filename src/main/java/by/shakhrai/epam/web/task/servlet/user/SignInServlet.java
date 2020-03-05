@@ -1,10 +1,9 @@
 package by.shakhrai.epam.web.task.servlet.user;
 
-import by.shakhrai.epam.web.task.databaseconnection.ConnectionPool;
+import by.shakhrai.epam.web.task.connectionpool.ConnectionPool;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.UserService;
-import by.shakhrai.epam.web.task.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,12 +39,16 @@ public class SignInServlet extends HttpServlet {
             if (user.getRole().getRole().equals("admin")) {
                 Long userId = user.getId();
                 session.setAttribute("id", userId);
+                session.setAttribute("role", user.getRole().getRole());
+                String userRole = (String) session.getAttribute("role");
+                request.setAttribute("userRole", userRole);
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("views/admin_page.jsp").forward(request, response);
             } else {
                 Long id = user.getId();
                 session.setAttribute("id", id);
                 request.setAttribute("user", user);
+                session.setAttribute("role", user.getRole().getRole());
                 request.getRequestDispatcher("views/user_page.jsp").forward(request, response);
             }
 
