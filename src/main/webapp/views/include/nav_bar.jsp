@@ -7,17 +7,23 @@
             <ul class="nav nav-pills">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="INDEX"> Главная </a>
+                    <a class="nav-link" href="/" > Главная </a>
                 </li>
 
                 <c:if test="${empty userRole}">
+
+                    <form class="form-inline" action="Controller" method="GET">
+                        <button class="btn btn-outline-green " value="signIn" type="submit">Вход</button>
+                    </form>
+
+
                     <li class="nav-item">
                         <c:if test="${empty param.error}">
                             <p class="text-danger">Вы не вошли в приложение, выполните</p>
                         </c:if>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="SignServlet" > Вход </a>
+                        <a class="nav-link" href="Controller" > Вход </a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="views/reg_page">Регистрация <span class="sr-only">(current)</span></a>
@@ -92,8 +98,8 @@
                     </c:if>
 
                     <c:if test="${userRole.equals('admin')}">
-                        <form class="form-inline" action="LOGOUT" method="post">
-                            <button class="btn btn-outline-danger " type="submit">Выйти</button>
+                        <form class="form-inline" action="Controller" method="post">
+                            <button class="btn btn-outline-danger " value="LOGOUT" type="submit">Выйти</button>
                         </form>
                     </c:if>
 

@@ -13,7 +13,7 @@
 
     <div class="container text-center my-5">
 
-        <form class="form-signin" action="Controller" method="post">
+        <form class="form-signin" action="Controller" method="POST">
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <label for="login" class="sr-only">Email address</label>
             <input type="text" id="login" class="form-control" placeholder="Login" name="login">

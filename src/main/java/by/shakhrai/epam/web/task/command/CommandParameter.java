@@ -9,21 +9,18 @@ public enum CommandParameter {
         {
             this.command = new SignIn();
         }
-
     },
 
     INDEX {
         {
             this.command = new Index();
         }
-
     },
 
     LOGOUT {
         {
             this.command = new LogOut();
         }
-
     },
 
     ;

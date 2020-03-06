@@ -1,7 +1,9 @@
 package by.shakhrai.epam.web.task.command;
 
 public enum JSPParameter {
-    COMMAND("command");
+    COMMAND("command"),
+    SIGN_IN_PAGE("signIn"),
+    ;
 
     private String value;
 

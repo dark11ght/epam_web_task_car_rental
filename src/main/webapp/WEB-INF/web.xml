@@ -40,7 +40,7 @@
 
     <!-- add by.shakhrai.epam.web.task.servlet -->
 
-    <!--SignServlet-->
+    <!--Controller-->
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>by.shakhrai.epam.web.task.controller.Controller</servlet-class>
@@ -48,11 +48,11 @@
 
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>Controller</url-pattern>
+        <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
-    <!--SignServlet-->
+    <!--Controller-->
 
-    <!--SignServlet-->
+    <!--SignServlet
     <servlet>
         <servlet-name>SignServlet</servlet-name>
         <servlet-class>by.shakhrai.epam.web.task.servlet.SignServlet</servlet-class>
@@ -62,9 +62,9 @@
         <servlet-name>SignServlet</servlet-name>
         <url-pattern>/SignServlet</url-pattern>
     </servlet-mapping>
-    <!--SignServlet-->
+    SignServlet
 
-    <!--IndexServlet-->
+    IndexServlet
     <servlet>
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>by.shakhrai.epam.web.task.servlet.IndexServlet</servlet-class>
@@ -74,9 +74,9 @@
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/IndexServlet</url-pattern>
     </servlet-mapping>
-    <!--IndexServlet-->
+    IndexServlet
 
-    <!--SignInServlet-->
+    SignInServlet
     <servlet>
         <servlet-name>SignInServlet</servlet-name>
         <servlet-class>by.shakhrai.epam.web.task.servlet.user.SignInServlet</servlet-class>
@@ -86,10 +86,10 @@
         <servlet-name>SignInServlet</servlet-name>
         <url-pattern>/SignInServlet</url-pattern>
     </servlet-mapping>
-    <!--SignInServlet-->
+    SignInServlet
 
 
-    <!--GetAllCarsServlet-->
+    GetAllCarsServlet
     <servlet>
         <servlet-name>GetAllCarsServlet</servlet-name>
         <servlet-class>by.shakhrai.epam.web.task.servlet.car.GetAllCarsServlet</servlet-class>
@@ -99,9 +99,9 @@
         <servlet-name>GetAllCarsServlet</servlet-name>
         <url-pattern>/GetAllCarsServlet</url-pattern>
     </servlet-mapping>
-    <!--GetAllCarsServlet-->
+    GetAllCarsServlet
 
-    <!--LogOutServlet-->
+    LogOutServlet
     <servlet>
         <servlet-name>LogOutServlet</servlet-name>
         <servlet-class>by.shakhrai.epam.web.task.servlet.user.LogOutServlet</servlet-class>
@@ -111,7 +111,7 @@
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/LogOutServlet</url-pattern>
     </servlet-mapping>
-    <!--GetAllCarsServlet-->
+    GetAllCarsServlet-->
 
 
 </web-app>
