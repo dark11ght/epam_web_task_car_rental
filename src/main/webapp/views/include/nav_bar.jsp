@@ -7,7 +7,7 @@
             <ul class="nav nav-pills">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="IndexServlet"> Главная </a>
+                    <a class="nav-link" href="INDEX"> Главная </a>
                 </li>
 
                 <c:if test="${empty userRole}">
@@ -86,13 +86,13 @@
                      </c:if>--%>
 
                     <c:if test="${userRole.equals('user')}">
-                        <form class="form-inline" action="LogOutServlet" method="post">
+                        <form class="form-inline" action="LOGOUT" method="post">
                             <button class="btn btn-outline-danger " type="submit">Выйти</button>
                         </form>
                     </c:if>
 
                     <c:if test="${userRole.equals('admin')}">
-                        <form class="form-inline" action="LogOutServlet" method="post">
+                        <form class="form-inline" action="LOGOUT" method="post">
                             <button class="btn btn-outline-danger " type="submit">Выйти</button>
                         </form>
                     </c:if>

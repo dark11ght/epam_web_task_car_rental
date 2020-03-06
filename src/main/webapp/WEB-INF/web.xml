@@ -42,6 +42,18 @@
 
     <!--SignServlet-->
     <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>by.shakhrai.epam.web.task.controller.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>Controller</url-pattern>
+    </servlet-mapping>
+    <!--SignServlet-->
+
+    <!--SignServlet-->
+    <servlet>
         <servlet-name>SignServlet</servlet-name>
         <servlet-class>by.shakhrai.epam.web.task.servlet.SignServlet</servlet-class>
     </servlet>
