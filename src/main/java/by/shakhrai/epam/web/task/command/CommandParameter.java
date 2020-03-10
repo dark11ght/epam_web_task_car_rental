@@ -1,6 +1,6 @@
 package by.shakhrai.epam.web.task.command;
 
-import by.shakhrai.epam.web.task.command.runner.*;
+import by.shakhrai.epam.web.task.command.receiver.*;
 
 public enum CommandParameter {
     SIGN_IN_PAGE {

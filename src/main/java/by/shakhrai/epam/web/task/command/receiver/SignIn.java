@@ -1,8 +1,9 @@
-package by.shakhrai.epam.web.task.command.runner;
+package by.shakhrai.epam.web.task.command.receiver;
 
 import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.ViewParameter;
 import by.shakhrai.epam.web.task.entity.User;
+import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.UserService;
 import org.apache.log4j.LogManager;
@@ -19,13 +20,22 @@ public class SignIn implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         UserService userService = ServiceFactory.INSTANCE.getUserService();
-        HttpSession session = request.getSession();
+
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        User user = null;
+        try {
+            user = userService.signIn(login, password);
+        } catch (UserServiceEcxeption userServiceEcxeption) {
+            String message = "Incorrect login or Password";
+            request.setAttribute("informMessage", message);
+            page = ViewParameter.INFORMER_PAGE_JSP.getValue();
+            return page;
+        }
 
-        User user = userService.signIn(login, password);
         if (user != null) {
+            HttpSession session = request.getSession();
             request.setAttribute("user", user);
             if (user.getRole().getRole().equals("admin")) {
                 Long userId = user.getId();

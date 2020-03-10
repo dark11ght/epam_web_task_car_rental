@@ -1,4 +1,4 @@
-package by.shakhrai.epam.web.task.command.runner;
+package by.shakhrai.epam.web.task.command.receiver;
 
 import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.ViewParameter;
