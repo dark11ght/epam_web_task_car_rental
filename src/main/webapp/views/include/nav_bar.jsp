@@ -7,39 +7,30 @@
             <ul class="nav nav-pills">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="/" > Главная </a>
+                    <a class="nav-link" href="Controller?command=INDEX_PAGE" > Главная </a>
                 </li>
 
                 <c:if test="${empty userRole}">
 
-                    <form class="form-inline" action="Controller" method="GET">
-                        <button class="btn btn-outline-green " value="signIn" type="submit">Вход</button>
-                    </form>
-
-
-                    <li class="nav-item">
-                        <c:if test="${empty param.error}">
-                            <p class="text-danger">Вы не вошли в приложение, выполните</p>
-                        </c:if>
-                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="Controller" > Вход </a>
+                        <a class="nav-link" href="Controller?command=SIGN_IN_PAGE" > Вход </a>
                     </li>
+
                     <li class="nav-item active">
-                        <a class="nav-link" href="views/reg_page">Регистрация <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="Controller?command=REGISTRATION">Регистрация <span class="sr-only">(current)</span></a>
                     </li>
                 </c:if>
 
 
                     <c:if test="${userRole.equals('user')}">
                         <li class="nav-item">
-                            <a class="nav-link" href="GetAllCarsServlet">Список автомобилей</a>
+                            <a class="nav-link" href="Controller?command=CARS_LIST">Список автомобилей</a>
                         </li>
                     </c:if>
 
                     <c:if test="${userRole.equals('admin')}">
                         <li class="nav-item">
-                            <a class="nav-link" href="GetAllCarsServlet">Список автомобилей </a>
+                            <a class="nav-link" href="Controller?command=CARS_LIST">Список автомобилей </a>
                         </li>
                     </c:if>
 
@@ -92,14 +83,14 @@
                      </c:if>--%>
 
                     <c:if test="${userRole.equals('user')}">
-                        <form class="form-inline" action="LOGOUT" method="post">
-                            <button class="btn btn-outline-danger " type="submit">Выйти</button>
+                        <form class="form-inline" action="Controller" method="post">
+                            <button class="btn btn-outline-danger " name="command" value="LOGOUT" type="submit">Выйти</button>
                         </form>
                     </c:if>
 
                     <c:if test="${userRole.equals('admin')}">
                         <form class="form-inline" action="Controller" method="post">
-                            <button class="btn btn-outline-danger " value="LOGOUT" type="submit">Выйти</button>
+                            <button class="btn btn-outline-danger " name="command" value="LOGOUT" type="submit">Выйти</button>
                         </form>
                     </c:if>
 

@@ -2,7 +2,7 @@ package by.shakhrai.epam.web.task.command;
 
 public enum JSPParameter {
     COMMAND("command"),
-    SIGN_IN_PAGE("signIn"),
+    HREF("href"),
     ;
 
     private String value;

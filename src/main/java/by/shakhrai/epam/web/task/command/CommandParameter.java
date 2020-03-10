@@ -1,19 +1,28 @@
 package by.shakhrai.epam.web.task.command;
 
-import by.shakhrai.epam.web.task.command.runner.Index;
-import by.shakhrai.epam.web.task.command.runner.LogOut;
-import by.shakhrai.epam.web.task.command.runner.SignIn;
+import by.shakhrai.epam.web.task.command.runner.*;
 
 public enum CommandParameter {
+    SIGN_IN_PAGE {
+        {
+            this.command = new SignPage();
+        }
+    },
+
     SIGN_IN {
         {
             this.command = new SignIn();
         }
     },
 
-    INDEX {
+    INDEX_PAGE {
         {
             this.command = new Index();
+        }
+    },
+    CARS_LIST {
+        {
+            this.command = new CarsList();
         }
     },
 
@@ -24,7 +33,6 @@ public enum CommandParameter {
     },
 
     ;
-
 
     Command command;
 

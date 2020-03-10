@@ -21,7 +21,7 @@
             <label for="pass" class="sr-only">Password</label>
             <input type="password" id="pass" class="form-control mt-1" placeholder="Password" name="password">
 
-            <button class="btn btn-lg btn-primary btn-block my-3" type="submit" value="SIGN_IN">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block my-3" type="submit" name="command" value="SIGN_IN">Sign in</button>
             <p class="mt-5 mb-3 text-muted">© Pavel Shakhrai 2020</p>
         </form>
     </div>
