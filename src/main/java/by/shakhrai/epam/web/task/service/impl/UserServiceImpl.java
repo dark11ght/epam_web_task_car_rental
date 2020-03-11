@@ -10,11 +10,21 @@ import by.shakhrai.epam.web.task.validator.LoginPasswordValidator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
     private UserDAO userDAO = DAOFactory.INSTANCE.getUserDao();
 
-    public UserServiceImpl() {
+    @Override
+    public List<User> geaAllUsers() throws UserServiceEcxeption {
+        try {
+            return userDAO.getAllUsers();
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e) {
+            };
+        }
     }
 
     @Override
@@ -41,8 +51,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByLogin(String login) {
-        return null;
+    public User getUserByLogin(String login) throws UserServiceEcxeption {
+        User user = null;
+        try {
+            user = userDAO.getUserByLogin(login);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e) {
+            };
+        }
+        return user;
     }
 
     @Override
@@ -51,8 +69,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(long id) {
-        return null;
+    public User getUserById(long id) throws UserServiceEcxeption {
+        User user = null;
+        try {
+            user = userDAO.getUserByID(id);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e) {
+            };
+        }
+        return user;
     }
 
     @Override

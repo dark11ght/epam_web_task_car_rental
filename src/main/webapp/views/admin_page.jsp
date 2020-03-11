@@ -12,17 +12,17 @@
 
 <div>
     <h2>
-        Hello, ${user.login}
+        Hello, ADMIN ${user.login}
     </h2>
 </div>
+<div class="container">
+    <ul class="list-unstyled">
+        <li><p class="text-danger">Заказы, ожидающите рассомотрения <strong>${countOrders}</strong></p></li>
+        <li><a class="nav-link" href="">Список заказов</a><br></li>
+        <li><a class="nav-link" href="Controller?command=ALL_USER_LIST">Список пользователей</a><br></li>
+    </ul>
 
-
-<%--<div class="container text-center my-5">
-
-    <form class="form-signin" action="GetAllCarsServlet">
-        <button class="btn btn-lg btn-primary btn-block my-3" type="submit">User List</button>
-    </form>
-</div>--%>
+</div>
 
 </body>
 </html>

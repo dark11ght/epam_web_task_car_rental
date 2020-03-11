@@ -12,8 +12,6 @@ import java.util.List;
 public class CarServiceImpl implements CarService {
     private CarDAO carDAOImpl = DAOFactory.INSTANCE.getCarDao();
 
-    public CarServiceImpl() {
-    }
 
     @Override
     public ArrayList<Car> getAllCars() {

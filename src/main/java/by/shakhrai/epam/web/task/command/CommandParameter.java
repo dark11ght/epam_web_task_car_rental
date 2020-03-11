@@ -15,6 +15,20 @@ public enum CommandParameter {
         }
     },
 
+    ALL_USER_LIST {
+        {
+            this.command = new AllUsers();
+        }
+    },
+
+
+    ADMIN_PAGE {
+        {
+            this.command = new AdminPage();
+        }
+    },
+
+
     INDEX_PAGE {
         {
             this.command = new Index();
