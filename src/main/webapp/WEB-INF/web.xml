@@ -52,66 +52,16 @@
     </servlet-mapping>
     <!--Controller-->
 
-    <!--SignServlet
-    <servlet>
-        <servlet-name>SignServlet</servlet-name>
-        <servlet-class>by.shakhrai.epam.web.task.servlet.SignServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>SignServlet</servlet-name>
-        <url-pattern>/SignServlet</url-pattern>
-    </servlet-mapping>
-    SignServlet
-
-    IndexServlet
-    <servlet>
-        <servlet-name>IndexServlet</servlet-name>
-        <servlet-class>by.shakhrai.epam.web.task.servlet.IndexServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>IndexServlet</servlet-name>
-        <url-pattern>/IndexServlet</url-pattern>
-    </servlet-mapping>
-    IndexServlet
-
-    SignInServlet
-    <servlet>
-        <servlet-name>SignInServlet</servlet-name>
-        <servlet-class>by.shakhrai.epam.web.task.servlet.user.SignInServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>SignInServlet</servlet-name>
-        <url-pattern>/SignInServlet</url-pattern>
-    </servlet-mapping>
-    SignInServlet
-
-
-    GetAllCarsServlet
-    <servlet>
-        <servlet-name>GetAllCarsServlet</servlet-name>
-        <servlet-class>by.shakhrai.epam.web.task.servlet.car.GetAllCarsServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>GetAllCarsServlet</servlet-name>
-        <url-pattern>/GetAllCarsServlet</url-pattern>
-    </servlet-mapping>
-    GetAllCarsServlet
-
-    LogOutServlet
-    <servlet>
-        <servlet-name>LogOutServlet</servlet-name>
-        <servlet-class>by.shakhrai.epam.web.task.servlet.user.LogOutServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LogOutServlet</servlet-name>
-        <url-pattern>/LogOutServlet</url-pattern>
-    </servlet-mapping>
-    GetAllCarsServlet-->
+    <!--filter-->
+    <filter>
+        <filter-name>Controller</filter-name>
+        <filter-class>by.shakhrai.epam.web.task.filter.CommandFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Controller</filter-name>
+        <url-pattern>/Controller</url-pattern>
+    </filter-mapping>
+    <!--filter-->
 
 
 </web-app>
