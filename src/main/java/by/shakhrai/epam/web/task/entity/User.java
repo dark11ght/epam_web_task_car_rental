@@ -11,6 +11,7 @@ public class User implements Serializable {
     private Role role;
     private boolean activeStatus;
     private String email;
+    private String phoneNumber;
     private String firstName;
     private String lastName;
     private String passportSerialNumber;
@@ -108,6 +109,14 @@ public class User implements Serializable {
         this.dateOfRegistration = dateOfRegistration;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -119,6 +128,7 @@ public class User implements Serializable {
                 Objects.equals(password, user.password) &&
                 Objects.equals(role, user.role) &&
                 Objects.equals(email, user.email) &&
+                Objects.equals(phoneNumber, user.phoneNumber) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(passportSerialNumber, user.passportSerialNumber) &&
@@ -128,7 +138,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, role, activeStatus, email, firstName, lastName, passportSerialNumber, driverLicenceNumber, dateOfRegistration);
+        return Objects.hash(id, login, password, role, activeStatus, email, phoneNumber, firstName, lastName, passportSerialNumber, driverLicenceNumber, dateOfRegistration);
     }
 
     @Override
@@ -140,6 +150,7 @@ public class User implements Serializable {
                 ", role=" + role +
                 ", activeStatus=" + activeStatus +
                 ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", passportSerialNumber='" + passportSerialNumber + '\'' +

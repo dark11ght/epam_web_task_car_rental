@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -8,94 +8,125 @@
 <body>
 <%@include file="include/nav_bar.jsp" %>
 
-<div class="container">
-    <form class="form-horizontal" role="form" method="POST" action="create_new_user">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <h2>Register New User</h2>
-                <hr>
+
+<form class="needs-validation" novalidate method="POST">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="login">Логин</label>
+            <input type="text" class="form-control" name="login" id="login" placeholder="Логин" required>
+            <div class="invalid-feedback">
+                Пожалуйста заполните это поле.
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 field-label-responsive">
-                <label for="login">Name</label>
+
+        <div class="col-md-4 mb-3">
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Пароль" required>
+            <div class="invalid-feedback">
+                Пожалуйста заполните это поле.
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-                        <input type="text" name="login" class="form-control" id="login" placeholder="Login..." required="" autofocus="">
-                    </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label for="rpassword">Повторить пароль</label>
+            <input type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Пароль" required>
+            <div class="invalid-feedback">
+                Пожалуйста заполните это поле.
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label for="firstName">Логин</label>
+            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Имя" required>
+            <div class="invalid-feedback">
+                Пожалуйста заполните это поле.
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label for="lastName">Логин</label>
+            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Фамилия" required>
+            <div class="invalid-feedback">
+                Пожалуйста заполните это поле.
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label for="email">Email</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-control-feedback">
-                        <span class="text-danger align-middle">
-                            <!-- Put name validation error messages here -->
-                        </span>
+                <input type="text" class="form-control" name="email" id="email" placeholder="example@mail.com."
+                       aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback">
+                    Пожалуйста заполните это поле.
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-3 field-label-responsive">
-                <label for="email">Email</label>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-                        <input type="text" name="email" class="form-control" id="email" placeholder="Email..." required="" autofocus="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-control-feedback">
-                        <span class="text-danger align-middle">
-                            <!-- Put name validation error messages here -->
-                        </span>
-                </div>
+        <div class="col-md-4 mb-3">
+            <label for="passportSerialNumber">Номер пасспорта</label>
+            <input type="text" class="form-control" name="passportSerialNumber" id="passportSerialNumber"
+                   placeholder="Номер пасспорта" required>
+            <div class="invalid-feedback">
+                Пожалуйста заполните это поле.
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-3 field-label-responsive">
-                <label for="pass">Password</label>
+        <div class="col-md-4 mb-3">
+            <label for="phoneNumber">Номер телефона</label>
+            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="+375291234567"
+                   required>
+            <div class="invalid-feedback">
+                Пожалуйста заполните это поле.
             </div>
-            <div class="col-md-6">
-                <div class="form-group has-danger">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                        <input type="password" name="pass" class="form-control" id="pass" placeholder="Password" required="">
-                    </div>
-                </div>
-            </div>
+        </div>
 
-        </div>
-        <div class="row">
-            <div class="col-md-3 field-label-responsive">
-                <label for="repeat_pass">Confirm Password</label>
+        <div class="col-md-4 mb-3">
+            <label for="driverLicenceNumber">Номер водительсного удостоверения</label>
+            <input type="text" class="form-control" name="driverLicenceNumber" id="driverLicenceNumber"
+                   placeholder="Номер водительсного удостоверения" required>
+            <div class="invalid-feedback">
+                Пожалуйста заполните это поле.
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem">
-                            <i class="fa fa-repeat"></i>
-                        </div>
-                        <input type="password" name="repeat_pass" class="form-control" id="repeat_pass" placeholder="Password" required="">
-                    </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                </label>
+                <div class="invalid-feedback">
+                    Пожалуйста подтвердите.
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
-            </div>
-        </div>
-    </form>
-</div>
+        <button class="btn btn-primary" type="submit" name="command" value="USER_REGISTRATION">Registration</button>
+    </div>
+</form>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 </body>
 </html>

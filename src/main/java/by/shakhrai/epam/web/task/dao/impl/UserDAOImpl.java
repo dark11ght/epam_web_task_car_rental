@@ -25,6 +25,7 @@ public class UserDAOImpl implements UserDAO {
     private static final String PASSWORD = "password";
     private static final String ACTIVE_USER_STATUS = "active_status";
     private static final String EMAIL = "email";
+    private static final String PHONE_NUMBER = "phone_number";
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
     private static final String PASSPORT_SERIAL_NUMBER = "passport_serial_number";
@@ -36,20 +37,21 @@ public class UserDAOImpl implements UserDAO {
 
     private static final String IS_USER_BY_EMAIL_QUERY = "SELECT email FROM user WHERE email = ";
 
-    private static final String GET_USER_BY_LOGIN_QUERY = "SELECT user.id, login, password, role, active_status, email," +
-            " first_name, last_name, passport_serial_number, driver_licence_number, date_of_registration\n" +
-            "FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
+    private static final String GET_USER_BY_LOGIN_QUERY = "SELECT user.id, login, password, role, active_status," +
+            " phone_number,email, first_name, last_name, passport_serial_number,\n" +
+            " driver_licence_number, date_of_registration FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
 
-    private static final String GET_USER_BY_EMAIL_QUERY = "SELECT user.id, login, password, role, active_status, email," +
-            " first_name, last_name, passport_serial_number, driver_licence_number, date_of_registration\n" +
-            "FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.email = ";
+    private static final String GET_USER_BY_EMAIL_QUERY = "SELECT user.id, login, password, role, active_status, " +
+            "phone_number,email, first_name, last_name, passport_serial_number,\n" +
+            " driver_licence_number, date_of_registration FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.email = ";
 
-    private static final String GET_USER_BY_ID_QUERY = "SELECT user.id, login, password, role, active_status, email, " +
-            "first_name, last_name, passport_serial_number, driver_licence_number, date_of_registration\n" +
-            "FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
-    private static final String GET_ALL_USERS_QUERY = "SELECT user.id, login, password, role, active_status, email, " +
-            "first_name, last_name, passport_serial_number, driver_licence_number, date_of_registration\n" +
-            "FROM user INNER JOIN role r ON user.role_id = r.id";
+    private static final String GET_USER_BY_ID_QUERY = "SELECT user.id, login, password, role, active_status, " +
+            "phone_number,email, first_name, last_name, passport_serial_number,\n" +
+            " driver_licence_number, date_of_registration FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.id = ";
+
+    private static final String GET_ALL_USERS_QUERY = "SELECT user.id, login, password, role, active_status," +
+            " phone_number,email, first_name, last_name, passport_serial_number,\n" +
+            " driver_licence_number, date_of_registration FROM user INNER JOIN role r ON user.role_id = r.id";
 
 
     @Override
@@ -117,6 +119,7 @@ public class UserDAOImpl implements UserDAO {
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             createUserByResultSet(user, resultSet);
+            System.out.println(user);
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException("Can`t get user by login");
@@ -158,6 +161,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setPassword(resultSet.getString(PASSWORD));
                 user.setRole(role);
                 user.setActiveStatus(resultSet.getBoolean(ACTIVE_USER_STATUS));
+                user.setPhoneNumber(resultSet.getString(PHONE_NUMBER));
                 user.setEmail(resultSet.getString(EMAIL));
                 user.setFirstName(resultSet.getString(FIRST_NAME));
                 user.setLastName(resultSet.getString(LAST_NAME));
@@ -182,6 +186,7 @@ public class UserDAOImpl implements UserDAO {
             user.setPassword(resultSet.getString(PASSWORD));
             user.setRole(role);
             user.setActiveStatus(resultSet.getBoolean(ACTIVE_USER_STATUS));
+            user.setPhoneNumber(resultSet.getString(PHONE_NUMBER));
             user.setEmail(resultSet.getString(EMAIL));
             user.setFirstName(resultSet.getString(FIRST_NAME));
             user.setLastName(resultSet.getString(LAST_NAME));

@@ -27,13 +27,6 @@ public class SignIn implements Command {
         User user = null;
         try {
             user = userService.signIn(login, password);
-
-           /* if (user == null){
-                String message = "User not found";
-                request.setAttribute("informMessage", message);
-                page = ViewParameter.INFORMER_PAGE_JSP.getValue();
-                return page;
-            }*/
         } catch (UserServiceEcxeption userServiceEcxeption) {
             String message = "Incorrect login or Password";
             request.setAttribute("informMessage", message);

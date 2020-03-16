@@ -26,6 +26,8 @@ ALTER TABLE user ADD passport_serrial_number VARCHAR(255) NOT NULL;
 CREATE UNIQUE INDEX user_passport_serrial_number_uindex ON user (passport_serrial_number);
 ALTER TABLE user ADD driver_licennce_number VARCHAR(255) NOT NULL;
 CREATE UNIQUE INDEX user_driver_licennce_number_uindex ON user (driver_licennce_number);
+ALTER TABLE user ADD phone_number VARCHAR(13) NOT NULL;
+CREATE UNIQUE INDEX user_phone_number_uindex ON user (phone_number);
 
 CREATE TABLE car
 (
