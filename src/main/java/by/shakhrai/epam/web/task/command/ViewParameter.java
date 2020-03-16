@@ -1,6 +1,7 @@
 package by.shakhrai.epam.web.task.command;
 
 public enum ViewParameter {
+    REGISTRATION_PAGE("views/registration_page.jsp"),
     ALL_USER_JSP("views/users_page.jsp"),
     INDEX_JSP("views/index.jsp"),
     SIGN_PAGE_JSP("views/sign_page.jsp"),

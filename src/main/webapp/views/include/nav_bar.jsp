@@ -17,7 +17,7 @@
                     </li>
 
                     <li class="nav-item active">
-                        <a class="nav-link" href="Controller?command=REGISTRATION">Регистрация <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="Controller?command=USER_REGISTRATION_PAGE">Регистрация </a>
                     </li>
                 </c:if>
 
