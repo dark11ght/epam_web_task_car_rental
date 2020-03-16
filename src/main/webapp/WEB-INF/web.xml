@@ -42,24 +42,24 @@
 
     <!--Controller-->
     <servlet>
-        <servlet-name>Controller</servlet-name>
+        <servlet-name>controller</servlet-name>
         <servlet-class>by.shakhrai.epam.web.task.controller.Controller</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/Controller</url-pattern>
+        <servlet-name>controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
     </servlet-mapping>
     <!--Controller-->
 
     <!--filter-->
     <filter>
-        <filter-name>Controller</filter-name>
+        <filter-name>controller</filter-name>
         <filter-class>by.shakhrai.epam.web.task.filter.CommandFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>Controller</filter-name>
-        <url-pattern>/Controller</url-pattern>
+        <filter-name>controller</filter-name>
+        <url-pattern>/controller</url-pattern>
     </filter-mapping>
     <!--filter-->
 

@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.command.receiver.user;
 
 import by.shakhrai.epam.web.task.command.Command;
-import by.shakhrai.epam.web.task.command.ViewParameter;
+import by.shakhrai.epam.web.task.command.PageENUM;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +15,7 @@ public class LogOut implements Command {
         HttpSession session = request.getSession();
         session.invalidate();
 
-        page = ViewParameter.INDEX_JSP.getValue();
+        page = PageENUM.INDEX_JSP.getValue();
         return page;
     }
 }

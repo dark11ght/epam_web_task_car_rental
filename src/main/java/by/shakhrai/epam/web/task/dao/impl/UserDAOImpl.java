@@ -53,6 +53,13 @@ public class UserDAOImpl implements UserDAO {
             " phone_number,email, first_name, last_name, passport_serial_number,\n" +
             " driver_licence_number, date_of_registration FROM user INNER JOIN role r ON user.role_id = r.id";
 
+    private static final String REGISTRATION_USER_QUERY = "";
+
+
+    @Override
+    public User registrationUser() throws DAOException {
+        return null;
+    }
 
     @Override
     public boolean isUserByLogin(String login) throws DAOException {
@@ -119,7 +126,6 @@ public class UserDAOImpl implements UserDAO {
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             createUserByResultSet(user, resultSet);
-            System.out.println(user);
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException("Can`t get user by login");

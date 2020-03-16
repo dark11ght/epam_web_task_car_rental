@@ -9,7 +9,7 @@
 <%@include file="include/nav_bar.jsp" %>
 
 
-<form class="needs-validation" novalidate method="POST">
+<form class="needs-validation" action="controller" novalidate method="POST">
     <div class="form-row">
         <div class="col-md-4 mb-3">
             <label for="login">Логин</label>

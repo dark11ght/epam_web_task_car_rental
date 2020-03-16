@@ -1,6 +1,6 @@
 package by.shakhrai.epam.web.task.command;
 
-public enum ViewParameter {
+public enum PageENUM {
     REGISTRATION_PAGE("views/registration_page.jsp"),
     ALL_USER_JSP("views/users_page.jsp"),
     INDEX_JSP("views/index.jsp"),
@@ -10,13 +10,13 @@ public enum ViewParameter {
     PAGE_404_JSP("views/404.jsp"),
     ADMIN_PAGE_JSP("views/admin_page.jsp"),
     ERROR_PAGE_JSP("views/error_page.jsp"),
-    USER_INFO_PAGE_JSP("user_info_page.jsp"),
-    USER_PAGE_JSP("user_page.jsp");
+    USER_INFO_PAGE_JSP("views/user_info_page.jsp"),
+    USER_PAGE_JSP("views/user_page.jsp");
 
 
     private String value;
 
-    private ViewParameter(String value) {
+    private PageENUM(String value) {
         this.value = value;
     }
 

@@ -12,43 +12,49 @@
     <caption>Список пользователей</caption>
     <thead class="thead-light">
     <tr>
-        <th scope="col">id</th>
-        <th scope="col">Имя</th>
-        <th scope="col">Пароль</th>
-        <%--<th scope="col">Email</th>--%>
+        <%--<th scope="col">id</th>--%>
+        <th scope="col">Логин</th>
         <th scope="col">Роль</th>
+        <th scope="col">Email</th>
         <th scope="col">Статус</th>
-        <%-- <th scope="col">Имя</th>
-         <th scope="col">Фамилия</th>
-         <th scope="col">Дата регистрации</th>
-         <th scope="col">День рождения</th>
-         <th scope="col">Email</th>
-         <th scope="col">Водительское удостоверение</th>--%>
-
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Номер телефона</th>
+        <th scope="col">Номер пасспорта</th>
+        <th scope="col">Водительское удостоверение</th>
+        <th scope="col">Дата регистрации</th>
 
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td>${user.id}</td>
         <td>${user.login}</td>
-        <td>${user.password}</td>
-        <%-- <td>${user.email}</td>--%>
         <td>${user.role.role}</td>
-        <td>${user.activeStatus}</td>
-        <%-- <td>${user.firstName}</td>
-         <td>${user.lastName}</td>
-         <td>${user.regDate}</td>
-         <td>${user.dateOfBirth}</td>
-         <td>${user.email}</td>
-         <td>${user.driverLicence}</td>--%>
+        <td>${user.email}</td>
+        <c:if test="${user.activeStatus.equals(true)}">
+            <td>
+                active
+            </td>
+        </c:if>
+
+        <c:if test="${!user.activeStatus.equals(true)}">
+            <td>
+                deactive
+            </td>
+        </c:if>
+        <td>${user.firstName}</td>
+        <td>${user.lastName}</td>
+        <td>${user.phoneNumber}</td>
+        <td>${user.passportSerialNumber}</td>
+        <td>${user.driverLicenceNumber}</td>
+        <td>${user.dateOfRegistration}</td>
     </tr>
 
-    <%-- <td>
-         <form action="/UserEditPageServlet" method="get">
-             <button type="submit" name="login" value="${user.login}" class="btn btn-outline-warning">EDIT</button>
-         </form>
-     </td>--%>
+    <td>
+        <form action="/UserEditPageServlet" method="get">
+            <button type="submit" name="login" value="${user.login}" class="btn btn-outline-warning">EDIT</button>
+        </form>
+    </td>
 
     </tbody>
 </table>

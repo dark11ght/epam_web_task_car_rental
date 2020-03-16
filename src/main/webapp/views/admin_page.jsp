@@ -19,7 +19,7 @@
     <ul class="list-unstyled">
         <li><p class="text-danger">Заказы, ожидающите рассомотрения <strong>${countOrders}</strong></p></li>
         <li><a class="nav-link" href="">Список заказов</a><br></li>
-        <li><a class="nav-link" href="Controller?command=ALL_USER_LIST">Список пользователей</a><br></li>
+        <li><a class="nav-link" href="controller?command=ALL_USER_LIST">Список пользователей</a><br></li>
     </ul>
 
 </div>
