@@ -24,15 +24,72 @@ public class UserDAOImpl implements UserDAO {
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
     private static final String ACTIVE_USER_STATUS = "active_status";
+    private static final String EMAIL = "email";
+    private static final String FIRST_NAME = "first_name";
+    private static final String LAST_NAME = "last_name";
+    private static final String PASSPORT_SERIAL_NUMBER = "passport_serial_number";
+    private static final String DRIVER_LICENCE_NUMBER = "driver_licence_number";
+    private static final String DATE_OF_REGISTRATION = "date_of_registration";
 
     //query
-    private static final String GET_USER_BY_LOGIN_QUERY = "SELECT user.id, login, password, role, active_status FROM user " +
-            "INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
-    private static final String GET_USER_BY_ID_QUERY = "SELECT user.id, login, password, role, active_status FROM user " +
-            "INNER JOIN role r ON user.role_id = r.id WHERE user.id = ";
-    private static final String GET_ALL_USERS_QUERY = "SELECT user.id, login, password, role, active_status FROM user " +
-            "INNER JOIN role r ON user.role_id = r.id";
+    private static final String IS_USER_BY_LOGIN_QUERY = "SELECT login FROM user WHERE login = ";
 
+    private static final String IS_USER_BY_EMAIL_QUERY = "SELECT email FROM user WHERE email = ";
+
+    private static final String GET_USER_BY_LOGIN_QUERY = "SELECT user.id, login, password, role, active_status, email," +
+            " first_name, last_name, passport_serial_number, driver_licence_number, date_of_registration\n" +
+            "FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
+
+    private static final String GET_USER_BY_EMAIL_QUERY = "SELECT user.id, login, password, role, active_status, email," +
+            " first_name, last_name, passport_serial_number, driver_licence_number, date_of_registration\n" +
+            "FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.email = ";
+
+    private static final String GET_USER_BY_ID_QUERY = "SELECT user.id, login, password, role, active_status, email, " +
+            "first_name, last_name, passport_serial_number, driver_licence_number, date_of_registration\n" +
+            "FROM user INNER JOIN role r ON user.role_id = r.id WHERE user.login = ";
+    private static final String GET_ALL_USERS_QUERY = "SELECT user.id, login, password, role, active_status, email, " +
+            "first_name, last_name, passport_serial_number, driver_licence_number, date_of_registration\n" +
+            "FROM user INNER JOIN role r ON user.role_id = r.id";
+
+
+    @Override
+    public boolean isUserByLogin(String login) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(IS_USER_BY_LOGIN_QUERY + "\'" + login + "\'");
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t check user by login");
+        }
+    }
+
+
+    @Override
+    public boolean isUserByEmail(String email) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(IS_USER_BY_EMAIL_QUERY + "\'" + email + "\'");
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t check user by email");
+        }
+    }
 
     @Override
     public User getUserByID(long id) throws DAOException {
@@ -45,7 +102,7 @@ public class UserDAOImpl implements UserDAO {
             createUserByResultSet(user, resultSet);
         } catch (SQLException e) {
             LOGGER.warn(e);
-            throw new DAOException("Can`t get user ");
+            throw new DAOException("Can`t get user by ID");
         }
         return user;
     }
@@ -62,14 +119,25 @@ public class UserDAOImpl implements UserDAO {
             createUserByResultSet(user, resultSet);
         } catch (SQLException e) {
             LOGGER.warn(e);
-            throw new DAOException("Can`t get user ");
+            throw new DAOException("Can`t get user by login");
         }
         return user;
     }
 
     @Override
     public User getUserBYEmail(String email) throws DAOException {
-        return null;
+        User user = new User();
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_EMAIL_QUERY + "\'" + email + "\'");
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            createUserByResultSet(user, resultSet);
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t get user by email");
+        }
+        return user;
     }
 
     @Override
@@ -90,6 +158,12 @@ public class UserDAOImpl implements UserDAO {
                 user.setPassword(resultSet.getString(PASSWORD));
                 user.setRole(role);
                 user.setActiveStatus(resultSet.getBoolean(ACTIVE_USER_STATUS));
+                user.setEmail(resultSet.getString(EMAIL));
+                user.setFirstName(resultSet.getString(FIRST_NAME));
+                user.setLastName(resultSet.getString(LAST_NAME));
+                user.setPassportSerialNumber(resultSet.getNString(PASSPORT_SERIAL_NUMBER));
+                user.setDriverLicenceNumber(resultSet.getString(DRIVER_LICENCE_NUMBER));
+                user.setDateOfRegistration(resultSet.getTimestamp(DATE_OF_REGISTRATION));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -108,6 +182,12 @@ public class UserDAOImpl implements UserDAO {
             user.setPassword(resultSet.getString(PASSWORD));
             user.setRole(role);
             user.setActiveStatus(resultSet.getBoolean(ACTIVE_USER_STATUS));
+            user.setEmail(resultSet.getString(EMAIL));
+            user.setFirstName(resultSet.getString(FIRST_NAME));
+            user.setLastName(resultSet.getString(LAST_NAME));
+            user.setPassportSerialNumber(resultSet.getNString(PASSPORT_SERIAL_NUMBER));
+            user.setDriverLicenceNumber(resultSet.getString(DRIVER_LICENCE_NUMBER));
+            user.setDateOfRegistration(resultSet.getTimestamp(DATE_OF_REGISTRATION));
         }
     }
 }

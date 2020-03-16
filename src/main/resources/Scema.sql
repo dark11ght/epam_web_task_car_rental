@@ -17,20 +17,15 @@ CREATE TABLE user
 CREATE UNIQUE INDEX user_id_uindex ON user (id);
 CREATE UNIQUE INDEX user_login_uindex ON user (login);
 
-CREATE TABLE user_info
-(
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    email VARCHAR(255),
-    date_of_birthday DATE,
-    date_of_registration DATE,
-    driver_licence VARCHAR(50)
-);
-CREATE UNIQUE INDEX user_info_id_uindex ON user_info (id);
-CREATE UNIQUE INDEX user_info_user_id_uindex ON user_info (user_id);
-CREATE UNIQUE INDEX user_info_email_uindex ON user_info (email);
+ALTER TABLE user ADD first_name VARCHAR(255) NULL;
+ALTER TABLE user ADD last_name VARCHAR(255) NULL;
+ALTER TABLE user ADD date_of_registration DATE NOT NULL;
+ALTER TABLE user ADD email VARCHAR(255) NOT NULL;
+CREATE UNIQUE INDEX user_email_uindex ON user (email);
+ALTER TABLE user ADD passport_serrial_number VARCHAR(255) NOT NULL;
+CREATE UNIQUE INDEX user_passport_serrial_number_uindex ON user (passport_serrial_number);
+ALTER TABLE user ADD driver_licennce_number VARCHAR(255) NOT NULL;
+CREATE UNIQUE INDEX user_driver_licennce_number_uindex ON user (driver_licennce_number);
 
 CREATE TABLE car
 (
@@ -110,10 +105,6 @@ FOREIGN KEY (car_status_id) REFERENCES car_status (id);
 ALTER TABLE car_mark
 ADD CONSTRAINT car_mark_country_of_manufacture_id_fk
 FOREIGN KEY (country_of_manufacture_id) REFERENCES country_of_manufacture (id);
-
-ALTER TABLE user_info
-ADD CONSTRAINT user_info_user_id_fk
-FOREIGN KEY (user_id) REFERENCES user (id);
 
 ALTER TABLE `order`
 ADD CONSTRAINT order_user_id_fk

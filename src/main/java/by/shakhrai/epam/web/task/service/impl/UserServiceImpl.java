@@ -30,19 +30,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public User signIn(String login, String password) throws UserServiceEcxeption {
         User user = null;
+
         if (LoginPasswordValidator.validationLogin(login) && LoginPasswordValidator.validationPassword(password)) {
             try {
                 user = userDAO.getUserByLogin(login);
+
             } catch (DAOException e) {
                 LOGGER.warn(e);
                 throw new UserServiceEcxeption(e) {
                 };
             }
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                return user;
+            if (user.getLogin() != null) {
+                if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                    return user;
+                }
             }
         }
-        throw new UserServiceEcxeption("Incorrect login or Password");
+        return null;
     }
 
     @Override
