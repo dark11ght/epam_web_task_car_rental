@@ -8,7 +8,8 @@ import java.util.List;
 public interface UserService {
     List<User> geaAllUsers() throws UserServiceEcxeption;
     User signIn(String login, String password) throws UserServiceEcxeption;
-    User createUser(String login, String password, String email);
+    void createUser(String login, String password, String first_name, String last_name, String passport_serial_number,
+                    String driver_licence_number, String email, String phone_number) throws UserServiceEcxeption;
     User getUserByLogin(String login) throws UserServiceEcxeption;
     User getUserByEmail(String email);
     User getUserById(long id) throws UserServiceEcxeption;

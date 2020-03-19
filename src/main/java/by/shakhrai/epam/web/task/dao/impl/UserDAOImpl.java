@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +21,10 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAOImpl.class);
     //fields
-    private static final String USER_ROLE = "role";
     private static final String USER_ID = "id";
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
+    private static final String USER_ROLE = "role";
     private static final String ACTIVE_USER_STATUS = "active_status";
     private static final String EMAIL = "email";
     private static final String PHONE_NUMBER = "phone_number";
@@ -53,12 +55,33 @@ public class UserDAOImpl implements UserDAO {
             " phone_number,email, first_name, last_name, passport_serial_number,\n" +
             " driver_licence_number, date_of_registration FROM user INNER JOIN role r ON user.role_id = r.id";
 
-    private static final String REGISTRATION_USER_QUERY = "";
+    private static final String REGISTRATION_USER_QUERY = "INSERT INTO user (login, password, first_name, last_name, " +
+            "passport_serial_number, driver_licence_number, date_of_registration, email, phone_number)\n" +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 
     @Override
-    public User registrationUser() throws DAOException {
-        return null;
+    public void registrationUser(String login, String password, String first_name, String last_name, String passport_serial_number,
+                                 String driver_licence_number, String email, String phone_number) throws DAOException {
+        User user = new User();
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(REGISTRATION_USER_QUERY);
+        ) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, first_name);
+            preparedStatement.setString(4, last_name);
+            preparedStatement.setString(5, passport_serial_number);
+            preparedStatement.setString(6, driver_licence_number);
+            preparedStatement.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStatement.setString(8, email);
+            preparedStatement.setString(9, phone_number);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t create user");
+        }
     }
 
     @Override

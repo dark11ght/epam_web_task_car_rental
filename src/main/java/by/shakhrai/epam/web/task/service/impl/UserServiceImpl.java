@@ -50,8 +50,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(String login, String password, String email) {
-        return null;
+    public void createUser(String login, String password, String first_name, String last_name, String passport_serial_number,
+                           String driver_licence_number, String email, String phone_number) throws UserServiceEcxeption {
+        try {
+            if (userDAO.isUserByLogin(login)) {
+                throw new UserServiceEcxeption("Login is used");
+            }
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e);
+        }
+
+        try {
+            if (userDAO.isUserByEmail(email)) {
+                throw new UserServiceEcxeption("Email is used");
+            }
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e);
+        }
+
+        try {
+            userDAO.registrationUser(login, password, first_name, last_name, passport_serial_number, driver_licence_number,
+                    email, phone_number);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e);
+        }
     }
 
     @Override

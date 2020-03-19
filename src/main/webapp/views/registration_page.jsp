@@ -29,14 +29,15 @@
 
         <div class="col-md-4 mb-3">
             <label for="confirm_password">Повторить пароль</label>
-            <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Пароль" required>
-           <%-- <div class="invalid-feedback">
-                Пожалуйста заполните это поле.
-            </div>--%>
+            <input type="password" class="form-control" name="confirm_password" id="confirm_password"
+                   placeholder="Пароль" required>
+            <%-- <div class="invalid-feedback">
+                 Пожалуйста заполните это поле.
+             </div>--%>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="firstName">Логин</label>
+            <label for="firstName">Имя</label>
             <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Имя" required>
             <div class="invalid-feedback">
                 Пожалуйста заполните это поле.
@@ -44,7 +45,7 @@
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="lastName">Логин</label>
+            <label for="lastName">Фамилия</label>
             <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Фамилия" required>
             <div class="invalid-feedback">
                 Пожалуйста заполните это поле.
@@ -108,50 +109,48 @@
 </form>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         var $submitBtn = $("#form input[type='submit']");
         var $passwordBox = $("#password");
         var $confirmBox = $("#confirm_password");
-        var $errorMsg =  $('<span id="error_msg">Passwords do not match.</span>');
+        var $errorMsg = $('<span id="error_msg">Passwords do not match.</span>');
 
         // This is incase the user hits refresh - some browsers will maintain the disabled state of the button.
         $submitBtn.removeAttr("disabled");
 
-        function checkMatchingPasswords(){
-            if($confirmBox.val() != "" && $passwordBox.val != ""){
-                if( $confirmBox.val() != $passwordBox.val() ){
+        function checkMatchingPasswords() {
+            if ($confirmBox.val() != "" && $passwordBox.val != "") {
+                if ($confirmBox.val() != $passwordBox.val()) {
                     $submitBtn.attr("disabled", "disabled");
                     $errorMsg.insertAfter($confirmBox);
                 }
             }
         }
 
-        function resetPasswordError(){
+        function resetPasswordError() {
             $submitBtn.removeAttr("disabled");
             var $errorCont = $("#error_msg");
-            if($errorCont.length > 0){
+            if ($errorCont.length > 0) {
                 $errorCont.remove();
             }
         }
 
-
         $("#confirm_password, #password")
-            .on("keydown", function(e){
+            .on("keydown", function (e) {
                 /* only check when the tab or enter keys are pressed
                  * to prevent the method from being called needlessly  */
-                if(e.keyCode == 13 || e.keyCode == 9) {
+                if (e.keyCode == 13 || e.keyCode == 9) {
                     checkMatchingPasswords();
                 }
             })
-            .on("blur", function(){
+            .on("blur", function () {
                 // also check when the element looses focus (clicks somewhere else)
                 checkMatchingPasswords();
             })
-            .on("focus", function(){
+            .on("focus", function () {
                 // reset the error message when they go to make a change
                 resetPasswordError();
             })
-
     });
 </script>
 

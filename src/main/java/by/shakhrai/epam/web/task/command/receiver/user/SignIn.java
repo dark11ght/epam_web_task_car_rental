@@ -47,8 +47,10 @@ public class SignIn implements Command {
             } else {
                 Long id = user.getId();
                 session.setAttribute("userId", id);
-                request.setAttribute("user", user);
                 session.setAttribute("role", user.getRole().getRole());
+                String userRole = (String) session.getAttribute("role");
+                request.setAttribute("userRole", userRole);
+                request.setAttribute("user", user);
                 page = PageENUM.USER_PAGE_JSP.getValue();
             }
         } else {

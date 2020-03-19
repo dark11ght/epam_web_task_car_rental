@@ -51,7 +51,9 @@
     </tr>
 
     <td>
-        <form action="/UserEditPageServlet" method="get">
+        <form action="controller" method="POST">
+
+
             <button type="submit" name="login" value="${user.login}" class="btn btn-outline-warning">EDIT</button>
         </form>
     </td>

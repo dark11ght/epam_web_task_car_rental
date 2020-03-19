@@ -18,36 +18,41 @@
         </thead>
         <tbody>
 
-        <%-- <tr>
+        <tr>
 
-             <td>
-                 <form action="GetOrdersByUserIdServlet" method="get">
-                     <button type="submit" name="id" value="${User.id}" class="btn btn-outline-warning">My orders
-                     </button>
-                 </form>
-             </td>
-
-
-             <td>
-                 <form action="UserInfoServlet" method="get">
-                     <button type="submit" name="login" value="${User.login}" class="btn btn-outline-info">INFO</button>
-                 </form>
-             </td>
-             <td>
-                 <form action="UserEditPageServlet" method="get">
-                     <button type="submit" name="login" value="${User.login}" class="btn btn-outline-warning">EDIT</button>
-                 </form>
-             </td>
-
-             <td>
-                 <form action="DeleteUserByStatusServlet" method="get">
-                     <button type="submit" name="id" value="${User.id}" class="btn btn-outline-danger">Delete profile
-                     </button>
-                 </form>
-             </td>
+            <td>
+                <form action="controller" method="POST">
+                    <button type="submit" name="command" value="USER_ORDERS_PAGE" class="btn btn-outline-info">My orders
+                    </button>
+                </form>
+            </td>
 
 
-         </tr>--%>
+            <td>
+                <form action="controller" method="POST">
+
+                    <button type="submit" name="command" value="USER_INFO_PAGE" class="btn btn-outline-info">Profile
+                        info
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="controller" method="POST">
+                    <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning">EDIT
+                    </button>
+                </form>
+            </td>
+
+            <td>
+                <form action="controller" method="POST">
+                    <button type="submit" name="command" value="DELETE_PROFILE" class="btn btn-outline-danger">Delete
+                        profile
+                    </button>
+                </form>
+            </td>
+
+
+        </tr>
 
         </tbody>
     </table>

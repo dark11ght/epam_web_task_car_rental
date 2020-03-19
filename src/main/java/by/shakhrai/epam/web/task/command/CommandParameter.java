@@ -49,6 +49,12 @@ public enum CommandParameter {
         }
     },
 
+    USER_PAGE {
+        {
+            this.command = new UserPage();
+        }
+    },
+
 
     INDEX_PAGE {
         {

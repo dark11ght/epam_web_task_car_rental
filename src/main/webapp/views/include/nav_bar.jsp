@@ -17,7 +17,8 @@
                     </li>
 
                     <li class="nav-item active">
-                        <a class="nav-link" href="controller?command=USER_REGISTRATION_PAGE">Регистрация </a>
+                        <a class="nav-link" href="controller?command=USER_REGISTRATION_PAGE"
+                           methods="POST">Регистрация </a>
                     </li>
                 </c:if>
 
@@ -37,19 +38,20 @@
 
                 <c:if test="${userRole.equals('user')}">
                     <li class="nav-item">
-                        <a class="nav-link" href="controller?command=USER_INFO_PAGE">Профиль</a>
+                        <a class="nav-link" href="controller?command=USER_PAGE">Профиль</a>
                     </li>
                 </c:if>
 
                 <c:if test="${userRole.equals('admin')}">
                     <li class="nav-item">
-                        <a class="nav-link" href="controller?command=USER_INFO_PAGE">Профиль</a>
+                        <a class="nav-link" href="controller?command=USER_PAGE">Профиль</a>
                     </li>
                 </c:if>
 
                 <c:if test="${userRole.equals('admin')}">
                     <li class="nav-item">
-                        <a class="nav-link" href="controller?command=ALL_USER_LIST">Список пользователей</a>
+                        <a class="nav-link" href="controller?command=ALL_USER_LIST">Список
+                            пользователей</a>
                     </li>
                 </c:if>
 
@@ -75,14 +77,14 @@
 
 
                 <c:if test="${userRole.equals('user')}">
-                    <form class="form-inline" action="controller" method="post">
+                    <form class="form-inline" action="controller" method="POST">
                         <button class="btn btn-outline-danger " name="command" value="LOGOUT" type="submit">Выйти
                         </button>
                     </form>
                 </c:if>
 
                 <c:if test="${userRole.equals('admin')}">
-                    <form class="form-inline" action="controller" method="post">
+                    <form class="form-inline" action="controller" method="POST">
                         <button class="btn btn-outline-danger " name="command" value="LOGOUT" type="submit">Выйти
                         </button>
                     </form>
