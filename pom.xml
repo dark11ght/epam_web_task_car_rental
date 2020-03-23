@@ -16,6 +16,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <junitVersion>4.12</junitVersion>
+        <jstlVersion>1.2</jstlVersion>
+        <log4jVersion>1.2.17</log4jVersion>
+        <javax.servlet-apiVersion>3.1.0</javax.servlet-apiVersion>
+        <jsp-apiVersion>2.0</jsp-apiVersion>
+        <mysql-connectorVersion>5.1.39</mysql-connectorVersion>
     </properties>
 
   <build>
@@ -37,30 +44,30 @@
       <dependency>
           <groupId>javax.servlet</groupId>
           <artifactId>javax.servlet-api</artifactId>
-          <version>3.1.0</version>
+          <version>${javax.servlet-apiVersion}</version>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+
 
       <!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
       <dependency>
           <groupId>javax.servlet</groupId>
           <artifactId>jsp-api</artifactId>
-          <version>2.0</version>
+          <version>${jsp-apiVersion}</version>
           <scope>provided</scope>
       </dependency>
 
-
+      <!-- https://mvnrepository.com/artifact/jstl/jstl -->
       <dependency>
           <groupId>jstl</groupId>
           <artifactId>jstl</artifactId>
-          <version>1.2</version>
+          <version>${jstlVersion}</version>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/junit/junit -->
       <dependency>
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>
-          <version>4.12</version>
+          <version>${junitVersion}</version>
           <scope>test</scope>
       </dependency>
 
@@ -68,16 +75,15 @@
       <dependency>
           <groupId>log4j</groupId>
           <artifactId>log4j</artifactId>
-          <version>1.2.17</version>
+          <version>${log4jVersion}</version>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
       <dependency>
           <groupId>mysql</groupId>
           <artifactId>mysql-connector-java</artifactId>
-          <version>5.1.39</version>
+          <version>${mysql-connectorVersion}</version>
       </dependency>
-
 
   </dependencies>
 

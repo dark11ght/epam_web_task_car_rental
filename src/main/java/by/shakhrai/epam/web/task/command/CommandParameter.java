@@ -17,7 +17,11 @@ public enum CommandParameter {
         }
     },
 
-
+    ERROR_PAGE {
+        {
+            this.command = new ErrorPage();
+        }
+    },
     USER_REGISTRATION {
         {
             this.command = new UserRegistration();
@@ -71,9 +75,7 @@ public enum CommandParameter {
         {
             this.command = new LogOut();
         }
-    },
-
-    ;
+    };
 
     Command command;
 

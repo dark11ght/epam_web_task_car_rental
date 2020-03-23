@@ -52,14 +52,16 @@
     <!--Controller-->
 
     <!--filter-->
-    <filter>
+
+    <!--<filter>
         <filter-name>controller</filter-name>
-        <filter-class>by.shakhrai.epam.web.task.filter.CommandFilter</filter-class>
+        <filter-class>by.shakhrai.epam.web.task.filter.PageSecurityFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>controller</filter-name>
         <url-pattern>/controller</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
+
     <!--filter-->
 
 
