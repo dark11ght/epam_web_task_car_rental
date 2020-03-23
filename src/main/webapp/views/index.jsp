@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib uri="/WEB-INF/myTags.tld" prefix="mt" %>
 
 
 <html>
@@ -35,23 +36,11 @@
         машины.
         Разумеется, все сопутствующие расходы (топливо, стоянки) транспортная компания берет на себя.
     </p>
-
-
-<%--<div class="container text-center my-5">
-    <form class="form-signin" action="get_all_users">
-        <button class="btn btn-lg btn-primary btn-block my-3" type="submit">User List</button>
-    </form>
 </div>
-<div class="container text-center my-5">
-    <form class="form-signin" action="ger_all_car_from_DB">
-        <button class="btn btn-lg btn-primary btn-block my-3" type="submit">Car List</button>
-    </form>
-</div>
-<div class="container text-center my-5">
-    <form class="form-signin" action="get_user_by_id">
-        <button name="id" value="25" class="btn btn-lg btn-primary btn-block my-3" type="submit">User</button>
-    </form>
-</div>--%>
-
+<footer>
+    <div>
+        <%@include file="include/footer.jsp" %>
+    </div>
+</footer>
 </body>
 </html>

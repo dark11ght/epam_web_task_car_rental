@@ -14,14 +14,12 @@
         <tr>
             <th scope="col">id</th>
             <th scope="col">Имя</th>
-            <%--<th scope="col">Пароль</th>--%>
-            <%-- <th scope="col">Email</th>--%>
             <th scope="col">Роль</th>
             <th scope="col">Статус</th>
             <th scope="col">EDIT</th>
-            <th scope="col">DELETE</th>
+            <th scope="col">BLOCK USER</th>
             <th scope="col">INFO</th>
-            <th scope="col">del from DB</th>
+            <th scope="col">DELETE</th>
 
         </tr>
         </thead>
@@ -31,8 +29,6 @@
             <tr>
                 <td>${user.id}</td>
                 <td>${user.login}</td>
-                    <%-- <td>${user.pass}</td>--%>
-                    <%--<td>${user.email}</td>--%>
                 <td>${user.role.role}</td>
                 <c:if test="${user.activeStatus.equals(true)}">
                     <td>
@@ -42,7 +38,7 @@
 
                 <c:if test="${!user.activeStatus.equals(true)}">
                     <td>
-                        deactive
+                        blocked
                     </td>
                 </c:if>
                 <td>
@@ -55,7 +51,7 @@
 
                 <c:if test="${user.activeStatus.equals(true)}">
                     <td>
-                        <form action="DeleteUserByStatusServlet" method="get">
+                        <form action="BLOCK_USER" method="get">
                             <button type="submit" name="id" value="${user.id}" class="btn btn-outline-danger">DELETE
                             </button>
                         </form>
@@ -64,7 +60,7 @@
 
                 <c:if test="${!user.activeStatus.equals(true)}">
                     <td>
-                        <form action="ReturnUserByStatusServlet" method="get">
+                        <form action="UNBLOCK_USER" method="get">
                             <button type="submit" name="id" value="${user.id}" class="btn btn-outline-success">RETURN
                                 USER
                             </button>
@@ -91,6 +87,10 @@
         </tbody>
     </table>
 </div>
-
+<footer>
+    <div>
+        <%@include file="include/footer.jsp" %>
+    </div>
+</footer>
 </body>
 </html>

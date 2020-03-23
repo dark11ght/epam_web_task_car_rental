@@ -22,10 +22,13 @@
             <input type="password" id="pass" class="form-control mt-1" placeholder="Password" name="password">
 
             <button class="btn btn-lg btn-primary btn-block my-3" type="submit" name="command" value="SIGN_IN">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">© Pavel Shakhrai 2020</p>
         </form>
     </div>
 </div>
-
+<footer>
+    <div>
+        <%@include file="include/footer.jsp" %>
+    </div>
+</footer>
 </body>
 </html>

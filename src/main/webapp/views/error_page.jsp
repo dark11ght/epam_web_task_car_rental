@@ -11,6 +11,10 @@
         Oops, something wrong, we a so sorry :(
     </h2>
 </div>
-
+<footer>
+    <div>
+        <%@include file="include/footer.jsp" %>
+    </div>
+</footer>
 </body>
 </html>

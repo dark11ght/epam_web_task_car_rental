@@ -175,6 +175,10 @@
         }, false);
     })();
 </script>
-
+<footer>
+    <div>
+        <%@include file="include/footer.jsp" %>
+    </div>
+</footer>
 </body>
 </html>
