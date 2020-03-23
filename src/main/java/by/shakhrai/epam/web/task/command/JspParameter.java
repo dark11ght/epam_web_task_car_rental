@@ -1,13 +1,13 @@
 package by.shakhrai.epam.web.task.command;
 
-public enum JSPParameter {
+public enum JspParameter {
     COMMAND("command"),
     HREF("href"),
     ;
 
     private String value;
 
-    private JSPParameter(String value) {
+    private JspParameter(String value) {
         this.value = value;
     }
 

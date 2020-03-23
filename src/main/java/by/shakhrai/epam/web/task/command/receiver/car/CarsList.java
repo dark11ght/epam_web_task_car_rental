@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.command.receiver.car;
 
 import by.shakhrai.epam.web.task.command.Command;
-import by.shakhrai.epam.web.task.command.PageENUM;
+import by.shakhrai.epam.web.task.command.PageEnum;
 import by.shakhrai.epam.web.task.entity.Car;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.CarService;
@@ -24,7 +24,7 @@ public class CarsList implements Command {
         String userRole = (String) session.getAttribute("role");
         request.setAttribute("cars", cars);
         request.setAttribute("userRole", userRole);
-        page = PageENUM.CARS_LIST_JSP.getValue();
+        page = PageEnum.CARS_LIST_JSP.getValue();
         return page;
     }
 }

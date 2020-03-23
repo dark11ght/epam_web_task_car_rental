@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.command.receiver.user;
 
 import by.shakhrai.epam.web.task.command.Command;
-import by.shakhrai.epam.web.task.command.PageENUM;
+import by.shakhrai.epam.web.task.command.PageEnum;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
@@ -29,7 +29,7 @@ public class SignIn implements Command {
         } catch (UserServiceEcxeption userServiceEcxeption) {
             String message = "Incorrect login or Password";
             request.setAttribute("informMessage", message);
-            page = PageENUM.INFORMER_PAGE_JSP.getValue();
+            page = PageEnum.INFORMER_PAGE_JSP.getValue();
             return page;
         }
 
@@ -43,7 +43,7 @@ public class SignIn implements Command {
                 String userRole = (String) session.getAttribute("role");
                 request.setAttribute("userRole", userRole);
                 request.setAttribute("user", user);
-                page = PageENUM.ADMIN_PAGE_JSP.getValue();
+                page = PageEnum.ADMIN_PAGE_JSP.getValue();
             } else {
                 Long id = user.getId();
                 session.setAttribute("userId", id);
@@ -51,12 +51,12 @@ public class SignIn implements Command {
                 String userRole = (String) session.getAttribute("role");
                 request.setAttribute("userRole", userRole);
                 request.setAttribute("user", user);
-                page = PageENUM.USER_PAGE_JSP.getValue();
+                page = PageEnum.USER_PAGE_JSP.getValue();
             }
         } else {
             String message = "User not found";
             request.setAttribute("informMessage", message);
-            page = PageENUM.INFORMER_PAGE_JSP.getValue();
+            page = PageEnum.INFORMER_PAGE_JSP.getValue();
         }
         return page;
     }

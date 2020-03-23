@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.command.receiver.user;
 
 import by.shakhrai.epam.web.task.command.Command;
-import by.shakhrai.epam.web.task.command.PageENUM;
+import by.shakhrai.epam.web.task.command.PageEnum;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
@@ -36,7 +36,7 @@ public class UserRegistration implements Command {
         } catch (UserServiceEcxeption userServiceEcxeption) {
             String message = "Cant create user";
             request.setAttribute("informMessage", message);
-            page = PageENUM.INFORMER_PAGE_JSP.getValue();
+            page = PageEnum.INFORMER_PAGE_JSP.getValue();
             return page;
         }
 
@@ -53,11 +53,11 @@ public class UserRegistration implements Command {
             String userRole = (String) session.getAttribute("role");
             request.setAttribute("userRole", userRole);
             request.setAttribute("user", user);
-            page = PageENUM.USER_PAGE_JSP.getValue();
+            page = PageEnum.USER_PAGE_JSP.getValue();
         } else {
             String message = "User not found";
             request.setAttribute("informMessage", message);
-            page = PageENUM.INFORMER_PAGE_JSP.getValue();
+            page = PageEnum.INFORMER_PAGE_JSP.getValue();
         }
         return page;
     }

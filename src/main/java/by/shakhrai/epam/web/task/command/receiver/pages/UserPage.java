@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.command.receiver.pages;
 
 import by.shakhrai.epam.web.task.command.Command;
-import by.shakhrai.epam.web.task.command.PageENUM;
+import by.shakhrai.epam.web.task.command.PageEnum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +17,7 @@ public class UserPage implements Command {
             request.setAttribute("userRole", userRole);
         }
 
-        page = PageENUM.USER_PAGE_JSP.getValue();
+        page = PageEnum.USER_PAGE_JSP.getValue();
         return page;
     }
 }

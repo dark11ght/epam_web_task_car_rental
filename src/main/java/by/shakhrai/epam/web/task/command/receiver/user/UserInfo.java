@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.command.receiver.user;
 
 import by.shakhrai.epam.web.task.command.Command;
-import by.shakhrai.epam.web.task.command.PageENUM;
+import by.shakhrai.epam.web.task.command.PageEnum;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
@@ -36,11 +36,11 @@ public class UserInfo implements Command {
             } catch (UserServiceEcxeption userServiceEcxeption) {
                 String message = "User not found";
                 request.setAttribute("informMessage", message);
-                page = PageENUM.INFORMER_PAGE_JSP.getValue();
+                page = PageEnum.INFORMER_PAGE_JSP.getValue();
                 return page;
             }
 
         }
-        return PageENUM.USER_INFO_PAGE_JSP.getValue();
+        return PageEnum.USER_INFO_PAGE_JSP.getValue();
     }
 }

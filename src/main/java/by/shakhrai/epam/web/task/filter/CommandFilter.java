@@ -1,8 +1,8 @@
 package by.shakhrai.epam.web.task.filter;
 
 import by.shakhrai.epam.web.task.command.CommandParameter;
-import by.shakhrai.epam.web.task.command.JSPParameter;
-import by.shakhrai.epam.web.task.command.PageENUM;
+import by.shakhrai.epam.web.task.command.JspParameter;
+import by.shakhrai.epam.web.task.command.PageEnum;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -21,16 +21,16 @@ public class CommandFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        String command = request.getParameter(JSPParameter.COMMAND.getValue());
+        String command = request.getParameter(JspParameter.COMMAND.getValue());
         if (command != null && !command.isEmpty()) {
             try {
                 CommandParameter.valueOf(command.toUpperCase());
             } catch (IllegalArgumentException e) {
-                resp.sendRedirect(req.getContextPath() + PageENUM.INDEX_JSP.getValue());
+                resp.sendRedirect(req.getContextPath() + PageEnum.INDEX_JSP.getValue());
                 return;
             }
         } else {
-            resp.sendRedirect(req.getContextPath() + PageENUM.INDEX_JSP.getValue());
+            resp.sendRedirect(req.getContextPath() + PageEnum.INDEX_JSP.getValue());
             return;
         }
         chain.doFilter(request, response);

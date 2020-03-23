@@ -1,6 +1,6 @@
 package by.shakhrai.epam.web.task.command;
 
-public enum PageENUM {
+public enum PageEnum {
     REGISTRATION_PAGE("views/registration_page.jsp"),
     ALL_USER_JSP("views/users_page.jsp"),
     INDEX_JSP("views/index.jsp"),
@@ -16,7 +16,7 @@ public enum PageENUM {
 
     private String value;
 
-    private PageENUM(String value) {
+    private PageEnum(String value) {
         this.value = value;
     }
 

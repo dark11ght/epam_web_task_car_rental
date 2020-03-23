@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.command.receiver.user;
 
 import by.shakhrai.epam.web.task.command.Command;
-import by.shakhrai.epam.web.task.command.PageENUM;
+import by.shakhrai.epam.web.task.command.PageEnum;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
@@ -29,13 +29,13 @@ public class AllUsers implements Command {
         } catch (UserServiceEcxeption userServiceEcxeption) {
             String message = "Users not found";
             request.setAttribute("informMessage", message);
-            page = PageENUM.INFORMER_PAGE_JSP.getValue();
+            page = PageEnum.INFORMER_PAGE_JSP.getValue();
             return page;
         }
         String userRole = (String) session.getAttribute("role");
         request.setAttribute("users", users);
         request.setAttribute("userRole", userRole);
-        page = PageENUM.ALL_USER_JSP.getValue();
+        page = PageEnum.ALL_USER_JSP.getValue();
         return page;
     }
 }

@@ -1,7 +1,7 @@
 package by.shakhrai.epam.web.task.controller;
 
 import by.shakhrai.epam.web.task.command.Command;
-import by.shakhrai.epam.web.task.command.PageENUM;
+import by.shakhrai.epam.web.task.command.PageEnum;
 import by.shakhrai.epam.web.task.connectionpool.ConnectionPool;
 import by.shakhrai.epam.web.task.factory.CommandFactory;
 
@@ -36,7 +36,7 @@ public class Controller extends HttpServlet {
         if (path != null) {
             request.getRequestDispatcher(path).forward(request, response);
         }else {
-            request.getRequestDispatcher(PageENUM.INDEX_JSP.getValue()).forward(request, response);
+            request.getRequestDispatcher(PageEnum.INDEX_JSP.getValue()).forward(request, response);
         }
     }
 }
