@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
@@ -28,9 +29,17 @@ public class OrderDAOImpl implements OrderDAO {
     private static final String NOTES = "notes";
 
 
-
     //query
-    private static final String GET_ORDER_BY_USER_ID = "SELECT order.id, u.login, m.model, m2.mark, rent_hours,\n" +
+    private static final String GET_ORDER_BY_ORDER_ID = "SELECT order.id, u.login, car_id, m.model, m2.mark, rent_hours,\n" +
+            "       total_price, payment_status, confirm_status, date_of_reg_order, order_status, notes FROM `order`\n" +
+            "       JOIN user u on `order`.user_id = u.id\n" +
+            "       JOIN car c on `order`.car_id = c.id\n" +
+            "       JOIN car_model m on c.model_id = m.id\n" +
+            "       JOIN car_mark m2 on c.mark_id = m2.id\n" +
+            " WHERE order.id = ";
+
+
+    private static final String GET_ORDER_BY_USER_ID = "SELECT order.id, u.login, car_id, m.model, m2.mark, rent_hours,\n" +
             "       total_price, payment_status, confirm_status, date_of_reg_order, order_status, notes FROM `order`\n" +
             "       JOIN user u on `order`.user_id = u.id\n" +
             "       JOIN car c on `order`.car_id = c.id\n" +
@@ -44,33 +53,81 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public Order getOrderByOrderID(long id) throws DAOException {
+    public Order getOrderByOrderID(long orderID) throws DAOException {
         Order order = new Order();
-        try(
+        try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
-                PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER_BY_USER_ID + id);
+                PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER_BY_ORDER_ID + orderID);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                ) {
-            if(resultSet.next()){
+        ) {
+            if (resultSet.next()) {
                 User user = new User();
                 Car car = new Car();
                 CarModel carModel = new CarModel();
                 CarMark carMark = new CarMark();
-                user.setId(resultSet.getLong(USER_ID));
                 user.setLogin(resultSet.getString("login"));
+                order.setId(resultSet.getLong(ORDER_ID));
                 order.setUser(user);
-
+                car.setId(resultSet.getInt(CAR_ID));
+                carMark.setMark(resultSet.getString("mark"));
+                carModel.setModelName(resultSet.getString("model"));
+                car.setMark(carMark);
+                car.setModel(carModel);
+                order.setCar(car);
+                order.setRentHours(resultSet.getInt(RENT_HOURS));
+                order.setTotalPrice(resultSet.getDouble(TOTAL_PRICE));
+                order.setPaymentStatus(resultSet.getBoolean(PAYMENT_STATUS));
+                order.setConfirmByAdminStatus(resultSet.getBoolean(CONFIRM_STATUS));
+                order.setDateOfRegOrder(resultSet.getTimestamp(DATE_OF_REG_ORDER));
+                order.setOrderStatus(resultSet.getBoolean(ORDER_STATUS));
+                order.setNotes(resultSet.getString(NOTES));
             }
         } catch (SQLException e) {
             LOGGER.warn(e);
-            throw new DAOException("Can`t get order by ID");
+            throw new DAOException("Can`t get order by order ID");
         }
         return order;
     }
 
     @Override
-    public List<Order> getOrdersByUserID(long id) throws DAOException {
-        return null;
+    public List<Order> getOrdersByUserID(long userID) throws DAOException {
+        List<Order> orders = new ArrayList<>();
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER_BY_USER_ID + userID);
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            while (resultSet.next()) {
+                Order order = new Order();
+                User user = new User();
+                Car car = new Car();
+                CarModel carModel = new CarModel();
+                CarMark carMark = new CarMark();
+                user.setId(userID);
+                user.setLogin(resultSet.getString("login"));
+                order.setId(resultSet.getLong(ORDER_ID));
+                order.setUser(user);
+                car.setId(resultSet.getInt(CAR_ID));
+                carMark.setMark(resultSet.getString("mark"));
+                carModel.setModelName(resultSet.getString("model"));
+                car.setMark(carMark);
+                car.setModel(carModel);
+                order.setCar(car);
+                order.setRentHours(resultSet.getInt(RENT_HOURS));
+                order.setTotalPrice(resultSet.getDouble(TOTAL_PRICE));
+                order.setPaymentStatus(resultSet.getBoolean(PAYMENT_STATUS));
+                order.setConfirmByAdminStatus(resultSet.getBoolean(CONFIRM_STATUS));
+                order.setDateOfRegOrder(resultSet.getTimestamp(DATE_OF_REG_ORDER));
+                order.setOrderStatus(resultSet.getBoolean(ORDER_STATUS));
+                order.setNotes(resultSet.getString(NOTES));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LOGGER.warn(e);
+            throw new DAOException("Can`t get order by user ID");
+        }
+        return orders;
     }
 
     @Override

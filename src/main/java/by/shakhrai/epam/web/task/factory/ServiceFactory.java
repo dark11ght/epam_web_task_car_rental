@@ -1,8 +1,10 @@
 package by.shakhrai.epam.web.task.factory;
 
 import by.shakhrai.epam.web.task.service.CarService;
+import by.shakhrai.epam.web.task.service.OrderService;
 import by.shakhrai.epam.web.task.service.UserService;
 import by.shakhrai.epam.web.task.service.impl.CarServiceImpl;
+import by.shakhrai.epam.web.task.service.impl.OrderServiceImpl;
 import by.shakhrai.epam.web.task.service.impl.UserServiceImpl;
 
 public enum ServiceFactory {
@@ -10,6 +12,7 @@ public enum ServiceFactory {
 
     private UserService userServiceImpl = new UserServiceImpl();
     private CarService carServiceImpl = new CarServiceImpl();
+    private OrderService orderServiceImpl = new OrderServiceImpl();
 
 
     ServiceFactory() {
@@ -21,6 +24,10 @@ public enum ServiceFactory {
 
     public CarService getCarService() {
         return carServiceImpl;
+    }
+
+    public OrderService getOrderService(){
+        return orderServiceImpl;
     }
 
 

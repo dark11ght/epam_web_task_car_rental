@@ -8,9 +8,9 @@ import java.util.List;
 public interface OrderDAO {
     Order createOrder() throws DAOException;
 
-    Order getOrderByOrderID(long id) throws DAOException;
+    Order getOrderByOrderID(long orderID) throws DAOException;
 
-    List<Order> getOrdersByUserID(long id) throws DAOException;
+    List<Order> getOrdersByUserID(long userID) throws DAOException;
 
     List<Order> getOrdersByAdminStatus() throws DAOException;
 

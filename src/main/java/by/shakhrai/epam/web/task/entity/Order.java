@@ -11,7 +11,7 @@ public class Order implements Serializable {
     private int rentHours;
     private double totalPrice;
     private boolean paymentStatus;
-    private boolean confirmStatus;
+    private boolean confirmByAdminStatus;
     private Timestamp dateOfRegOrder;
     private boolean orderStatus;
     private String notes;
@@ -67,12 +67,12 @@ public class Order implements Serializable {
         this.paymentStatus = paymentStatus;
     }
 
-    public boolean isConfirmStatus() {
-        return confirmStatus;
+    public boolean isConfirmByAdminStatus() {
+        return confirmByAdminStatus;
     }
 
-    public void setConfirmStatus(boolean confirmStatus) {
-        this.confirmStatus = confirmStatus;
+    public void setConfirmByAdminStatus(boolean confirmByAdminStatus) {
+        this.confirmByAdminStatus = confirmByAdminStatus;
     }
 
     public Timestamp getDateOfRegOrder() {
@@ -108,7 +108,7 @@ public class Order implements Serializable {
                 rentHours == order.rentHours &&
                 Double.compare(order.totalPrice, totalPrice) == 0 &&
                 paymentStatus == order.paymentStatus &&
-                confirmStatus == order.confirmStatus &&
+                confirmByAdminStatus == order.confirmByAdminStatus &&
                 orderStatus == order.orderStatus &&
                 Objects.equals(user, order.user) &&
                 Objects.equals(car, order.car) &&
@@ -118,7 +118,7 @@ public class Order implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, car, rentHours, totalPrice, paymentStatus, confirmStatus, dateOfRegOrder, orderStatus, notes);
+        return Objects.hash(id, user, car, rentHours, totalPrice, paymentStatus, confirmByAdminStatus, dateOfRegOrder, orderStatus, notes);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class Order implements Serializable {
                 ", rentHours=" + rentHours +
                 ", totalPrice=" + totalPrice +
                 ", paymentStatus=" + paymentStatus +
-                ", confirmStatus=" + confirmStatus +
+                ", confirmByAdminStatus=" + confirmByAdminStatus +
                 ", dateOfRegOrder=" + dateOfRegOrder +
                 ", orderStatus=" + orderStatus +
                 ", notes='" + notes + '\'' +
