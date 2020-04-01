@@ -30,6 +30,7 @@ public class UserRegistration implements Command {
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phoneNumber");
 
+
         try {
             userService.createUser(login, password, firstName, lastName, passportSerialNumber, driverLicenceNumber, email,
                     phoneNumber);

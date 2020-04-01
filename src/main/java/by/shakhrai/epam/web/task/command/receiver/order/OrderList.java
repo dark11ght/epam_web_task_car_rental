@@ -22,15 +22,15 @@ public class OrderList implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         HttpSession session = request.getSession();
+        long userID = (long) session.getAttribute("userId");
         List<Order> orders = null;
         try {
-            long userID = 1;
             orders = orderServiceImpl.getOrderByUserID(userID);
         } catch (UserServiceEcxeption userServiceEcxeption) {
-           /* String message = "Orders not found";
+            String message = "Orders not found";
             request.setAttribute("informMessage", message);
             page = PageEnum.INFORMER_PAGE_JSP.getValue();
-            return page;*/
+            return page;
         }
 
         System.out.println(orders);

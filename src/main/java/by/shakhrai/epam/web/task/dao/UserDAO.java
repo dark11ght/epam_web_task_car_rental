@@ -6,8 +6,7 @@ import by.shakhrai.epam.web.task.exception.DAOException;
 import java.util.List;
 
 public interface UserDAO {
-    void registrationUser(String login, String password, String first_name, String last_name, String passport_serial_number,
-                          String driver_licence_number, String email, String phone_number)throws DAOException;
+    void registrationUser(User user)throws DAOException;
 
     boolean isUserByLogin(String login) throws DAOException;
 

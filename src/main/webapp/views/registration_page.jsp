@@ -22,18 +22,18 @@
         <div class="col-md-4 mb-3">
             <label for="password">Пароль</label>
             <input type="password" class="form-control" name="password" id="password" placeholder="Пароль" required>
-            <%--<div class="invalid-feedback">
+            <div class="invalid-feedback">
                 Пожалуйста заполните это поле.
-            </div>--%>
+            </div>
         </div>
 
         <div class="col-md-4 mb-3">
             <label for="confirm_password">Повторить пароль</label>
             <input type="password" class="form-control" name="confirm_password" id="confirm_password"
                    placeholder="Пароль" required>
-            <%-- <div class="invalid-feedback">
+             <div class="invalid-feedback">
                  Пожалуйста заполните это поле.
-             </div>--%>
+             </div>
         </div>
 
         <div class="col-md-4 mb-3">
@@ -93,67 +93,9 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                    Agree to terms and conditions
-                </label>
-                <div class="invalid-feedback">
-                    Пожалуйста подтвердите.
-                </div>
-            </div>
-        </div>
         <button class="btn btn-primary" type="submit" name="command" value="USER_REGISTRATION">Registration</button>
     </div>
 </form>
-
-<script>
-    $(document).ready(function () {
-        var $submitBtn = $("#form input[type='submit']");
-        var $passwordBox = $("#password");
-        var $confirmBox = $("#confirm_password");
-        var $errorMsg = $('<span id="error_msg">Passwords do not match.</span>');
-
-        // This is incase the user hits refresh - some browsers will maintain the disabled state of the button.
-        $submitBtn.removeAttr("disabled");
-
-        function checkMatchingPasswords() {
-            if ($confirmBox.val() != "" && $passwordBox.val != "") {
-                if ($confirmBox.val() != $passwordBox.val()) {
-                    $submitBtn.attr("disabled", "disabled");
-                    $errorMsg.insertAfter($confirmBox);
-                }
-            }
-        }
-
-        function resetPasswordError() {
-            $submitBtn.removeAttr("disabled");
-            var $errorCont = $("#error_msg");
-            if ($errorCont.length > 0) {
-                $errorCont.remove();
-            }
-        }
-
-        $("#confirm_password, #password")
-            .on("keydown", function (e) {
-                /* only check when the tab or enter keys are pressed
-                 * to prevent the method from being called needlessly  */
-                if (e.keyCode == 13 || e.keyCode == 9) {
-                    checkMatchingPasswords();
-                }
-            })
-            .on("blur", function () {
-                // also check when the element looses focus (clicks somewhere else)
-                checkMatchingPasswords();
-            })
-            .on("focus", function () {
-                // reset the error message when they go to make a change
-                resetPasswordError();
-            })
-    });
-</script>
-
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

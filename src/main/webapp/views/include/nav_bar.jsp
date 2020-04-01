@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-
         <div class="bd-example">
             <ul class="nav nav-pills">
 
@@ -91,6 +91,15 @@
                 </c:if>
 
 
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false">Язык</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">RU</a>
+                        <a class="dropdown-item" href="#">EN</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(String login, String password, String first_name, String last_name, String passport_serial_number,
-                           String driver_licence_number, String email, String phone_number) throws UserServiceEcxeption {
+    public void createUser(String login, String password, String firstName, String lastName, String passportSerialNumber,
+                           String driverLicenceNumber, String email, String phoneNumber) throws UserServiceEcxeption {
         try {
             if (userDAO.isUserByLogin(login)) {
                 throw new UserServiceEcxeption("Login is used");
@@ -71,8 +71,9 @@ public class UserServiceImpl implements UserService {
         }
 
         try {
-            userDAO.registrationUser(login, password, first_name, last_name, passport_serial_number, driver_licence_number,
-                    email, phone_number);
+            User newUser = buildUser(login, password, firstName, lastName, passportSerialNumber, driverLicenceNumber,
+                    email, phoneNumber);
+            userDAO.registrationUser(newUser);
         } catch (DAOException e) {
             LOGGER.warn(e);
             throw new UserServiceEcxeption(e);
@@ -113,5 +114,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(User user) {
 
+    }
+
+
+    private User buildUser(String login, String password, String firstName, String lastName, String passportSerialNumber,
+                          String driverLicenceNumber, String email, String phoneNumber) {
+        User user = new User();
+
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPassportSerialNumber(passportSerialNumber);
+        user.setDriverLicenceNumber(driverLicenceNumber);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        return user;
     }
 }

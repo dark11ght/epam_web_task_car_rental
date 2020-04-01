@@ -61,22 +61,21 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public void registrationUser(String login, String password, String first_name, String last_name, String passport_serial_number,
-                                 String driver_licence_number, String email, String phone_number) throws DAOException {
+    public void registrationUser(User newUser) throws DAOException {
         User user = new User();
         try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
                 PreparedStatement preparedStatement = connection.prepareStatement(REGISTRATION_USER_QUERY);
         ) {
-            preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password);
-            preparedStatement.setString(3, first_name);
-            preparedStatement.setString(4, last_name);
-            preparedStatement.setString(5, passport_serial_number);
-            preparedStatement.setString(6, driver_licence_number);
+            preparedStatement.setString(1, newUser.getLogin());
+            preparedStatement.setString(2, newUser.getPassword());
+            preparedStatement.setString(3, newUser.getFirstName());
+            preparedStatement.setString(4, newUser.getLastName());
+            preparedStatement.setString(5, newUser.getPassportSerialNumber());
+            preparedStatement.setString(6, newUser.getDriverLicenceNumber());
             preparedStatement.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            preparedStatement.setString(8, email);
-            preparedStatement.setString(9, phone_number);
+            preparedStatement.setString(8, newUser.getEmail());
+            preparedStatement.setString(9, newUser.getPhoneNumber());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);

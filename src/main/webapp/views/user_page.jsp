@@ -22,7 +22,7 @@
 
             <td>
                 <form action="controller" method="POST">
-                    <button type="submit" name="command" value="USER_ORDERS_PAGE" class="btn btn-outline-info">My orders
+                    <button type="submit" name="command" value="ORDERS_BY_USER_ID" class="btn btn-outline-info">My orders
                     </button>
                 </form>
             </td>
