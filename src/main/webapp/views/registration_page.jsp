@@ -4,6 +4,7 @@
 <head>
     <title>Registration page</title>
     <%@include file="include/header.jsp" %>
+    <script src="js/registration_page.js" type="text/javascript"></script>
 </head>
 <body>
 <%@include file="include/nav_bar.jsp" %>
@@ -96,27 +97,6 @@
         <button class="btn btn-primary" type="submit" name="command" value="USER_REGISTRATION">Registration</button>
     </div>
 </form>
-
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
 <footer>
     <div id="footer">
         <%@include file="include/footer.jsp" %>
