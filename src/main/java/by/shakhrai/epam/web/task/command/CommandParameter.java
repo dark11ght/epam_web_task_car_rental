@@ -18,6 +18,18 @@ public enum CommandParameter {
         }
     },
 
+    USER_CHANGE_PASSWORD_PAGE {
+        {
+            this.command = new ChangePasswordPage();
+        }
+    },
+
+    USER_CHANGE_PASSWORD {
+        {
+            this.command = new ChangePassword();
+        }
+    },
+
     ERROR_PAGE {
         {
             this.command = new ErrorPage();
@@ -54,11 +66,12 @@ public enum CommandParameter {
         }
     },
 
-    USER_PAGE {
+    //TODO delete
+   /* USER_PAGE {
         {
             this.command = new UserPage();
         }
-    },//TODO delete
+    },*/
 
 
     INDEX_PAGE {
@@ -72,7 +85,7 @@ public enum CommandParameter {
         }
     },
 
-    ORDERS_BY_USER_ID{
+    ORDERS_BY_USER_ID {
         {
             this.command = new OrderList();
         }

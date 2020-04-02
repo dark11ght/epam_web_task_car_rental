@@ -14,14 +14,14 @@
     <div class="container text-center my-5">
 
         <form class="form-signin" action="controller" method="POST">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label for="login" class="sr-only">Email address</label>
+            <h1 class="h3 mb-3 font-weight-normal">Пожалуйста выполните вход</h1>
+            <label for="login">Введите логин</label>
             <input type="text" id="login" class="form-control" placeholder="Login" name="login">
 
-            <label for="pass" class="sr-only">Password</label>
+            <label for="pass">Введите пароль</label>
             <input type="password" id="pass" class="form-control mt-1" placeholder="Password" name="password">
 
-            <button class="btn btn-lg btn-primary btn-block my-3" type="submit" name="command" value="SIGN_IN">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block my-3" type="submit" name="command" value="SIGN_IN">Войти</button>
         </form>
     </div>
 </div>

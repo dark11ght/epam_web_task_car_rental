@@ -19,4 +19,6 @@ public interface UserDAO {
     User getUserBYEmail(String email) throws DAOException;
 
     List<User> getAllUsers() throws DAOException;
+
+    void changeUserPassword(long userID,String newPassword)throws DAOException;
 }

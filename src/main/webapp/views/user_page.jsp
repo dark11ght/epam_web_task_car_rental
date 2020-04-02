@@ -57,32 +57,21 @@
     <tr>
         <td>
             <form action="controller" method="POST">
-                <button type="submit" name="command" value="ORDERS_BY_USER_ID" class="btn btn-outline-info">My
-                    orders
+                <button type="submit" name="command" value="USER_CHANGE_PASSWORD_PAGE" class="btn btn-outline-warning">Изменить пароль
                 </button>
             </form>
         </td>
 
         <td>
             <form action="controller" method="POST">
-
-                <button type="submit" name="command" value="USER_INFO_PAGE" class="btn btn-outline-info">Profile
-                    info
+                <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning">Изменить данные
                 </button>
             </form>
         </td>
 
         <td>
             <form action="controller" method="POST">
-                <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning">EDIT
-                </button>
-            </form>
-        </td>
-
-        <td>
-            <form action="controller" method="POST">
-                <button type="submit" name="command" value="DELETE_PROFILE" class="btn btn-outline-danger">Delete
-                    profile
+                <button type="submit" name="command" value="DELETE_PROFILE" class="btn btn-outline-danger">Удалить профиль
                 </button>
             </form>
         </td>

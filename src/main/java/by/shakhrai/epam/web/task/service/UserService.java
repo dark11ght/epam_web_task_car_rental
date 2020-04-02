@@ -13,6 +13,7 @@ public interface UserService {
     User getUserByLogin(String login) throws UserServiceEcxeption;
     User getUserByEmail(String email);
     User getUserById(long id) throws UserServiceEcxeption;
-    void deleteUser (User user);
+    void deleteUser (User user)throws UserServiceEcxeption;
+    void changePassword(long userID, String oldPassword, String newPassword, String repeatPassword)throws UserServiceEcxeption;
 
 }

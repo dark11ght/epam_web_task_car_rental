@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO = DAOFactory.INSTANCE.getUserDao();
 
     @Override
-    public List<User> geaAllUsers() throws UserServiceEcxeption {
+    public List <User> geaAllUsers() throws UserServiceEcxeption {
         try {
             return userDAO.getAllUsers();
         } catch (DAOException e) {
@@ -116,9 +116,30 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public void changePassword(long userID, String oldPassword, String newPassword, String repeatPassword) throws UserServiceEcxeption {
+        if (LoginPasswordValidator.validationPassword(oldPassword) && LoginPasswordValidator.validationPassword(newPassword) && LoginPasswordValidator.validationPassword(repeatPassword)) {
+            if (newPassword.equals(repeatPassword)) {
+                User user = getUserById(userID);
+                if (oldPassword.equals(user.getPassword())) {
+                    try {
+                        userDAO.changeUserPassword(userID, newPassword);
+                    } catch (DAOException e) {
+                        LOGGER.warn(e);
+                        throw new UserServiceEcxeption(e);
+                    }
+                }
+            } else {
+                throw new UserServiceEcxeption("Passwords do not much");
+            }
+        } else {
+            throw new UserServiceEcxeption("Incorrect password");
+        }
+    }
+
 
     private User buildUser(String login, String password, String firstName, String lastName, String passportSerialNumber,
-                          String driverLicenceNumber, String email, String phoneNumber) {
+                           String driverLicenceNumber, String email, String phoneNumber) {
         User user = new User();
 
         user.setLogin(login);

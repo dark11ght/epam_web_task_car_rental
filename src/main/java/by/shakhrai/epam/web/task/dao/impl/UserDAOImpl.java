@@ -59,6 +59,8 @@ public class UserDAOImpl implements UserDAO {
             "passport_serial_number, driver_licence_number, date_of_registration, email, phone_number)\n" +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
+    private static final String CHANGE_USER_PASSWORD_QUERY = "UPDATE user SET password = ? WHERE id = ";
+
 
     @Override
     public void registrationUser(User newUser) throws DAOException {
@@ -172,8 +174,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<User> getAllUsers() throws DAOException {
-        List<User> users = new ArrayList<>();
+    public List <User> getAllUsers() throws DAOException {
+        List <User> users = new ArrayList <>();
 
         try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
@@ -203,6 +205,20 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException("Can`t get users ");
         }
         return users;
+    }
+
+    @Override
+    public void changeUserPassword(long userID, String newPassword) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_USER_PASSWORD_QUERY + userID);
+        ) {
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t change password");
+        }
     }
 
     private void createUserByResultSet(User user, ResultSet resultSet) throws SQLException {
