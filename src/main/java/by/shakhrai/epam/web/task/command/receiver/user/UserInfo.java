@@ -41,6 +41,6 @@ public class UserInfo implements Command {
             }
 
         }
-        return PageEnum.USER_INFO_PAGE_JSP.getValue();
+        return PageEnum.USER_PAGE_JSP.getValue();
     }
 }

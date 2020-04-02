@@ -58,7 +58,7 @@ public enum CommandParameter {
         {
             this.command = new UserPage();
         }
-    },
+    },//TODO delete
 
 
     INDEX_PAGE {

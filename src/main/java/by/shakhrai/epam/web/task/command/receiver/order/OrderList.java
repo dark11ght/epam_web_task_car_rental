@@ -22,8 +22,10 @@ public class OrderList implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         HttpSession session = request.getSession();
-        long userID = (long) session.getAttribute("userId");
-        List<Order> orders = null;
+
+        long userID = Long.parseLong(request.getParameter("userID"));
+
+        List <Order> orders = null;
         try {
             orders = orderServiceImpl.getOrderByUserID(userID);
         } catch (UserServiceEcxeption userServiceEcxeption) {

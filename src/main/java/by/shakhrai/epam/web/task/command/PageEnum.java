@@ -10,7 +10,6 @@ public enum PageEnum {
     PAGE_404_JSP("views/404.jsp"),
     ADMIN_PAGE_JSP("views/admin_page.jsp"),
     ERROR_PAGE_JSP("views/error_page.jsp"),
-    USER_INFO_PAGE_JSP("views/user_info_page.jsp"),
     USER_PAGE_JSP("views/user_page.jsp"),
     ORDER_PAGE("views/orders.jsp");
 

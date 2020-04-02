@@ -147,5 +147,4 @@ INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, 
 INSERT INTO `car_renta`.`car` (`id`, `mark_id`, `model_id`, `millage`, `price`, `car_status_id`) VALUES (10, 3, 6, 1564, 8, 1);
 INSERT INTO `car_renta`.`role` (`id`, `role`) VALUES (1, 'user');
 INSERT INTO `car_renta`.`role` (`id`, `role`) VALUES (2, 'admin');
-INSERT INTO `car_renta`.`user` (`id`, `login`, `password`, `role_id`, `active_status`) VALUES (1, 'pavel', 'pass', 2, DEFAULT);
-INSERT INTO `car_renta`.`user` (`id`, `login`, `password`, `role_id`, `active_status`) VALUES (2, 'ivan', 'qqqwww', DEFAULT, DEFAULT);
+

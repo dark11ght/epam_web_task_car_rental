@@ -38,13 +38,13 @@
 
                 <c:if test="${userRole.equals('user')}">
                     <li class="nav-item">
-                        <a class="nav-link" href="controller?command=USER_PAGE">Профиль</a>
+                        <a class="nav-link" href="controller?command=USER_INFO_PAGE">Профиль</a>
                     </li>
                 </c:if>
 
                 <c:if test="${userRole.equals('admin')}">
                     <li class="nav-item">
-                        <a class="nav-link" href="controller?command=USER_PAGE">Профиль</a>
+                        <a class="nav-link" href="controller?command=USER_INFO_PAGE">Профиль</a>
                     </li>
                 </c:if>
 
@@ -58,13 +58,13 @@
 
                 <c:if test="${userRole.equals('user')}">
                     <li class="nav-item">
-                        <a class="nav-link" href="get_orders_by_user_id">Мои заказы</a>
+                        <a class="nav-link" href="controller?command=ORDERS_BY_USER_ID&userID=${user.id}">Мои заказы</a>
                     </li>
                 </c:if>
 
                 <c:if test="${userRole.equals('admin')}">
                     <li class="nav-item">
-                        <a class="nav-link" href="get_orders_by_user_id">Мои заказы</a>
+                        <a class="nav-link" href="controller?command=ORDERS_BY_USER_ID&userID=${user.id}">Мои заказы</a>
                     </li>
                 </c:if>
 
