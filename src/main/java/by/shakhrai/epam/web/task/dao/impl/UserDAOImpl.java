@@ -61,6 +61,12 @@ public class UserDAOImpl implements UserDAO {
 
     private static final String CHANGE_USER_PASSWORD_QUERY = "UPDATE user SET password = ? WHERE id = ";
 
+    private static final String BLOCK_USER_QUERY = "UPDATE user SET active_status = false WHERE id = ";
+
+    private static final String UNBLOCK_USER_QUERY = "UPDATE user SET active_status = true WHERE id = ";
+
+    private static final String DELETE_USER_FROM_DB_QUERY = "DELETE from users where id = ";
+
 
     @Override
     public void registrationUser(User newUser) throws DAOException {
@@ -218,6 +224,45 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException("Can`t change password");
+        }
+    }
+
+    @Override
+    public void blockUser(long userID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(BLOCK_USER_QUERY + userID);
+        ) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t block user");
+        }
+    }
+
+    @Override
+    public void unblockUser(long userID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(UNBLOCK_USER_QUERY + userID);
+        ) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t unblock user");
+        }
+    }
+
+    @Override
+    public void deleteUserFromDB(long userID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER_FROM_DB_QUERY + userID);
+        ) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t delete user from DB");
         }
     }
 

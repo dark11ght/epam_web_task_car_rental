@@ -52,33 +52,6 @@
         </tbody>
     </table>
 </div>
-<div>
-    <tbody>
-
-    <tr>
-        <td>
-            <form action="controller" method="POST">
-                <button type="submit" name="command" value="USER_CHANGE_PASSWORD_PAGE" class="btn btn-outline-warning">Изменить пароль
-                </button>
-            </form>
-        </td>
-
-        <td>
-            <form action="controller" method="POST">
-                <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning">Изменить данные
-                </button>
-            </form>
-        </td>
-
-        <td>
-            <form action="controller" method="POST">
-                <button type="submit" name="command" value="BLOCK_USER" class="btn btn-outline-danger">Удалить профиль
-                </button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</div>
 
 <footer>
     <div id="footer">

@@ -14,7 +14,13 @@ public enum CommandParameter {
 
     USER_INFO_PAGE {
         {
-            this.command = new UserInfo();
+            this.command = new UserPage();
+        }
+    },
+
+    USER_INFO_PAGE_BY_ADMIN {
+        {
+            this.command = new UserInfoPageByAdmin();
         }
     },
 
@@ -29,6 +35,7 @@ public enum CommandParameter {
             this.command = new ChangePassword();
         }
     },
+
 
     ERROR_PAGE {
         {
@@ -66,14 +73,6 @@ public enum CommandParameter {
         }
     },
 
-    //TODO delete
-   /* USER_PAGE {
-        {
-            this.command = new UserPage();
-        }
-    },*/
-
-
     INDEX_PAGE {
         {
             this.command = new IndexPage();
@@ -95,7 +94,30 @@ public enum CommandParameter {
         {
             this.command = new LogOut();
         }
-    };
+    },
+    UNBLOCK_USER {
+        {
+            this.command = new UnblockUser();
+        }
+    },
+    BLOCK_USER_BY_ADMIN {
+        {
+            this.command = new BlockUserByAdmin();
+        }
+    },
+    BLOCK_USER {
+        {
+            this.command = new BlockUserByUser();
+        }
+    },
+    DELETE_USER_FROM_DB {
+        {
+            this.command = new DeleteUserFromDB();
+        }
+    },
+
+
+    ;
 
     Command command;
 

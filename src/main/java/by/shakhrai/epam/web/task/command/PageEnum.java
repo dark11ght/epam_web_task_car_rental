@@ -11,6 +11,7 @@ public enum PageEnum {
     ADMIN_PAGE_JSP("views/admin_page.jsp"),
     ERROR_PAGE_JSP("views/error_page.jsp"),
     USER_PAGE_JSP("views/user_page.jsp"),
+    USER_INFO_PAGE_BY_ADMIN_JSP("views/user_info_page_by_admin.jsp"),
     ORDER_PAGE("views/orders.jsp"),
     USER_CHANGE_PASSWORD_PAGE("views/user_change_password_page.jsp");
 

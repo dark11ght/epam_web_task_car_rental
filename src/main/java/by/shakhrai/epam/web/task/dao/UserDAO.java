@@ -21,4 +21,10 @@ public interface UserDAO {
     List<User> getAllUsers() throws DAOException;
 
     void changeUserPassword(long userID,String newPassword)throws DAOException;
+
+    void blockUser(long userID)throws DAOException;
+
+    void unblockUser(long userID)throws DAOException;
+
+    void deleteUserFromDB(long userID) throws DAOException;
 }

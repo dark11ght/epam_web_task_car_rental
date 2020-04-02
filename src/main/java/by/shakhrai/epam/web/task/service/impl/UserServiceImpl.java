@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
                 throw new UserServiceEcxeption(e) {
                 };
             }
-            if (user.getLogin() != null) {
+            if (user.getLogin() != null && user.isActiveStatus()) {
                 if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
                     return user;
                 }
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         }
 
         try {
-            User newUser = buildUser(login, password, firstName, lastName, passportSerialNumber, driverLicenceNumber,
+            User newUser = buildTempUser(login, password, firstName, lastName, passportSerialNumber, driverLicenceNumber,
                     email, phoneNumber);
             userDAO.registrationUser(newUser);
         } catch (DAOException e) {
@@ -112,8 +112,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(User user) {
-
+    public void deleteUser(long userID) throws UserServiceEcxeption {
+        try {
+            userDAO.deleteUserFromDB(userID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e);
+        }
     }
 
     @Override
@@ -137,9 +142,29 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public void blockUser(long userID) throws UserServiceEcxeption {
+        try {
+            userDAO.blockUser(userID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e);
+        }
+    }
 
-    private User buildUser(String login, String password, String firstName, String lastName, String passportSerialNumber,
-                           String driverLicenceNumber, String email, String phoneNumber) {
+    @Override
+    public void unblockUser(long userID) throws UserServiceEcxeption {
+        try {
+            userDAO.unblockUser(userID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new UserServiceEcxeption(e);
+        }
+    }
+
+
+    private User buildTempUser(String login, String password, String firstName, String lastName, String passportSerialNumber,
+                               String driverLicenceNumber, String email, String phoneNumber) {
         User user = new User();
 
         user.setLogin(login);

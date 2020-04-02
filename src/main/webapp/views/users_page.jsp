@@ -16,7 +16,7 @@
             <th scope="col">Имя</th>
             <th scope="col">Роль</th>
             <th scope="col">Статус</th>
-            <th scope="col">EDIT</th>
+            <th scope="col">ORDERS</th>
             <th scope="col">BLOCK USER</th>
             <th scope="col">INFO</th>
             <th scope="col">DELETE</th>
@@ -41,42 +41,52 @@
                         blocked
                     </td>
                 </c:if>
+
+
                 <td>
-                    <form action="UserEditPageServlet" method="get">
-                        <button type="submit" name="login" value="${user.login}" class="btn btn-outline-warning">EDIT
+                    <form action="controller" method="POST">
+                        <input type="hidden" id="OrderUserID" name="userID" value="${user.id}">
+                        <button type="submit" name="command" value="ORDERS_BY_USER_ID"
+                                class="btn btn-outline-info">ORDERS
+                        </button>
+                    </form>
+                <td>
+
+                    <c:if test="${user.activeStatus.equals(true)}">
+                <td>
+                    <form action="controller" method="POST">
+                        <input type="hidden" id="BlockUserID" name="userID" value="${user.id}">
+                        <button type="submit" name="command" value="BLOCK_USER_BY_ADMIN" class="btn btn-outline-danger">
+                            BLOCK USER
                         </button>
                     </form>
                 </td>
-
-
-                <c:if test="${user.activeStatus.equals(true)}">
-                    <td>
-                        <form action="BLOCK_USER" method="get">
-                            <button type="submit" name="id" value="${user.id}" class="btn btn-outline-danger">DELETE
-                            </button>
-                        </form>
-                    </td>
                 </c:if>
 
                 <c:if test="${!user.activeStatus.equals(true)}">
                     <td>
-                        <form action="UNBLOCK_USER" method="get">
-                            <button type="submit" name="id" value="${user.id}" class="btn btn-outline-success">RETURN
-                                USER
+                        <form action="controller" method="POST">
+                            <input type="hidden" id="UnblockUserID" name="userID" value="${user.id}">
+                            <button type="submit" name="command" value="UNBLOCK_USER" class="btn btn-outline-success">
+                                UNBLOCK USER
                             </button>
                         </form>
                     </td>
                 </c:if>
 
                 <td>
-                    <form action="UserInfoServlet" method="get">
-                        <button type="submit" name="login" value="${user.login}" class="btn btn-outline-info">INFO
+                    <form action="controller" method="POST">
+                        <input type="hidden" id="InfoUserID" name="userID" value="${user.id}">
+                        <button type="submit" name="command" value="USER_INFO_PAGE_BY_ADMIN"
+                                class="btn btn-outline-info">INFO
                         </button>
                     </form>
 
                 <td>
-                    <form action="/DeleteUserServlet" method="get">
-                        <button type="submit" name="id" value="${user.id}" class="btn btn-outline-danger">del from DB
+                    <form action="controller" method="POST">
+                        <input type="hidden" id="DeleteUserID" name="userID" value="${user.id}">
+                        <button type="submit" name="command" value="DELETE_USER_FROM_DB" class="btn btn-outline-danger">
+                            DELETE FROM DB
                         </button>
                     </form>
                 </td>

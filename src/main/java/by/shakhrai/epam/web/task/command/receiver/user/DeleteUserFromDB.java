@@ -12,38 +12,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ChangePassword implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(ChangePassword.class);
+public class DeleteUserFromDB implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(DeleteUserFromDB.class);
     private UserService userService = ServiceFactory.INSTANCE.getUserService();
-
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         HttpSession session = request.getSession();
-        long userID = (long) session.getAttribute("ActiveUserId");
+        long userID = Long.parseLong(request.getParameter("userID"));
+
+        if (session.getAttribute("role") != null) {
+            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
+            String userRole = (String) session.getAttribute("role");
+            request.setAttribute("userRole", userRole);
+            request.setAttribute("ActiveUserId", ActiveUserId);
+        }
 
         if (session.getAttribute("role") != null) {
             String userRole = (String) session.getAttribute("role");
             request.setAttribute("userRole", userRole);
-            request.setAttribute("ActiveUserId", userID);
         }
-
-        String oldPassword = request.getParameter("oldPassword");
-        String newPassword = request.getParameter("newPassword");
-        String repeatPassword = request.getParameter("rPassword");
-
         try {
-            userService.changePassword(userID, oldPassword, newPassword, repeatPassword);
+            userService.blockUser(userID);
         } catch (UserServiceEcxeption userServiceEcxeption) {
             userServiceEcxeption.printStackTrace();
-            String message = "Не удалось изменить пароль";
+            String message = "Не удалось заблокировать пользователя";
             request.setAttribute("informMessage", message);
             page = PageEnum.INFORMER_PAGE_JSP.getValue();
             return page;
         }
 
-        String message = "Пароль успешно изменен";
+        String message = "Пользователь успешно заблокирован";
         request.setAttribute("informMessage", message);
         page = PageEnum.INFORMER_PAGE_JSP.getValue();
         return page;

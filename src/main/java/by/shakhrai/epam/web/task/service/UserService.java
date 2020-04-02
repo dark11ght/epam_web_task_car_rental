@@ -12,8 +12,10 @@ public interface UserService {
                     String driverLicenceNumber, String email, String phoneNumber) throws UserServiceEcxeption;
     User getUserByLogin(String login) throws UserServiceEcxeption;
     User getUserByEmail(String email);
-    User getUserById(long id) throws UserServiceEcxeption;
-    void deleteUser (User user)throws UserServiceEcxeption;
+    User getUserById(long userID) throws UserServiceEcxeption;
+    void deleteUser (long userID)throws UserServiceEcxeption;
     void changePassword(long userID, String oldPassword, String newPassword, String repeatPassword)throws UserServiceEcxeption;
+    void blockUser(long userID) throws UserServiceEcxeption;
+    void unblockUser(long userID) throws UserServiceEcxeption;
 
 }

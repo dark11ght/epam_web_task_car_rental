@@ -1,7 +1,8 @@
-package by.shakhrai.epam.web.task.command.receiver.user;
+package by.shakhrai.epam.web.task.command.receiver.pages;
 
 import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.PageEnum;
+import by.shakhrai.epam.web.task.command.receiver.user.UserPage;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
@@ -13,20 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class UserInfo implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(SignIn.class);
+public class UserInfoPageByAdmin implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(UserInfoPageByAdmin.class);
     private UserService userService = ServiceFactory.INSTANCE.getUserService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         HttpSession session = request.getSession();
+        long userID = Long.parseLong(request.getParameter("userID"));
 
         if (session.getAttribute("role") != null) {
-            long userID = (long) session.getAttribute("userId");
+            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
             String userRole = (String) session.getAttribute("role");
             request.setAttribute("userRole", userRole);
-
+            request.setAttribute("ActiveUserId", ActiveUserId);
 
             try {
                 User user = new User();
@@ -34,13 +36,14 @@ public class UserInfo implements Command {
                 request.setAttribute("user", user);
 
             } catch (UserServiceEcxeption userServiceEcxeption) {
-                String message = "User not found";
+                String message = "User not found ";
                 request.setAttribute("informMessage", message);
                 page = PageEnum.INFORMER_PAGE_JSP.getValue();
                 return page;
             }
 
         }
-        return PageEnum.USER_PAGE_JSP.getValue();
+        return PageEnum.USER_INFO_PAGE_BY_ADMIN_JSP.getValue();
     }
 }
+

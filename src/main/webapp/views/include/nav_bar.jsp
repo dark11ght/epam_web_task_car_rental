@@ -64,7 +64,7 @@
 
                 <c:if test="${userRole.equals('admin')}">
                     <li class="nav-item">
-                        <a class="nav-link" href="controller?command=ORDERS_BY_USER_ID&userID=${user.id}">Мои заказы</a>
+                        <a class="nav-link" href="controller?command=ORDERS_BY_USER_ID&userID=${ActiveUserId}">Мои заказы</a>
                     </li>
                 </c:if>
 

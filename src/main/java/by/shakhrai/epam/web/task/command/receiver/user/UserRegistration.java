@@ -49,7 +49,7 @@ public class UserRegistration implements Command {
         if (user != null) {
             HttpSession session = request.getSession();
             Long id = user.getId();
-            session.setAttribute("userId", id);
+            session.setAttribute("ActiveUserId", id);
             session.setAttribute("role", user.getRole().getRole());
             String userRole = (String) session.getAttribute("role");
             request.setAttribute("userRole", userRole);

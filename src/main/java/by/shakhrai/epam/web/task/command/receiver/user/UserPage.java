@@ -12,39 +12,35 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
-public class AllUsers implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(AllUsers.class);
-    private UserService userServiceImpl = ServiceFactory.INSTANCE.getUserService();
+public class UserPage implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(UserPage.class);
+    private UserService userService = ServiceFactory.INSTANCE.getUserService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
-
         HttpSession session = request.getSession();
+
         if (session.getAttribute("role") != null) {
-            long userID = (long) session.getAttribute("ActiveUserId");
+            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
             String userRole = (String) session.getAttribute("role");
             request.setAttribute("userRole", userRole);
-            request.setAttribute("ActiveUserId", userID);
+            request.setAttribute("ActiveUserId", ActiveUserId);
+
+            try {
+                User user = new User();
+                user = userService.getUserById(ActiveUserId);
+                request.setAttribute("user", user);
+
+            } catch (UserServiceEcxeption userServiceEcxeption) {
+                String message = "User not found";
+                request.setAttribute("informMessage", message);
+                page = PageEnum.INFORMER_PAGE_JSP.getValue();
+                return page;
+            }
+
         }
-
-
-        ArrayList<User> users = null;
-        try {
-            users = (ArrayList<User>) userServiceImpl.geaAllUsers();
-        } catch (UserServiceEcxeption userServiceEcxeption) {
-            String message = "Users not found";
-            request.setAttribute("informMessage", message);
-            page = PageEnum.INFORMER_PAGE_JSP.getValue();
-            return page;
-        }
-
-
-
-        request.setAttribute("users", users);
-        page = PageEnum.ALL_USER_JSP.getValue();
-        return page;
+        return PageEnum.USER_PAGE_JSP.getValue();
     }
 }

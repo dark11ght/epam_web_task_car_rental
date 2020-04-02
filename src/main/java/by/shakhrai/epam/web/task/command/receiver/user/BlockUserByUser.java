@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ChangePassword implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(ChangePassword.class);
+public class BlockUserByUser implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(BlockUserByUser.class);
     private UserService userService = ServiceFactory.INSTANCE.getUserService();
-
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -28,22 +27,19 @@ public class ChangePassword implements Command {
             request.setAttribute("userRole", userRole);
             request.setAttribute("ActiveUserId", userID);
         }
-
-        String oldPassword = request.getParameter("oldPassword");
-        String newPassword = request.getParameter("newPassword");
-        String repeatPassword = request.getParameter("rPassword");
-
         try {
-            userService.changePassword(userID, oldPassword, newPassword, repeatPassword);
+            userService.blockUser(userID);
         } catch (UserServiceEcxeption userServiceEcxeption) {
             userServiceEcxeption.printStackTrace();
-            String message = "Не удалось изменить пароль";
+            String message = "Не удалось заблокировать пользователя ";
             request.setAttribute("informMessage", message);
             page = PageEnum.INFORMER_PAGE_JSP.getValue();
             return page;
         }
 
-        String message = "Пароль успешно изменен";
+
+        session.invalidate();
+        String message = "Пользователь успешно заблокирован";
         request.setAttribute("informMessage", message);
         page = PageEnum.INFORMER_PAGE_JSP.getValue();
         return page;
