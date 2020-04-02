@@ -14,6 +14,6 @@ public interface OrderDAO {
 
     List<Order> getOrdersByAdminStatus() throws DAOException;
 
-    long getUncheckOrderCount() throws DAOException;
+    int getUncheckOrderCount() throws DAOException;
 
 }

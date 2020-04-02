@@ -20,7 +20,6 @@
         <li><p class="text-danger">Заказы, ожидающите рассомотрения <strong>${countOrders}</strong></p></li>
         <li><a class="nav-link" href="">Список заказов</a><br></li>
         <li><a class="nav-link" href="controller?command=ALL_USER_LIST">Список пользователей</a><br></li>
-        <li><a class="nav-link" href="controller?command=ORDERS_BY_USER_ID">Список заказов по id</a><br></li>
     </ul>
 
 </div>

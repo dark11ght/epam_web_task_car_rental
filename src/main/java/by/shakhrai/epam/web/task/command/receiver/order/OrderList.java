@@ -35,7 +35,6 @@ public class OrderList implements Command {
             return page;
         }
 
-        System.out.println(orders);
         String userRole = (String) session.getAttribute("role");
         request.setAttribute("orders", orders);
         request.setAttribute("userRole", userRole);

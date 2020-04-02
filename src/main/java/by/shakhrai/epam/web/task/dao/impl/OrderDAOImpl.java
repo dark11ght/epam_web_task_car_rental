@@ -19,7 +19,10 @@ public class OrderDAOImpl implements OrderDAO {
     //fields
     private static final String ORDER_ID = "id";
     private static final String USER_ID = "user_id";
+    private static final String USER_LOGIN = "login";
     private static final String CAR_ID = "car_id";
+    private static final String CAR_MARK = "mark";
+    private static final String CAR_MODEL = "model";
     private static final String RENT_HOURS = "rent_hours";
     private static final String TOTAL_PRICE = "total_price";
     private static final String PAYMENT_STATUS = "payment_status";
@@ -37,7 +40,6 @@ public class OrderDAOImpl implements OrderDAO {
             "       JOIN car_model m on c.model_id = m.id\n" +
             "       JOIN car_mark m2 on c.mark_id = m2.id\n" +
             " WHERE order.id = ";
-
 
     private static final String GET_ORDER_BY_USER_ID = "SELECT order.id, u.login, car_id, m.model, m2.mark, rent_hours,\n" +
             "       total_price, payment_status, confirm_status, date_of_reg_order, order_status, notes FROM `order`\n" +
@@ -65,12 +67,12 @@ public class OrderDAOImpl implements OrderDAO {
                 Car car = new Car();
                 CarModel carModel = new CarModel();
                 CarMark carMark = new CarMark();
-                user.setLogin(resultSet.getString("login"));
+                user.setLogin(resultSet.getString(USER_LOGIN));
                 order.setId(resultSet.getLong(ORDER_ID));
                 order.setUser(user);
                 car.setId(resultSet.getInt(CAR_ID));
-                carMark.setMark(resultSet.getString("mark"));
-                carModel.setModelName(resultSet.getString("model"));
+                carMark.setMark(resultSet.getString(CAR_MARK));
+                carModel.setModelName(resultSet.getString(CAR_MODEL));
                 car.setMark(carMark);
                 car.setModel(carModel);
                 order.setCar(car);
@@ -104,12 +106,12 @@ public class OrderDAOImpl implements OrderDAO {
                 CarModel carModel = new CarModel();
                 CarMark carMark = new CarMark();
                 user.setId(userID);
-                user.setLogin(resultSet.getString("login"));
+                user.setLogin(resultSet.getString(USER_LOGIN));
                 order.setId(resultSet.getLong(ORDER_ID));
                 order.setUser(user);
                 car.setId(resultSet.getInt(CAR_ID));
-                carMark.setMark(resultSet.getString("mark"));
-                carModel.setModelName(resultSet.getString("model"));
+                carMark.setMark(resultSet.getString(CAR_MARK));
+                carModel.setModelName(resultSet.getString(CAR_MODEL));
                 car.setMark(carMark);
                 car.setModel(carModel);
                 order.setCar(car);
@@ -136,7 +138,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public long getUncheckOrderCount() throws DAOException {
+    public int getUncheckOrderCount() throws DAOException {
         return 0;
     }
 }
