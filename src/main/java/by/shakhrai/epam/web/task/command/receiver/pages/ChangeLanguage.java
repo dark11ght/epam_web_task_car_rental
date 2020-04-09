@@ -2,13 +2,11 @@ package by.shakhrai.epam.web.task.command.receiver.pages;
 
 import by.shakhrai.epam.web.task.command.Command;
 
-import by.shakhrai.epam.web.task.command.CookieName;
 import by.shakhrai.epam.web.task.command.JspParameter;
 import by.shakhrai.epam.web.task.command.LocaleType;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,15 +32,11 @@ public class ChangeLanguage implements Command {
         String language = request.getParameter(JspParameter.LANGUAGE.getValue());
         LOGGER.warn(language);
         LocaleType localeType = LocaleType.valueOf(language);
-        setCookie(response, localeType);
+        session.setAttribute("userLocale", localeType);
         response.setLocale(new Locale(localeType.getLanguage(), localeType.getCountry()));
         LOGGER.warn(response.getLocale().getLanguage() + " " + response.getLocale().getCountry());
         return new IndexPage().execute(request, response);
     }
 
-    private void setCookie(HttpServletResponse response, LocaleType type) {
-        Cookie cookie = new Cookie(CookieName.LOCALE.toString(), type.toString());
-        response.addCookie(cookie);
-    }
 
 }

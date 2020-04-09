@@ -1,6 +1,5 @@
 package by.shakhrai.epam.web.task.filter;
 
-import by.shakhrai.epam.web.task.command.CookieName;
 import by.shakhrai.epam.web.task.command.LocaleType;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -8,7 +7,6 @@ import org.apache.log4j.Logger;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,31 +32,17 @@ public class LocaleFilter implements Filter {
     }
 
     private void setLocale(HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
+        HttpSession session = request.getSession();
         LocaleType type;
         String locale;
-        if (cookies != null && !(locale = findCookie(cookies, CookieName.LOCALE.toString())).isEmpty()) {
-            type = LocaleType.valueOf(locale.toUpperCase());
+        if (session.getAttribute("userLocale") != null) {
+            type = (LocaleType) session.getAttribute("userLocale");
         } else {
             type = defaultLocale;
-            setCookie(response);
+            session.setAttribute("userLocale", type);
         }
         LOGGER.warn(type.getCountry() + " " + type.getLanguage());
         response.setLocale(new Locale(type.getLanguage(), type.getCountry()));
-    }
-
-    private void setCookie(HttpServletResponse response) {
-        Cookie cookie = new Cookie(CookieName.LOCALE.toString(), defaultLocale.toString());
-        response.addCookie(cookie);
-    }
-
-    private String findCookie(Cookie[] cookies, String name) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals(name)) {
-                return cookie.getValue();
-            }
-        }
-        return new String();
     }
 
 
