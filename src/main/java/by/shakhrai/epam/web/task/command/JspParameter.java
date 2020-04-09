@@ -2,7 +2,8 @@ package by.shakhrai.epam.web.task.command;
 
 public enum JspParameter {
     COMMAND("command"),
-    HREF("href");
+    HREF("href"),
+    LANGUAGE("language");
 
     private String value;
 

@@ -18,6 +18,12 @@ public enum CommandParameter {
         }
     },
 
+    CHANGE_LANGUAGE {
+        {
+            this.command = new ChangeLanguage();
+        }
+    },
+
     USER_INFO_PAGE_BY_ADMIN {
         {
             this.command = new UserInfoPageByAdmin();

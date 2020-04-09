@@ -11,7 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.List;
-
+//TODO singleton
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
     private UserDAO userDAO = DAOFactory.INSTANCE.getUserDao();
@@ -161,7 +161,6 @@ public class UserServiceImpl implements UserService {
             throw new UserServiceEcxeption(e);
         }
     }
-
 
     private User buildTempUser(String login, String password, String firstName, String lastName, String passportSerialNumber,
                                String driverLicenceNumber, String email, String phoneNumber) {

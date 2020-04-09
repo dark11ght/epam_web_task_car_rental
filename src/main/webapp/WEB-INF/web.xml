@@ -39,30 +39,7 @@
     </session-config>
 
 
-    <!--Controller-->
-    <servlet>
-        <servlet-name>controller</servlet-name>
-        <servlet-class>by.shakhrai.epam.web.task.controller.Controller</servlet-class>
-    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>controller</servlet-name>
-        <url-pattern>/controller</url-pattern>
-    </servlet-mapping>
-    <!--Controller-->
-
-    <!--filter-->
-
-    <!--<filter>
-        <filter-name>controller</filter-name>
-        <filter-class>by.shakhrai.epam.web.task.filter.PageSecurityFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>controller</filter-name>
-        <url-pattern>/controller</url-pattern>
-    </filter-mapping>-->
-
-    <!--filter-->
 
 
 </web-app>

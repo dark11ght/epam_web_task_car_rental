@@ -76,7 +76,7 @@ public enum ConnectionPool {
         try {
             if (connection != null) {
                 if (!usedConnection.remove(connection)) {
-                    LOGGER.warn("Connection do not remove from usedConnection");
+                    LOGGER.debug("Connection do not remove from usedConnection");
                 }
                 availableConnections.put(connection);
             }

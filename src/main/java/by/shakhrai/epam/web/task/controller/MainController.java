@@ -6,12 +6,14 @@ import by.shakhrai.epam.web.task.connectionpool.ConnectionPool;
 import by.shakhrai.epam.web.task.factory.CommandFactory;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class Controller extends HttpServlet {
+@WebServlet( "/controller" )
+public class MainController extends HttpServlet {
     private static final CommandFactory COMMAND_FACTORY = new CommandFactory();
 
     @Override
@@ -38,5 +40,10 @@ public class Controller extends HttpServlet {
         }else {
             request.getRequestDispatcher(PageEnum.INDEX_JSP.getValue()).forward(request, response);
         }
+    }
+
+    @Override
+    public void destroy() {
+        ConnectionPool.INSTANCE.closePool();
     }
 }

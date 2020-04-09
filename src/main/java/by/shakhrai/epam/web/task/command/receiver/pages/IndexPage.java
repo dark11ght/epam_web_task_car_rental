@@ -15,10 +15,11 @@ public class IndexPage implements Command {
         if (session.getAttribute("role") != null) {
             long ActiveUserId = (long) session.getAttribute("ActiveUserId");
             String userRole = (String) session.getAttribute("role");
+
             request.setAttribute("userRole", userRole);
             request.setAttribute("ActiveUserId", ActiveUserId);
-        }
 
+        }
         page = PageEnum.INDEX_JSP.getValue();
         return page;
     }
