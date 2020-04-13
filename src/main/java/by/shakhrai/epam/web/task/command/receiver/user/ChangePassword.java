@@ -23,10 +23,6 @@ public class ChangePassword implements Command {
         HttpSession session = request.getSession();
         long userID = (long) session.getAttribute("ActiveUserId");
 
-        if (session.getAttribute("role") != null) {
-            request.setAttribute("ActiveUserId", userID);
-        }
-
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String repeatPassword = request.getParameter("rPassword");

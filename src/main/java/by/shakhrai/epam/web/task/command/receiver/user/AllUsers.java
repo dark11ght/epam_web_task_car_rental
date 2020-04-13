@@ -21,14 +21,6 @@ public class AllUsers implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
-
-        HttpSession session = request.getSession();
-        if (session.getAttribute("role") != null) {
-            long userID = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", userID);
-        }
-
-
         ArrayList<User> users = null;
         try {
             users = (ArrayList<User>) userServiceImpl.geaAllUsers();

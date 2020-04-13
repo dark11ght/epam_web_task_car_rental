@@ -10,14 +10,6 @@ import javax.servlet.http.HttpSession;
 public class ErrorPage implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page;
-        HttpSession session = request.getSession();
-        if (session.getAttribute("role") != null) {
-            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
-        }
-
-        page = PageEnum.ERROR_PAGE_JSP.getValue();
-        return page;
+        return PageEnum.ERROR_PAGE_JSP.getValue();
     }
 }

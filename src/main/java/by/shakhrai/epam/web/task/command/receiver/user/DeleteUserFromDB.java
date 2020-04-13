@@ -23,11 +23,6 @@ public class DeleteUserFromDB implements Command {
         long userID = Long.parseLong(request.getParameter("userID"));
 
         if (session.getAttribute("role") != null) {
-            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
-        }
-
-        if (session.getAttribute("role") != null) {
             String userRole = (String) session.getAttribute("role");
             request.setAttribute("userRole", userRole);
         }

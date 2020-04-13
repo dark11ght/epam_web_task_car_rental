@@ -10,15 +10,7 @@ import javax.servlet.http.HttpSession;
 public class IndexPage implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page;
-        HttpSession session = request.getSession();
-        if (session.getAttribute("role") != null) {
-            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
-
-        }
-        page = PageEnum.INDEX_JSP.getValue();
-        return page;
+        return PageEnum.INDEX_JSP.getValue();
     }
 }
 

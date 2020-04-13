@@ -22,9 +22,6 @@ public class BlockUserByUser implements Command {
         HttpSession session = request.getSession();
         long userID = (long) session.getAttribute("ActiveUserId");
 
-        if (session.getAttribute("role") != null) {
-            request.setAttribute("ActiveUserId", userID);
-        }
         try {
             userService.blockUser(userID);
         } catch (UserServiceEcxeption userServiceEcxeption) {

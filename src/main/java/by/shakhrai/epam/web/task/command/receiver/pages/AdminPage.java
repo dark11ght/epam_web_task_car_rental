@@ -10,14 +10,6 @@ import javax.servlet.http.HttpSession;
 public class AdminPage implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page;
-        HttpSession session = request.getSession();
-        if (session.getAttribute("role") != null) {
-            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
-        }
-
-        page = PageEnum.ADMIN_PAGE_JSP.getValue();
-        return page;
+        return PageEnum.ADMIN_PAGE_JSP.getValue();
     }
 }

@@ -21,26 +21,19 @@ public class UserInfoPageByAdmin implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
-        HttpSession session = request.getSession();
         long userID = Long.parseLong(request.getParameter("userID"));
+        try {
+            User user;
+            user = userService.getUserById(userID);
+            request.setAttribute("user", user);
 
-        if (session.getAttribute("role") != null) {
-            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
-
-            try {
-                User user = new User();
-                user = userService.getUserById(userID);
-                request.setAttribute("user", user);
-
-            } catch (UserServiceEcxeption userServiceEcxeption) {
-                String message = "User not found ";
-                request.setAttribute("informMessage", message);
-                page = PageEnum.INFORMER_PAGE_JSP.getValue();
-                return page;
-            }
-
+        } catch (UserServiceEcxeption userServiceEcxeption) {
+            String message = "User not found ";
+            request.setAttribute("informMessage", message);
+            page = PageEnum.INFORMER_PAGE_JSP.getValue();
+            return page;
         }
+
         return PageEnum.USER_INFO_PAGE_BY_ADMIN_JSP.getValue();
     }
 }

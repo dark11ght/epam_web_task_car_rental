@@ -24,10 +24,9 @@ public class UserPage implements Command {
 
         if (session.getAttribute("role") != null) {
             long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
 
             try {
-                User user = new User();
+                User user;
                 user = userService.getUserById(ActiveUserId);
                 request.setAttribute("user", user);
 

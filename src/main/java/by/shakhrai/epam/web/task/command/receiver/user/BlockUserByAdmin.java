@@ -19,13 +19,7 @@ public class BlockUserByAdmin implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
-        HttpSession session = request.getSession();
         long userID = Long.parseLong(request.getParameter("userID"));
-
-        if (session.getAttribute("role") != null) {
-            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
-        }
         try {
             userService.blockUser(userID);
         } catch (UserServiceEcxeption userServiceEcxeption) {

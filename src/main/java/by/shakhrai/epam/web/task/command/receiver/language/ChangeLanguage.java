@@ -20,10 +20,7 @@ public class ChangeLanguage implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("role") != null) {
-            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
-        }
+
 
         String language = request.getParameter(JspParameter.LANGUAGE.getValue());
         LOGGER.warn(language);

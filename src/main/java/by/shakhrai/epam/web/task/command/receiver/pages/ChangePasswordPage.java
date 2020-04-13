@@ -10,15 +10,7 @@ import javax.servlet.http.HttpSession;
 public class ChangePasswordPage implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page;
-        HttpSession session = request.getSession();
-        if (session.getAttribute("role") != null) {
-            long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            request.setAttribute("ActiveUserId", ActiveUserId);
-        }
-
-        page = PageEnum.USER_CHANGE_PASSWORD_PAGE.getValue();
-        return page;
+        return PageEnum.USER_CHANGE_PASSWORD_PAGE.getValue();
     }
 }
 
