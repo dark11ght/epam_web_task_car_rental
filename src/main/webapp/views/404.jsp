@@ -7,9 +7,11 @@
 <body>
 <%@include file="include/nav_bar.jsp" %>
 <div>
+    <fmt:bundle basename="pagecontent" prefix="404.">
     <h2>
-        Oops, something wrong, 404 not found :(
+        <fmt:message key="message" />
     </h2>
+    </fmt:bundle>
 </div>
 <footer>
     <div id="footer">

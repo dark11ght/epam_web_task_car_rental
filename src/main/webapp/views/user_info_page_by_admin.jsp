@@ -9,21 +9,22 @@
 <body>
 <%@include file="include/nav_bar.jsp" %>
 <div>
+<fmt:bundle basename="pagecontent" prefix="user_info_page_by_admin.">
     <table class="table">
-        <caption>Информация пользователя</caption>
+        <caption><fmt:message key="headText"/></caption>
         <thead class="thead-light">
         <tr>
             <%--<th scope="col">id</th>--%>
-            <th scope="col">Логин</th>
-            <th scope="col">Роль</th>
-            <th scope="col">Email</th>
-            <th scope="col">Статус</th>
-            <th scope="col">Имя</th>
-            <th scope="col">Фамилия</th>
-            <th scope="col">Номер телефона</th>
-            <th scope="col">Номер пасспорта</th>
-            <th scope="col">Водительское удостоверение</th>
-            <th scope="col">Дата регистрации</th>
+            <th scope="col"><fmt:message key="tableUserLogin"/></th>
+            <th scope="col"><fmt:message key="tableUserRole"/></th>
+            <th scope="col"><fmt:message key="tableUserEmail"/></th>
+            <th scope="col"><fmt:message key="tableUserStatus"/></th>
+            <th scope="col"><fmt:message key="tableUserFirstName"/></th>
+            <th scope="col"><fmt:message key="tableUserLastName"/></th>
+            <th scope="col"><fmt:message key="tableUserPhoneNumber"/></th>
+            <th scope="col"><fmt:message key="tableUserPassport"/></th>
+            <th scope="col"><fmt:message key="tableUserDriverLicenceNumber"/></th>
+            <th scope="col"><fmt:message key="tableUserDateOfReg"/></th>
         </tr>
         </thead>
         <tbody>
@@ -33,13 +34,13 @@
             <td>${user.email}</td>
             <c:if test="${user.activeStatus.equals(true)}">
                 <td>
-                    active
+                    <fmt:message key="tableTextActive"/>
                 </td>
             </c:if>
 
             <c:if test="${!user.activeStatus.equals(true)}">
                 <td>
-                    blocked
+                    <fmt:message key="tableTextBlock"/>
                 </td>
             </c:if>
             <td>${user.firstName}</td>
@@ -51,6 +52,7 @@
         </tr>
         </tbody>
     </table>
+</fmt:bundle>
 </div>
 
 <footer>

@@ -7,9 +7,11 @@
 <body>
 <%@include file="include/nav_bar.jsp" %>
 <div>
-    <h2>
-        Oops, something wrong, we a so sorry :(
-    </h2>
+    <fmt:bundle basename="pagecontent" prefix="error_page.">
+        <h2>
+            <fmt:message key="message" />
+        </h2>
+    </fmt:bundle>
 </div>
 <footer>
     <div id="footer">

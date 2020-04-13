@@ -9,75 +9,78 @@
 <body>
 <%@include file="include/nav_bar.jsp" %>
 <div>
-    <table class="table">
-        <caption>Информация пользователя</caption>
-        <thead class="thead-light">
-        <tr>
-            <%--<th scope="col">id</th>--%>
-            <th scope="col">Логин</th>
-            <th scope="col">Роль</th>
-            <th scope="col">Email</th>
-            <th scope="col">Статус</th>
-            <th scope="col">Имя</th>
-            <th scope="col">Фамилия</th>
-            <th scope="col">Номер телефона</th>
-            <th scope="col">Номер пасспорта</th>
-            <th scope="col">Водительское удостоверение</th>
-            <th scope="col">Дата регистрации</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>${user.login}</td>
-            <td>${user.role.role}</td>
-            <td>${user.email}</td>
-            <c:if test="${user.activeStatus.equals(true)}">
-                <td>
-                    active
-                </td>
-            </c:if>
+    <fmt:bundle basename="pagecontent" prefix="user_page.">
+        <table class="table">
+            <caption><fmt:message key="headText"/></caption>
+            <thead class="thead-light">
+            <tr>
+                    <%--<th scope="col">id</th>--%>
+                <th scope="col"><fmt:message key="tableUserLogin"/></th>
+                <th scope="col"><fmt:message key="tableUserRole"/></th>
+                <th scope="col"><fmt:message key="tableUserEmail"/></th>
+                <th scope="col"><fmt:message key="tableUserStatus"/></th>
+                <th scope="col"><fmt:message key="tableUserFirstName"/></th>
+                <th scope="col"><fmt:message key="tableUserLastName"/></th>
+                <th scope="col"><fmt:message key="tableUserPhoneNumber"/></th>
+                <th scope="col"><fmt:message key="tableUserPassport"/></th>
+                <th scope="col"><fmt:message key="tableUserDriverLicenceNumber"/></th>
+                <th scope="col"><fmt:message key="tableUserDateOfReg"/></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>${user.login}</td>
+                <td>${user.role.role}</td>
+                <td>${user.email}</td>
+                <c:if test="${user.activeStatus.equals(true)}">
+                    <td>
+                        <fmt:message key="tableTextActive"/>
+                    </td>
+                </c:if>
 
-            <c:if test="${!user.activeStatus.equals(true)}">
-                <td>
-                    blocked
-                </td>
-            </c:if>
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>${user.phoneNumber}</td>
-            <td>${user.passportSerialNumber}</td>
-            <td>${user.driverLicenceNumber}</td>
-            <td>${user.dateOfRegistration}</td>
-        </tr>
-        </tbody>
-    </table>
+                <c:if test="${!user.activeStatus.equals(true)}">
+                    <td>
+                        <fmt:message key="tableTextBlock"/>
+                    </td>
+                </c:if>
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
+                <td>${user.phoneNumber}</td>
+                <td>${user.passportSerialNumber}</td>
+                <td>${user.driverLicenceNumber}</td>
+                <td>${user.dateOfRegistration}</td>
+            </tr>
+            </tbody>
+        </table>
+    </fmt:bundle>
 </div>
 <div>
+<fmt:bundle basename="pagecontent" prefix="user_page.">
     <tbody>
-
     <tr>
         <td>
             <form action="controller" method="POST">
-                <button type="submit" name="command" value="USER_CHANGE_PASSWORD_PAGE" class="btn btn-outline-warning">Изменить пароль
+                <button type="submit" name="command" value="USER_CHANGE_PASSWORD_PAGE" class="btn btn-outline-warning"><fmt:message key="buttonChangePassword"/>
                 </button>
             </form>
         </td>
 
         <td>
             <form action="controller" method="POST">
-                <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning">Изменить данные
+                <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning"><fmt:message key="buttonChangeProfile"/>
                 </button>
             </form>
         </td>
 
         <td>
             <form action="controller" method="POST">
-                <button type="submit" name="command" value="BLOCK_USER" class="btn btn-outline-danger">Удалить профиль
+                <button type="submit" name="command" value="BLOCK_USER" class="btn btn-outline-danger"><fmt:message key="buttonDeleteProfile"/>
                 </button>
             </form>
         </td>
     </tr>
     </tbody>
+</fmt:bundle>
 </div>
 
 <footer>

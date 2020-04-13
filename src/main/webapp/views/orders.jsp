@@ -7,23 +7,24 @@
 <body>
 <%@include file="include/nav_bar.jsp" %>
 <div>
+<fmt:bundle basename="pagecontent" prefix="orders_page.">
     <table class="table">
-        <caption>Список заказов</caption>
+        <caption><fmt:message key="headText"/></caption>
         <thead class="thead-light">
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">Логин</th>
-            <th scope="col">Марка автомобиля</th>
-            <th scope="col">Модель автомобиля</th>
-            <th scope="col">Количество часов</th>
-            <th scope="col">Итоговая цена</th>
-            <th scope="col">Подтверждение от облате</th>
-            <th scope="col">Одобрение заказа администрацией</th>
-            <th scope="col">дата регистрации заказа</th>
+            <th scope="col"><fmt:message key="tableTextID"/></th>
+            <th scope="col"><fmt:message key="tableUserLogin"/></th>
+            <th scope="col"><fmt:message key="tableTextMark"/></th>
+            <th scope="col"><fmt:message key="tableTextModel"/></th>
+            <th scope="col"><fmt:message key="tableTextTime"/></th>
+            <th scope="col"><fmt:message key="tableTotalPrice"/></th>
+            <th scope="col"><fmt:message key="tablePaymentStatus"/></th>
+            <th scope="col"><fmt:message key="tableConfirmByAdminStatus"/></th>
+            <th scope="col"><fmt:message key="tableDateOfRegOrder"/></th>
+            <th scope="col"><fmt:message key="tableOrderStatus"/></th>
            <%-- <th scope="col">дата начала пользования автомобилем</th>
             <th scope="col">дата закрытия заказа</th>--%>
-            <th scope="col">примечания</th>
-            <th scope="col">татус заказа</th>
+            <th scope="col"><fmt:message key="tableNotes"/></th>
         </tr>
         </thead>
 
@@ -45,10 +46,10 @@
                 <td>${order.notes}</td>
 
             </tr>
-
         </c:forEach>
         </tbody>
     </table>
+</fmt:bundle>
 </div>
 
 

@@ -39,12 +39,14 @@ public class SignIn implements Command {
             if (user.getRole().getRole().equals("admin")) {
                 Long userId = user.getId();
                 session.setAttribute("ActiveUserId", userId);
+                session.setAttribute("activeUser", user);
                 session.setAttribute("role", user.getRole().getRole());
                 request.setAttribute("user", user);
                 page = PageEnum.ADMIN_PAGE_JSP.getValue();
             } else {
                 Long id = user.getId();
                 session.setAttribute("ActiveUserId", id);
+                session.setAttribute("activeUser", user);
                 session.setAttribute("role", user.getRole().getRole());
                 request.setAttribute("user", user);
                 page = PageEnum.USER_PAGE_JSP.getValue();

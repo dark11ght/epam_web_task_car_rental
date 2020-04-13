@@ -11,91 +11,93 @@
 
 
 <form class="needs-validation" action="controller" novalidate method="POST">
+<fmt:bundle basename="pagecontent" prefix="registration_page.">
     <div class="form-row">
         <div class="col-md-4 mb-3">
-            <label for="login">Логин</label>
-            <input type="text" class="form-control" name="login" id="login" placeholder="Логин" required>
+            <label for="login"><fmt:message key="tableUserLogin" /></label>
+            <input type="text" class="form-control" name="login" id="login" placeholder=<fmt:message key="tableFieldTextLogin" /> required>
             <div class="invalid-feedback">
-                Пожалуйста заполните это поле.
+                <fmt:message key="tableErrorFieldMessage" />
             </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="password">Пароль</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Пароль" required>
+            <label for="password"><fmt:message key="tableUserPass" /></label>
+            <input type="password" class="form-control" name="password" id="password" placeholder=<fmt:message key="tableFieldTextPass" /> required>
             <div class="invalid-feedback">
-                Пожалуйста заполните это поле.
+                <fmt:message key="tableErrorFieldMessage" />
             </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="confirm_password">Повторить пароль</label>
+            <label for="confirm_password"><fmt:message key="tableUserRPass" /></label>
             <input type="password" class="form-control" name="confirm_password" id="confirm_password"
-                   placeholder="Пароль" required>
+                   placeholder=<fmt:message key="tableFieldTextPass" /> required>
              <div class="invalid-feedback">
-                 Пожалуйста заполните это поле.
+                 <fmt:message key="tableErrorFieldMessage" />
              </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="firstName">Имя</label>
-            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Имя" required>
+            <label for="firstName"><fmt:message key="tableUserFirstName" /></label>
+            <input type="text" class="form-control" name="firstName" id="firstName" placeholder=<fmt:message key="tableFieldTextFirstName" /> required>
             <div class="invalid-feedback">
-                Пожалуйста заполните это поле.
+                <fmt:message key="tableErrorFieldMessage" />
             </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="lastName">Фамилия</label>
-            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Фамилия" required>
+            <label for="lastName"><fmt:message key="tableUserLastName" /></label>
+            <input type="text" class="form-control" name="lastName" id="lastName" placeholder=<fmt:message key="tableFieldTextLastName" /> required>
             <div class="invalid-feedback">
-                Пожалуйста заполните это поле.
+                <fmt:message key="tableErrorFieldMessage" />
             </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="email">Email</label>
+            <label for="email"><fmt:message key="tableUserEmail" /></label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroupPrepend">@</span>
                 </div>
-                <input type="text" class="form-control" name="email" id="email" placeholder="example@mail.com."
+                <input type="text" class="form-control" name="email" id="email" placeholder=<fmt:message key="tableFieldTextEmail" />
                        aria-describedby="inputGroupPrepend" required>
                 <div class="invalid-feedback">
-                    Пожалуйста заполните это поле.
+                    <fmt:message key="tableErrorFieldMessage" />
                 </div>
             </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="passportSerialNumber">Номер пасспорта</label>
+            <label for="passportSerialNumber"><fmt:message key="tableUserPassport" /></label>
             <input type="text" class="form-control" name="passportSerialNumber" id="passportSerialNumber"
-                   placeholder="Номер пасспорта" required>
+                   placeholder=<fmt:message key="tableFieldTextPassportSerialNumber" /> required>
             <div class="invalid-feedback">
-                Пожалуйста заполните это поле.
+                <fmt:message key="tableErrorFieldMessage" />
             </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="phoneNumber">Номер телефона</label>
-            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="+375291234567"
+            <label for="phoneNumber"><fmt:message key="tableUserPhoneNumber" /></label>
+            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder=<fmt:message key="tableFieldTextPhoneNumber" />
                    required>
             <div class="invalid-feedback">
-                Пожалуйста заполните это поле.
+                <fmt:message key="tableErrorFieldMessage" />
             </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="driverLicenceNumber">Номер водительсного удостоверения</label>
+            <label for="driverLicenceNumber"><fmt:message key="tableUserDriverLicenceNumber" /></label>
             <input type="text" class="form-control" name="driverLicenceNumber" id="driverLicenceNumber"
-                   placeholder="Номер водительсного удостоверения" required>
+                   placeholder=<fmt:message key="tableFieldDriverLicenceNumber" /> required>
             <div class="invalid-feedback">
-                Пожалуйста заполните это поле.
+                <fmt:message key="tableErrorFieldMessage" />
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit" name="command" value="USER_REGISTRATION">Registration</button>
+        <button class="btn btn-primary" type="submit" name="command" value="USER_REGISTRATION"><fmt:message key="tableButtonRegistration" /></button>
     </div>
+</fmt:bundle>
 </form>
 <footer>
     <div id="footer">
