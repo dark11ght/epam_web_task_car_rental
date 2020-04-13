@@ -14,8 +14,6 @@ public class AdminPage implements Command {
         HttpSession session = request.getSession();
         if (session.getAttribute("role") != null) {
             long ActiveUserId = (long) session.getAttribute("ActiveUserId");
-            String userRole = (String) session.getAttribute("role");
-            request.setAttribute("userRole", userRole);
             request.setAttribute("ActiveUserId", ActiveUserId);
         }
 

@@ -21,9 +21,7 @@ public class CarsList implements Command {
         CarService carServiceImpl = ServiceFactory.INSTANCE.getCarService();
         HttpSession session = request.getSession();
         ArrayList<Car> cars = carServiceImpl.getAllCars();
-        String userRole = (String) session.getAttribute("role");
         request.setAttribute("cars", cars);
-        request.setAttribute("userRole", userRole);
         page = PageEnum.CARS_LIST_JSP.getValue();
         return page;
     }

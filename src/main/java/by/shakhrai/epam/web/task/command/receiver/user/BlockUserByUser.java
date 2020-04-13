@@ -23,8 +23,6 @@ public class BlockUserByUser implements Command {
         long userID = (long) session.getAttribute("ActiveUserId");
 
         if (session.getAttribute("role") != null) {
-            String userRole = (String) session.getAttribute("role");
-            request.setAttribute("userRole", userRole);
             request.setAttribute("ActiveUserId", userID);
         }
         try {

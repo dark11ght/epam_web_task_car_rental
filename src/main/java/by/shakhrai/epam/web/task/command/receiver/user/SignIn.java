@@ -40,8 +40,6 @@ public class SignIn implements Command {
                 Long userId = user.getId();
                 session.setAttribute("ActiveUserId", userId);
                 session.setAttribute("role", user.getRole().getRole());
-                String userRole = (String) session.getAttribute("role");
-                request.setAttribute("userRole", userRole);
                 request.setAttribute("user", user);
                 request.setAttribute("ActiveUserId", userId);
                 page = PageEnum.ADMIN_PAGE_JSP.getValue();
@@ -49,8 +47,6 @@ public class SignIn implements Command {
                 Long id = user.getId();
                 session.setAttribute("ActiveUserId", id);
                 session.setAttribute("role", user.getRole().getRole());
-                String userRole = (String) session.getAttribute("role");
-                request.setAttribute("userRole", userRole);
                 request.setAttribute("user", user);
                 request.setAttribute("ActiveUserId", id);
                 page = PageEnum.USER_PAGE_JSP.getValue();

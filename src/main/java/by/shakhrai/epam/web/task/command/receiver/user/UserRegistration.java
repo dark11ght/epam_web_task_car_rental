@@ -51,8 +51,6 @@ public class UserRegistration implements Command {
             Long id = user.getId();
             session.setAttribute("ActiveUserId", id);
             session.setAttribute("role", user.getRole().getRole());
-            String userRole = (String) session.getAttribute("role");
-            request.setAttribute("userRole", userRole);
             request.setAttribute("user", user);
             page = PageEnum.USER_PAGE_JSP.getValue();
         } else {

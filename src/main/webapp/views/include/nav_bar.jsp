@@ -26,7 +26,7 @@
                             <fmt:message key="index"/> </a>
                     </li>
 
-                    <c:if test="${empty userRole}">
+                    <c:if test="${empty sessionScope.role}">
 
                         <li class="nav-item active">
                             <a class="nav-link" href="controller?command=SIGN_IN_PAGE">
@@ -40,14 +40,14 @@
                     </c:if>
 
 
-                    <c:if test="${userRole.equals('user')}">
+                    <c:if test="${sessionScope.role.equals('user')}">
                         <li class="nav-item">
                             <a class="nav-link" href="controller?command=CARS_LIST">
                                 <fmt:message key="carList"/></a>
                         </li>
                     </c:if>
 
-                    <c:if test="${userRole.equals('admin')}">
+                    <c:if test="${sessionScope.role.equals('admin')}">
                         <li class="nav-item">
                             <a class="nav-link" href="controller?command=CARS_LIST">
                                 <fmt:message key="carList"/></a>
@@ -55,21 +55,21 @@
                     </c:if>
 
 
-                    <c:if test="${userRole.equals('user')}">
+                    <c:if test="${sessionScope.role.equals('user')}">
                         <li class="nav-item">
                             <a class="nav-link" href="controller?command=USER_INFO_PAGE"><fmt:message
                                     key="profile"/></a>
                         </li>
                     </c:if>
 
-                    <c:if test="${userRole.equals('admin')}">
+                    <c:if test="${sessionScope.role.equals('admin')}">
                         <li class="nav-item">
                             <a class="nav-link" href="controller?command=USER_INFO_PAGE"><fmt:message
                                     key="profile"/></a>
                         </li>
                     </c:if>
 
-                    <c:if test="${userRole.equals('admin')}">
+                    <c:if test="${sessionScope.role.equals('admin')}">
                         <li class="nav-item">
                             <a class="nav-link" href="controller?command=ALL_USER_LIST"><fmt:message
                                     key="userList"/></a>
@@ -77,14 +77,14 @@
                     </c:if>
 
 
-                    <c:if test="${userRole.equals('user')}">
+                    <c:if test="${sessionScope.role.equals('user')}">
                         <li class="nav-item">
                             <a class="nav-link" href="controller?command=ORDERS_BY_USER_ID&userID=${user.id}">
                                 <fmt:message key="myOrders"/></a>
                         </li>
                     </c:if>
 
-                    <c:if test="${userRole.equals('admin')}">
+                    <c:if test="${sessionScope.role.equals('admin')}">
                         <li class="nav-item">
                             <a class="nav-link" href="controller?command=ORDERS_BY_USER_ID&userID=${ActiveUserId}">
                                 <fmt:message key="myOrders"/></a>
@@ -92,14 +92,14 @@
                     </c:if>
 
 
-                    <c:if test="${userRole.equals('admin')}">
+                    <c:if test="${sessionScope.role.equals('admin')}">
                         <li class="nav-item">
                             <a class="nav-link" href="controller?command=ADMIN_PAGE"><fmt:message key="adminPage"/></a>
                         </li>
                     </c:if>
 
 
-                    <c:if test="${userRole.equals('user')}">
+                    <c:if test="${sessionScope.role.equals('user')}">
                         <form class="form-inline" action="controller" method="POST">
                             <button class="btn btn-outline-danger " name="command" value="LOGOUT" type="submit">
                                 <fmt:message key="signOut"/>
@@ -107,7 +107,7 @@
                         </form>
                     </c:if>
 
-                    <c:if test="${userRole.equals('admin')}">
+                    <c:if test="${sessionScope.role.equals('admin')}">
                         <form class="form-inline" action="controller" method="POST">
                             <button class="btn btn-outline-danger " name="command" value="LOGOUT" type="submit">
                                 <fmt:message key="signOut"/>
