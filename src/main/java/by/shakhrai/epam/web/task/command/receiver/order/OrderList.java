@@ -3,6 +3,7 @@ package by.shakhrai.epam.web.task.command.receiver.order;
 import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.PageEnum;
 import by.shakhrai.epam.web.task.entity.Order;
+import by.shakhrai.epam.web.task.exception.OrderServiceException;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.OrderService;
@@ -28,7 +29,7 @@ public class OrderList implements Command {
         List <Order> orders = null;
         try {
             orders = orderServiceImpl.getOrderByUserID(userID);
-        } catch (UserServiceEcxeption userServiceEcxeption) {
+        } catch (OrderServiceException OrderServiceException) {
             String message = "Orders not found";
             request.setAttribute("informMessage", message);
             page = PageEnum.INFORMER_PAGE_JSP.getValue();

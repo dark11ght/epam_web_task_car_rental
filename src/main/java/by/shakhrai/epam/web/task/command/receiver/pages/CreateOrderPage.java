@@ -1,8 +1,7 @@
-package by.shakhrai.epam.web.task.command.receiver.car;
+package by.shakhrai.epam.web.task.command.receiver.pages;
 
 import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.PageEnum;
-import by.shakhrai.epam.web.task.entity.Car;
 import by.shakhrai.epam.web.task.exception.CarServiceException;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.CarService;
@@ -12,26 +11,33 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
-public class CarsList implements Command {
+public class CreateOrderPage implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(CreateOrderPage.class);
     private CarService carServiceImpl = ServiceFactory.INSTANCE.getCarService();
-    private static final Logger LOGGER = LogManager.getLogger(CarsList.class);
+
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         HttpSession session = request.getSession();
-        ArrayList<Car> cars = null;
+        int orderCarID = Integer.parseInt(request.getParameter("orderCarID"));
+        String orderCarMark = request.getParameter("orderCarMark");
+        String orderCarModel = request.getParameter("orderCarModel");
+        session.setAttribute("orderCarID", orderCarID);
+        session.setAttribute("orderCarMark", orderCarMark);
+        session.setAttribute("orderCarModel", orderCarModel);
+
         try {
-            cars = carServiceImpl.getAllCars();
+            carServiceImpl.blockCarByOrder(orderCarID);
         } catch (CarServiceException e) {
-            String message = "Can not get cars list";
+            String message = "Can not order this car";
             request.setAttribute("informMessage", message);
             page = PageEnum.INFORMER_PAGE_JSP.getValue();
             return page;
         }
-        request.setAttribute("cars", cars);
-        page = PageEnum.CARS_LIST_JSP.getValue();
+
+        page = PageEnum.CREATE_CAR_ORDER_PAGE.getValue();
         return page;
     }
 }

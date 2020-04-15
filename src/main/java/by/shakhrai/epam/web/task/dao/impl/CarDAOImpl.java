@@ -31,9 +31,13 @@ public class CarDAOImpl implements CarDAO {
     private static final String GET_ALL_CARS_QUERY = "SELECT car.id, m2.mark, a.model, millage, price, auto.car_status from car\n" +
             "join car_mark m2 on car.mark_id = m2.id join car_model a on\n" +
             "car.model_id = a.id join car_status auto on car.car_status_id = auto.id;";
+    private static final String BLOCK_CAR_BY_ORDER = "UPDATE car SET car_status_id = 2 WHERE id = ";
+    private static final String UNBLOCK_CAR_BY_ORDER = "UPDATE car SET car_status_id = 1 WHERE id = ";
+
+
     @Override
-    public List<Car> getAllCar() throws DAOException {
-        List<Car> cars = new ArrayList<>();
+    public List <Car> getAllCar() throws DAOException {
+        List <Car> cars = new ArrayList <>();
         try {
             try (
                     ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
@@ -64,4 +68,31 @@ public class CarDAOImpl implements CarDAO {
         }
         return cars;
     }
+
+    @Override
+    public void blockCarByOrder(int carID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(BLOCK_CAR_BY_ORDER + carID);
+        ) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can not block car");
+        }
+    }
+
+    @Override
+    public void unBlockCarByOrder(int carID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(UNBLOCK_CAR_BY_ORDER + carID);
+        ) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can not unblock car");
+        }
+    }
+
 }

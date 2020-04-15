@@ -3,6 +3,7 @@ package by.shakhrai.epam.web.task.service.impl;
 import by.shakhrai.epam.web.task.dao.OrderDAO;
 import by.shakhrai.epam.web.task.entity.Order;
 import by.shakhrai.epam.web.task.exception.DAOException;
+import by.shakhrai.epam.web.task.exception.OrderServiceException;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.DAOFactory;
 import by.shakhrai.epam.web.task.service.OrderService;
@@ -16,12 +17,12 @@ public class OrderServiceImpl implements OrderService {
     private OrderDAO orderDAOImpl = DAOFactory.INSTANCE.getOrderDao();
 
     @Override
-    public List<Order> getOrderByUserID(long userID) throws UserServiceEcxeption {
+    public List<Order> getOrderByUserID(long userID) throws OrderServiceException {
         try{
             return orderDAOImpl.getOrdersByUserID(userID);
         } catch (DAOException e) {
             LOGGER.warn(e);
-            throw new UserServiceEcxeption(e) {
+            throw new OrderServiceException(e) {
             };
         }
     }
