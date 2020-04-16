@@ -9,4 +9,5 @@ import java.util.List;
 public interface OrderService {
     List<Order> getOrderByUserID(long userID) throws OrderServiceException;
     void createOrderByUser(long userID, int carID, int rentHours, String notes)throws OrderServiceException;
+    Order getOrderByOrderID(long orderID) throws OrderServiceException;
 }

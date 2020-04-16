@@ -56,4 +56,14 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderServiceException(e);
         }
     }
+
+    @Override
+    public Order getOrderByOrderID(long orderID) throws OrderServiceException {
+        try {
+            return orderDAOImpl.getOrderByOrderID(orderID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
+        }
+    }
 }

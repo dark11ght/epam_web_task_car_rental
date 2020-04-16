@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>user_page</title>
+    <title>orders_list</title>
     <%@include file="include/header.jsp" %>
 </head>
 <body>
@@ -22,9 +22,8 @@
             <th scope="col"><fmt:message key="tableConfirmByAdminStatus"/></th>
             <th scope="col"><fmt:message key="tableDateOfRegOrder"/></th>
             <th scope="col"><fmt:message key="tableOrderStatus"/></th>
-           <%-- <th scope="col">дата начала пользования автомобилем</th>
-            <th scope="col">дата закрытия заказа</th>--%>
             <th scope="col"><fmt:message key="tableNotes"/></th>
+            <th scope="col"><fmt:message key="tableOrderInfo"/></th>
         </tr>
         </thead>
 
@@ -67,6 +66,14 @@
                 </c:if>
 
                 <td>${order.notes}</td>
+                <td>
+                    <form action="controller" method="POST">
+                        <input type="hidden" id="OrderUserID" name="orderID" value="${order.id}">
+                        <button type="submit" name="command" value="ORDER_INFO"
+                                class="btn btn-outline-info"><fmt:message key="buttonOrderInfo"/>
+                        </button>
+                    </form>
+                </td>
 
             </tr>
         </c:forEach>

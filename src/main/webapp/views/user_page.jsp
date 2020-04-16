@@ -14,7 +14,6 @@
             <caption><fmt:message key="headText"/></caption>
             <thead class="thead-light">
             <tr>
-                    <%--<th scope="col">id</th>--%>
                 <th scope="col"><fmt:message key="tableUserLogin"/></th>
                 <th scope="col"><fmt:message key="tableUserRole"/></th>
                 <th scope="col"><fmt:message key="tableUserEmail"/></th>
@@ -55,32 +54,35 @@
     </fmt:bundle>
 </div>
 <div>
-<fmt:bundle basename="pagecontent" prefix="user_page.">
-    <tbody>
-    <tr>
-        <td>
-            <form action="controller" method="POST">
-                <button type="submit" name="command" value="USER_CHANGE_PASSWORD_PAGE" class="btn btn-outline-warning"><fmt:message key="buttonChangePassword"/>
-                </button>
-            </form>
-        </td>
+    <fmt:bundle basename="pagecontent" prefix="user_page.">
+        <tbody>
+        <tr>
+            <td>
+                <form action="controller" method="POST">
+                    <button type="submit" name="command" value="USER_CHANGE_PASSWORD_PAGE"
+                            class="btn btn-outline-warning"><fmt:message key="buttonChangePassword"/>
+                    </button>
+                </form>
+            </td>
 
-        <td>
-            <form action="controller" method="POST">
-                <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning"><fmt:message key="buttonChangeProfile"/>
-                </button>
-            </form>
-        </td>
+            <td>
+                <form action="controller" method="POST">
+                    <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning">
+                        <fmt:message key="buttonChangeProfile"/>
+                    </button>
+                </form>
+            </td>
 
-        <td>
-            <form action="controller" method="POST">
-                <button type="submit" name="command" value="BLOCK_USER" class="btn btn-outline-danger"><fmt:message key="buttonDeleteProfile"/>
-                </button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</fmt:bundle>
+            <td>
+                <form action="controller" method="POST">
+                    <button type="submit" name="command" value="BLOCK_USER" class="btn btn-outline-danger"><fmt:message
+                            key="buttonDeleteProfile"/>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </fmt:bundle>
 </div>
 
 <footer>

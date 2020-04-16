@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Car_Price</title>
+    <title>car_list</title>
     <%@include file="include/header.jsp" %>
 </head>
 <body>

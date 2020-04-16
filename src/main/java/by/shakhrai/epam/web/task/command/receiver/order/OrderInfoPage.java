@@ -11,32 +11,28 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
-public class OrderList implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(OrderList.class);
+public class OrderInfoPage implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(OrderInfoPage.class);
     private OrderService orderServiceImpl = ServiceFactory.INSTANCE.getOrderService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
-        HttpSession session = request.getSession();
+        Order order;
+        long orderID = Long.parseLong(request.getParameter("orderID"));
 
-        long userID = Long.parseLong(request.getParameter("userID"));
-
-        List <Order> orders = null;
         try {
-            orders = orderServiceImpl.getOrderByUserID(userID);
+            order = orderServiceImpl.getOrderByOrderID(orderID);
         } catch (OrderServiceException e) {
-            String message = "Orders not found";
+            String message = "Order is not found";
             request.setAttribute("informMessage", message);
             page = PageEnum.INFORMER_PAGE_JSP.getValue();
             return page;
         }
+        request.setAttribute("order", order);
 
-        request.setAttribute("orders", orders);
-        page = PageEnum.ORDERS_PAGE.getValue();
+        page = PageEnum.ORDER_INFO_PAGE.getValue();
         return page;
     }
 }

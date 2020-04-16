@@ -3,6 +3,7 @@ package by.shakhrai.epam.web.task.command;
 import by.shakhrai.epam.web.task.command.receiver.car.CarsList;
 import by.shakhrai.epam.web.task.command.receiver.language.ChangeLanguage;
 import by.shakhrai.epam.web.task.command.receiver.order.CreateOrder;
+import by.shakhrai.epam.web.task.command.receiver.order.OrderInfoPage;
 import by.shakhrai.epam.web.task.command.receiver.order.OrderList;
 import by.shakhrai.epam.web.task.command.receiver.pages.*;
 import by.shakhrai.epam.web.task.command.receiver.user.*;
@@ -17,6 +18,11 @@ public enum CommandParameter {
     USER_INFO_PAGE {
         {
             this.command = new UserPage();
+        }
+    },
+    ORDER_INFO {
+        {
+            this.command = new OrderInfoPage();
         }
     },
     CREATE_ORDER {
