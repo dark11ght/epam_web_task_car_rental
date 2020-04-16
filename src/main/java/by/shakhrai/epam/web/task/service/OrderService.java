@@ -15,4 +15,6 @@ public interface OrderService {
     void changeAdminStatusOrderToApproved(long orderID) throws OrderServiceException;
     void changeAdminStatusOrderToBlock(long orderID) throws OrderServiceException;
     void completeOrder(long orderID) throws OrderServiceException;
+    int getCountOrdersWhereAdminStatusFalse() throws OrderServiceException;
+    List<Order> getOrderByConfirmStatus() throws OrderServiceException;
 }

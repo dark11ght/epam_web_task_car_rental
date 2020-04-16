@@ -23,6 +23,11 @@ public enum CommandParameter {
             this.command = new CompleteOrder();
         }
     },
+    ORDER_BY_CONFIRM_STATUS {
+        {
+            this.command = new OrderByConfirmStatus();
+        }
+    },
     PAYMENT_ORDER_PAGE {
         {
             this.command = new PaymentOrderPage();

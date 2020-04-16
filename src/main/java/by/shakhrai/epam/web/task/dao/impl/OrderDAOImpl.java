@@ -51,6 +51,13 @@ public class OrderDAOImpl implements OrderDAO {
             "       JOIN car_mark m2 on c.mark_id = m2.id\n" +
             " WHERE user_id = ";
 
+    private static final String GET_ALL_ORDER = "SELECT order.id, u.login, car_id, m.model, m2.mark, rent_hours,\n" +
+            "       total_price, payment_status, confirm_status, date_of_reg_order, order_status, notes FROM `order`\n" +
+            "       JOIN user u on `order`.user_id = u.id\n" +
+            "       JOIN car c on `order`.car_id = c.id\n" +
+            "       JOIN car_model m on c.model_id = m.id\n" +
+            "       JOIN car_mark m2 on c.mark_id = m2.id ";
+
     private static final String CREATE_ORDER = "INSERT INTO `order` (user_id, car_id, rent_hours, total_price, date_of_reg_order, notes) " +
             "VALUES (?, ?, ?, ?, ?, ?);";
 
@@ -58,18 +65,26 @@ public class OrderDAOImpl implements OrderDAO {
 
     private static final String COMPLETE_ORDER = "UPDATE `order` SET order_status = false WHERE id = ";
 
-    private static final String CHANGE_CONFIRM_CTATUS_ON_TRUE = "UPDATE `order` SET confirm_status = true WHERE id = ";
+    private static final String CHANGE_CONFIRM_STATUS_ON_TRUE = "UPDATE `order` SET confirm_status = true WHERE id = ";
 
-    private static final String CHANGE_CONFIRM_CTATUS_ON_FALSE = "UPDATE `order` SET confirm_status = false WHERE id = ";
+    private static final String CHANGE_CONFIRM_STATUS_ON_FALSE = "UPDATE `order` SET confirm_status = false WHERE id = ";
 
+    private static final String COUNT_ORDERS_WHERE_ADMIN_STATUS_FALSE = "SELECT COUNT(*) FROM  `order` WHERE confirm_status = false ";
 
+    private static final String GET_ORDERS_WHERE_CONFIRM_STATUS_FALSE = "SELECT order.id, u.login, car_id, m.model, m2.mark, rent_hours, \n" +
+            "        total_price, payment_status, confirm_status, date_of_reg_order, order_status, notes FROM `order` \n" +
+            "        JOIN user u on `order`.user_id = u.id \n" +
+            "        JOIN car c on `order`.car_id = c.id \n" +
+            "        JOIN car_model m on c.model_id = m.id \n" +
+            "        JOIN car_mark m2 on c.mark_id = m2.id \n" +
+            "        WHERE confirm_status = false";
 
     @Override
     public void createOrder(User user, Car car, int rentHours, String notes) throws DAOException {
-        try(
+        try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
                 PreparedStatement preparedStatement = connection.prepareStatement(CREATE_ORDER);
-                ){
+        ) {
             preparedStatement.setLong(1, user.getId());
             preparedStatement.setInt(2, car.getId());
             preparedStatement.setInt(3, rentHours);
@@ -122,8 +137,8 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public List<Order> getOrdersByUserID(long userID) throws DAOException {
-        List<Order> orders = new ArrayList<>();
+    public List <Order> getOrdersByUserID(long userID) throws DAOException {
+        List <Order> orders = new ArrayList <>();
         try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
                 PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDER_BY_USER_ID + userID);
@@ -161,14 +176,63 @@ public class OrderDAOImpl implements OrderDAO {
         return orders;
     }
 
+
     @Override
-    public List<Order> getOrdersByAdminStatus() throws DAOException {
-        return null;
+    public List <Order> getOrdersByAdminStatus() throws DAOException {
+        List <Order> orders = new ArrayList <>();
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(GET_ORDERS_WHERE_CONFIRM_STATUS_FALSE);
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            while (resultSet.next()) {
+                Order order = new Order();
+                User user = new User();
+                Car car = new Car();
+                CarModel carModel = new CarModel();
+                CarMark carMark = new CarMark();
+                user.setLogin(resultSet.getString(USER_LOGIN));
+                order.setId(resultSet.getLong(ORDER_ID));
+                order.setUser(user);
+                car.setId(resultSet.getInt(CAR_ID));
+                carMark.setMark(resultSet.getString(CAR_MARK));
+                carModel.setModelName(resultSet.getString(CAR_MODEL));
+                car.setMark(carMark);
+                car.setModel(carModel);
+                order.setCar(car);
+                order.setRentHours(resultSet.getInt(RENT_HOURS));
+                order.setTotalPrice(resultSet.getDouble(TOTAL_PRICE));
+                order.setPaymentStatus(resultSet.getBoolean(PAYMENT_STATUS));
+                order.setConfirmByAdminStatus(resultSet.getBoolean(CONFIRM_STATUS));
+                order.setDateOfRegOrder(resultSet.getTimestamp(DATE_OF_REG_ORDER));
+                order.setOrderStatus(resultSet.getBoolean(ORDER_STATUS));
+                order.setNotes(resultSet.getString(NOTES));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t get order by admin status");
+        }
+        return orders;
     }
 
     @Override
-    public int getUncheckOrderCount() throws DAOException {
-        return 0;
+    public int getCountOrdersWhereAdminStatusFalse() throws DAOException {
+        int countOrders = 0;
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ORDERS_WHERE_ADMIN_STATUS_FALSE);
+                ResultSet resultSet = preparedStatement.executeQuery()
+        ) {
+            if (resultSet.next()) {
+                countOrders = resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t get count order");
+        }
+        return countOrders;
     }
 
     @Override
@@ -176,7 +240,7 @@ public class OrderDAOImpl implements OrderDAO {
         try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
                 PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_ORDER_PAYMENT_STATUS_ON_TRUE + orderID);
-        ){
+        ) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);
@@ -188,8 +252,8 @@ public class OrderDAOImpl implements OrderDAO {
     public void changeAdminStatusOrderToApproved(long orderID) throws DAOException {
         try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
-                PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_CONFIRM_CTATUS_ON_TRUE + orderID);
-        ){
+                PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_CONFIRM_STATUS_ON_TRUE + orderID);
+        ) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);
@@ -201,8 +265,8 @@ public class OrderDAOImpl implements OrderDAO {
     public void changeAdminStatusOrderToBlock(long orderID) throws DAOException {
         try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
-                PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_CONFIRM_CTATUS_ON_FALSE + orderID);
-        ){
+                PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_CONFIRM_STATUS_ON_FALSE + orderID);
+        ) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);
@@ -215,7 +279,7 @@ public class OrderDAOImpl implements OrderDAO {
         try (
                 ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
                 PreparedStatement preparedStatement = connection.prepareStatement(COMPLETE_ORDER + orderID);
-        ){
+        ) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);

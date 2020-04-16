@@ -124,4 +124,26 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderServiceException(e);
         }
     }
+
+    @Override
+    public int getCountOrdersWhereAdminStatusFalse() throws OrderServiceException {
+        int countOrdersWhereAdminStatusFalse = 0;
+        try{
+            countOrdersWhereAdminStatusFalse = orderDAOImpl.getCountOrdersWhereAdminStatusFalse();
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
+        }
+        return countOrdersWhereAdminStatusFalse;
+    }
+
+    @Override
+    public List <Order> getOrderByConfirmStatus() throws OrderServiceException {
+        try{
+            return orderDAOImpl.getOrdersByAdminStatus();
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
+        }
+    }
 }

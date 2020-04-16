@@ -20,9 +20,24 @@
 <div class="container">
 <fmt:bundle basename="pagecontent" prefix="admin_page.">
     <ul class="list-unstyled">
-        <li><p class="text-danger"><fmt:message key="uncheckOrders" /> <strong>${countOrders}</strong></p></li>
+        <li><p class="text-danger"><fmt:message key="uncheckOrders" /> <strong>${countOrder}</strong></p></li>
         <li><a class="nav-link" href=""><fmt:message key="orderList" /></a><br></li>
     </ul>
+
+    <ul class="list-unstyled">
+    <fmt:bundle basename="pagecontent" prefix="admin_page.">
+            <td>
+                <form action="controller" method="POST">
+                    <button type="submit" name="command" value="ORDER_BY_CONFIRM_STATUS"
+                            class="btn btn-outline-danger">
+                        <fmt:message key="buttonGetAllOrder"/>
+                    </button>
+                </form>
+            </td>
+    </fmt:bundle>
+    </ul>
+
+
 </fmt:bundle>
 </div>
 <footer>

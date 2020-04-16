@@ -12,7 +12,7 @@ public interface OrderDAO {
     Order getOrderByOrderID(long orderID) throws DAOException;
     List<Order> getOrdersByUserID(long userID) throws DAOException;
     List<Order> getOrdersByAdminStatus() throws DAOException;
-    int getUncheckOrderCount() throws DAOException;
+    int getCountOrdersWhereAdminStatusFalse() throws DAOException;
     void changePaymentStatusOrderToApproved(long orderID) throws DAOException;
     void changeAdminStatusOrderToApproved(long orderID) throws DAOException;
     void changeAdminStatusOrderToBlock(long orderID) throws DAOException;
