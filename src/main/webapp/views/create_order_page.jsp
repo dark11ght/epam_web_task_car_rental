@@ -11,39 +11,47 @@
 
 
 <div class="container">
+<fmt:bundle basename="pagecontent" prefix="create_order_page.">
     <form class="form-horizontal" role="form" method="POST" action="controller">
+        <div>
+            <input type="hidden" id="OrderCarID" name="orderCarID" value="${orderCarID}">
+        </div>
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <h2>Заказ авто ${sessionScope.orderCarMark}, ${sessionScope.orderCarModel} </h2>
+                <h2><fmt:message key="heatText"/> ${orderCarMark} ${orderCarModel} </h2>
                 <hr>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-3 field-label-responsive">
-                <label for="rent_days">Количество часов аренды</label>
+                <label for="rentHours"><fmt:message key="rentHours"/></label>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-                        <input type="text" name="rent_days" class="form-control" id="rent_days" placeholder=1..." required="" autofocus="">
+                        <input type="text" name="rentHours" class="form-control" id="rentHours" placeholder=1..."
+                               required="" autofocus="">
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <label for="notes">Notes</label>
+            <label for="notes"><fmt:message key="notes"/></label>
             <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
         </div>
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <button type="submit" name="command" value="CREATE_ORDER" class="btn btn-success"><i class="fa fa-user-plus"></i> Apply</button>
+                <button type="submit" name="command" value="CREATE_ORDER" class="btn btn-success"><i
+                        class="fa fa-user-plus"></i> <fmt:message key="toOrder"/>
+                </button>
             </div>
         </div>
     </form>
+</fmt:bundle>
 </div>
 <footer>
     <div id="footer">

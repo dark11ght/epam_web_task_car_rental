@@ -1,7 +1,11 @@
 package by.shakhrai.epam.web.task.service.impl;
 
+import by.shakhrai.epam.web.task.dao.CarDAO;
 import by.shakhrai.epam.web.task.dao.OrderDAO;
+import by.shakhrai.epam.web.task.dao.UserDAO;
+import by.shakhrai.epam.web.task.entity.Car;
 import by.shakhrai.epam.web.task.entity.Order;
+import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.DAOException;
 import by.shakhrai.epam.web.task.exception.OrderServiceException;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
@@ -15,6 +19,8 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private static final Logger LOGGER = LogManager.getLogger(OrderServiceImpl.class);
     private OrderDAO orderDAOImpl = DAOFactory.INSTANCE.getOrderDao();
+    private CarDAO carDAOImpl = DAOFactory.INSTANCE.getCarDao();
+    private UserDAO userDAOImpl = DAOFactory.INSTANCE.getUserDao();
 
     @Override
     public List<Order> getOrderByUserID(long userID) throws OrderServiceException {
@@ -22,8 +28,32 @@ public class OrderServiceImpl implements OrderService {
             return orderDAOImpl.getOrdersByUserID(userID);
         } catch (DAOException e) {
             LOGGER.warn(e);
-            throw new OrderServiceException(e) {
-            };
+            throw new OrderServiceException(e);
+        }
+    }
+
+    @Override
+    public void createOrderByUser(long userID, int carID, int rentHours, String notes) throws OrderServiceException {
+        User user;
+        Car car;
+        try {
+            user = userDAOImpl.getUserByID(userID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
+        }
+        try{
+            car = carDAOImpl.getCarByID(carID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
+        }
+
+        try{
+             orderDAOImpl.createOrder(user, car, rentHours, notes);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
         }
     }
 }

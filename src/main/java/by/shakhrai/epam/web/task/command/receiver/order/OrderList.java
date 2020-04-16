@@ -4,7 +4,6 @@ import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.PageEnum;
 import by.shakhrai.epam.web.task.entity.Order;
 import by.shakhrai.epam.web.task.exception.OrderServiceException;
-import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.OrderService;
 import org.apache.log4j.LogManager;
@@ -37,7 +36,7 @@ public class OrderList implements Command {
         }
 
         request.setAttribute("orders", orders);
-        page = PageEnum.ORDER_PAGE.getValue();
+        page = PageEnum.ORDERS_PAGE.getValue();
         return page;
     }
 }

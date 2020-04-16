@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <c:if test="${empty sessionScope.language}">
-    <fmt:setLocale value="en"/>
+    <fmt:setLocale value="ru"/>
 </c:if>
 <c:if test="${not empty sessionScope.language}">
     <c:if test="${ sessionScope.language.equals('en')}">

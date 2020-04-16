@@ -32,6 +32,16 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public Car getCarByID(int carID) throws CarServiceException {
+        try{
+            return carDAOImpl.getCarByID(carID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new CarServiceException(e);
+        }
+    }
+
+    @Override
     public void blockCarByOrder(int carID) throws CarServiceException {
         try {
             carDAOImpl.blockCarByOrder(carID);

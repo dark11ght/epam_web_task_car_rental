@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,9 +51,27 @@ public class OrderDAOImpl implements OrderDAO {
             "       JOIN car_mark m2 on c.mark_id = m2.id\n" +
             " WHERE user_id = ";
 
+    private static final String CREATE_ORDER = "INSERT INTO `order` (user_id, car_id, rent_hours, total_price, date_of_reg_order, notes) " +
+            "VALUES (?, ?, ?, ?, ?, ?);";
+
     @Override
-    public Order createOrder() throws DAOException {
-        return null;
+    public void createOrder(User user, Car car, int rentHours, String notes) throws DAOException {
+        try(
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(CREATE_ORDER);
+                ){
+            preparedStatement.setLong(1, user.getId());
+            preparedStatement.setInt(2, car.getId());
+            preparedStatement.setInt(3, rentHours);
+            preparedStatement.setFloat(4, (rentHours * car.getPrice()));
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStatement.setString(6, notes);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t create order");
+        }
     }
 
     @Override

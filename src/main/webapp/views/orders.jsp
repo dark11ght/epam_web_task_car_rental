@@ -39,10 +39,33 @@
                 <td>${order.car.model.modelName}</td>
                 <td>${order.rentHours}</td>
                 <td>${order.totalPrice}</td>
-                <td>${order.paymentStatus}</td>
-                <td>${order.confirmByAdminStatus}</td>
+
+                <c:if test="${order.paymentStatus.equals(true)}">
+                    <td><p class="text-success"><fmt:message key="paymentStatusTrue"/></p></td>
+                </c:if>
+
+                <c:if test="${!order.paymentStatus.equals(true)}">
+                    <td><p class="text-danger"><fmt:message key="paymentStatusFalse"/></p></td>
+                </c:if>
+
+                <c:if test="${order.confirmByAdminStatus.equals(true)}">
+                    <td><p class="text-success"><fmt:message key="tableConfirmByAdminStatusTrue"/></p></td>
+                </c:if>
+
+                <c:if test="${!order.confirmByAdminStatus.equals(true)}">
+                    <td><p class="text-danger"><fmt:message key="tableConfirmByAdminStatusFalse"/></p></td>
+                </c:if>
+
                 <td>${order.dateOfRegOrder}</td>
-                <td>${order.orderStatus}</td>
+
+                <c:if test="${order.orderStatus.equals(true)}">
+                    <td><p class="text-success"><fmt:message key="tableOrderStatusTrue"/></p></td>
+                </c:if>
+
+                <c:if test="${!order.orderStatus.equals(true)}">
+                    <td><p class="text-danger"><fmt:message key="tableOrderStatusFalse"/></p></td>
+                </c:if>
+
                 <td>${order.notes}</td>
 
             </tr>

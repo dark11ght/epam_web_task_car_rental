@@ -138,7 +138,7 @@ public class UserDAOImpl implements UserDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_ID_QUERY + id);
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
-            createUserByResultSet(user, resultSet);
+            buildUserByResultSet(user, resultSet);
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException("Can`t get user by ID");
@@ -155,7 +155,7 @@ public class UserDAOImpl implements UserDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_LOGIN_QUERY + "\'" + login + "\'");
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
-            createUserByResultSet(user, resultSet);
+            buildUserByResultSet(user, resultSet);
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException("Can`t get user by login");
@@ -171,7 +171,7 @@ public class UserDAOImpl implements UserDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_EMAIL_QUERY + "\'" + email + "\'");
                 ResultSet resultSet = preparedStatement.executeQuery();
         ) {
-            createUserByResultSet(user, resultSet);
+            buildUserByResultSet(user, resultSet);
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException("Can`t get user by email");
@@ -266,7 +266,7 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    private void createUserByResultSet(User user, ResultSet resultSet) throws SQLException {
+    private void buildUserByResultSet(User user, ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {
             Role role = new Role();
             role.setRole(resultSet.getString(USER_ROLE));

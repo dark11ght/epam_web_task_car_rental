@@ -12,7 +12,7 @@ public enum PageEnum {
     ERROR_PAGE_JSP("views/error_page.jsp"),
     USER_PAGE_JSP("views/user_page.jsp"),
     USER_INFO_PAGE_BY_ADMIN_JSP("views/user_info_page_by_admin.jsp"),
-    ORDER_PAGE("views/orders.jsp"),
+    ORDERS_PAGE("views/orders.jsp"),
     USER_CHANGE_PASSWORD_PAGE("views/user_change_password_page.jsp"),
     CREATE_CAR_ORDER_PAGE("views/create_order_page.jsp");
 

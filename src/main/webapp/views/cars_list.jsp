@@ -28,7 +28,6 @@
                         <div class="card-body">
 
                             <ul class="list-unstyled mt-3 mb-4">
-                                <li>id - ${car.id}</li>
                                 <li><fmt:message key="tableTextMark"/> - ${car.mark.mark}</li>
                                 <li><fmt:message key="tableTextModel"/> - ${car.model.modelName}</li>
                                 <li><fmt:message key="tableTextMillage"/> - ${car.millage}км</li>

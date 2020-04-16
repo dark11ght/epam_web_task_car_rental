@@ -33,12 +33,14 @@ public class CarDAOImpl implements CarDAO {
             "car.model_id = a.id join car_status auto on car.car_status_id = auto.id;";
     private static final String BLOCK_CAR_BY_ORDER = "UPDATE car SET car_status_id = 2 WHERE id = ";
     private static final String UNBLOCK_CAR_BY_ORDER = "UPDATE car SET car_status_id = 1 WHERE id = ";
+    private static final String GET_CAR_BY_ID_QUERY = "SELECT car.id, m2.mark, a.model, millage, price, auto.car_status from car\n" +
+            "join car_mark m2 on car.mark_id = m2.id join car_model a on\n" +
+            "car.model_id = a.id join car_status auto on car.car_status_id = auto.id WHERE car.id = ";
 
 
     @Override
     public List <Car> getAllCar() throws DAOException {
         List <Car> cars = new ArrayList <>();
-        try {
             try (
                     ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
                     PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_CARS_QUERY);
@@ -61,12 +63,42 @@ public class CarDAOImpl implements CarDAO {
                     car.setCarStatus(carStatus);
                     cars.add(car);
                 }
-            }
+
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException("Can`t get cars list");
         }
         return cars;
+    }
+
+    @Override
+    public Car getCarByID(int carID) throws DAOException {
+        Car car = new Car();
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(GET_CAR_BY_ID_QUERY + carID);
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            if (resultSet.next()) {
+                CarMark carMark = new CarMark();
+                CarStatus carStatus = new CarStatus();
+                CarModel carModel = new CarModel();
+
+                car.setId(resultSet.getInt(CAR_ID));
+                carMark.setMark(resultSet.getString(CAR_MARK));
+                car.setMark(carMark);
+                carModel.setModelName(resultSet.getString(CAR_MODEL));
+                car.setModel(carModel);
+                car.setMillage(resultSet.getInt(CAR_MILLAGE));
+                car.setPrice(resultSet.getFloat(CAR_PRICE));
+                carStatus.setCarStatus(resultSet.getString(CAR_STATUS));
+                car.setCarStatus(carStatus);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t get car by carID");
+        }
+        return car;
     }
 
     @Override
