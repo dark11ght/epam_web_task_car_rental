@@ -75,8 +75,9 @@
     <c:if test="${!order.paymentStatus.equals(true)}">
         <td>
             <form action="controller" method="POST">
-                <input type="hidden" id="PayByOrder" name="paymentOrder" value="${order.id}">
-                <button type="submit" name="command" value="PAYMENT_ORDER"
+                <input type="hidden" id="PayByOrder" name="paymentOrderID" value="${order.id}">
+                <input type="hidden" id="totalPrice" name="totalPrice" value="${order.totalPrice}">
+                <button type="submit" name="command" value="PAYMENT_ORDER_PAGE"
                         class="btn btn-outline-danger">
                     <fmt:message key="buttonPaymentOrder"/>
                 </button>
@@ -88,10 +89,10 @@
 
 <div>
     <fmt:bundle basename="pagecontent" prefix="orders_page.">
-        <c:if test="${!order.paymentStatus.equals(true)}">
+        <c:if test="${order.orderStatus.equals(true)}">
             <td>
                 <form action="controller" method="POST">
-                    <input type="hidden" id="СompleteOrder" name="completeOrder" value="${order.id}">
+                    <input type="hidden" id="СompleteOrder" name="completeOrderID" value="${order.id}">
                     <button type="submit" name="command" value="COMPLETE_ORDER"
                             class="btn btn-outline-danger">
                         <fmt:message key="buttonCompleteOrder"/>

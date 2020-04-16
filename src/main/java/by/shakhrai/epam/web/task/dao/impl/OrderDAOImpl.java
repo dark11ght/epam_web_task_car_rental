@@ -54,6 +54,16 @@ public class OrderDAOImpl implements OrderDAO {
     private static final String CREATE_ORDER = "INSERT INTO `order` (user_id, car_id, rent_hours, total_price, date_of_reg_order, notes) " +
             "VALUES (?, ?, ?, ?, ?, ?);";
 
+    private static final String CHANGE_ORDER_PAYMENT_STATUS_ON_TRUE = "UPDATE `order` SET payment_status = true WHERE id = ";
+
+    private static final String COMPLETE_ORDER = "UPDATE `order` SET order_status = false WHERE id = ";
+
+    private static final String CHANGE_CONFIRM_CTATUS_ON_TRUE = "UPDATE `order` SET confirm_status = true WHERE id = ";
+
+    private static final String CHANGE_CONFIRM_CTATUS_ON_FALSE = "UPDATE `order` SET confirm_status = false WHERE id = ";
+
+
+
     @Override
     public void createOrder(User user, Car car, int rentHours, String notes) throws DAOException {
         try(
@@ -145,7 +155,6 @@ public class OrderDAOImpl implements OrderDAO {
                 orders.add(order);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             LOGGER.warn(e);
             throw new DAOException("Can`t get order by user ID");
         }
@@ -160,5 +169,57 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public int getUncheckOrderCount() throws DAOException {
         return 0;
+    }
+
+    @Override
+    public void changePaymentStatusOrderToApproved(long orderID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_ORDER_PAYMENT_STATUS_ON_TRUE + orderID);
+        ){
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t change payment status");
+        }
+    }
+
+    @Override
+    public void changeAdminStatusOrderToApproved(long orderID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_CONFIRM_CTATUS_ON_TRUE + orderID);
+        ){
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t change confirm status");
+        }
+    }
+
+    @Override
+    public void changeAdminStatusOrderToBlock(long orderID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_CONFIRM_CTATUS_ON_FALSE + orderID);
+        ){
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t change confirm status");
+        }
+    }
+
+    @Override
+    public void completeOrder(long orderID) throws DAOException {
+        try (
+                ConnectionProxy connection = new ConnectionProxy(ConnectionPool.INSTANCE.getConnection());
+                PreparedStatement preparedStatement = connection.prepareStatement(COMPLETE_ORDER + orderID);
+        ){
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException("Can`t change order status");
+        }
     }
 }

@@ -15,7 +15,8 @@ public enum PageEnum {
     ORDERS_PAGE("views/orders.jsp"),
     USER_CHANGE_PASSWORD_PAGE("views/user_change_password_page.jsp"),
     CREATE_CAR_ORDER_PAGE("views/create_order_page.jsp"),
-    ORDER_INFO_PAGE("views/order_info_page.jsp");
+    ORDER_INFO_PAGE("views/order_info_page.jsp"),
+    PAYMENT_ORDER_PAGE("views/payment_order_page.jsp");
 
 
     private String value;

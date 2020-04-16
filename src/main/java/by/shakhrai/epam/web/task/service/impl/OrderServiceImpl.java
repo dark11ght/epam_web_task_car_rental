@@ -8,7 +8,6 @@ import by.shakhrai.epam.web.task.entity.Order;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.DAOException;
 import by.shakhrai.epam.web.task.exception.OrderServiceException;
-import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.DAOFactory;
 import by.shakhrai.epam.web.task.service.OrderService;
 import org.apache.log4j.LogManager;
@@ -61,6 +60,65 @@ public class OrderServiceImpl implements OrderService {
     public Order getOrderByOrderID(long orderID) throws OrderServiceException {
         try {
             return orderDAOImpl.getOrderByOrderID(orderID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
+        }
+    }
+
+    @Override
+    public void paymentOrder(long orderID, float totalCost) throws OrderServiceException {
+        Order order;
+        try {
+            order = orderDAOImpl.getOrderByOrderID(orderID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
+        }
+
+        if(order.getTotalPrice() == totalCost){
+            try {
+                orderDAOImpl.changePaymentStatusOrderToApproved(orderID);
+            } catch (DAOException e) {
+                LOGGER.warn(e);
+                throw new OrderServiceException(e);
+            }
+        }else {
+            LOGGER.warn("Total cost and enter cost do not much");
+            throw new OrderServiceException("Total cost and enter cost do not much");
+
+        }
+    }
+
+    @Override
+    public void changePaymentStatusOrderToApproved(long orderID) throws OrderServiceException {
+
+    }
+
+    @Override
+    public void changeAdminStatusOrderToApproved(long orderID) throws OrderServiceException {
+
+    }
+
+    @Override
+    public void changeAdminStatusOrderToBlock(long orderID) throws OrderServiceException {
+
+    }
+
+    @Override
+    public void completeOrder(long orderID) throws OrderServiceException {
+        Order order = getOrderByOrderID(orderID);
+
+        int carID = order.getCar().getId();
+        try {
+            carDAOImpl.unBlockCarByOrder(carID);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new OrderServiceException(e);
+        }
+
+        try {
+            orderDAOImpl.completeOrder(orderID);
         } catch (DAOException e) {
             LOGGER.warn(e);
             throw new OrderServiceException(e);

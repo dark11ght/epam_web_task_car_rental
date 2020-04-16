@@ -8,21 +8,19 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateOrderPage implements Command {
+public class PaymentOrderPage implements Command {
     private static final Logger LOGGER = LogManager.getLogger(CreateOrderPage.class);
 
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
-        int orderCarID = Integer.parseInt(request.getParameter("orderCarID"));
-        String orderCarMark = request.getParameter("orderCarMark");
-        String orderCarModel = request.getParameter("orderCarModel");
-        request.setAttribute("orderCarID", orderCarID);
-        request.setAttribute("orderCarMark", orderCarMark);
-        request.setAttribute("orderCarModel", orderCarModel);
+        long paymentOrderID = Long.parseLong(request.getParameter("paymentOrderID"));
+        float totalPrice = Float.parseFloat(request.getParameter("totalPrice"));
+        request.setAttribute("paymentOrderID", paymentOrderID);
+        request.setAttribute("totalPrice", totalPrice);
 
-        page = PageEnum.CREATE_CAR_ORDER_PAGE.getValue();
+        page = PageEnum.PAYMENT_ORDER_PAGE.getValue();
         return page;
     }
 }
