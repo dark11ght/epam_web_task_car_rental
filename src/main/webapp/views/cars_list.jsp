@@ -45,13 +45,16 @@
                                 </form>
                             </c:if>
                             <c:if test="${!car.carStatus.carStatus.equals('free')}">
-                                <form action="controller" method="POST">
+                                <form action="controller" method="GET">
                                     <button type="submit" class="btn btn-lg btn-block btn-outline-secondary" disabled>
                                         <fmt:message key="tableButtonToOrder"/></button>
                                 </form>
                             </c:if>
                             <form action="controller" method="POST">
-                                <button type="submit" name="car_id" value="${car.id}"
+                                <input type="hidden" id="InfoCarMark" name="infoCarMark" value="${car.mark.mark}">
+                                <input type="hidden" id="InfoCarModel" name="infoCarModel" value="${car.model.modelName}">
+
+                                <button type="submit" name="command" value="CAR_INFO_PAGE"
                                         class="btn btn-lg btn-block btn-outline-primary"><fmt:message
                                         key="tableButtonViewInfo"/></button>
                             </form>

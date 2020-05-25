@@ -13,6 +13,13 @@ public enum CommandParameter {
         }
     },
 
+    CAR_INFO_PAGE {
+        {
+            this.command = new CarInfoPage();
+        }
+    },
+
+
     USER_INFO_PAGE {
         {
             this.command = new UserPage();

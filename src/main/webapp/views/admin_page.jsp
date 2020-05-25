@@ -21,7 +21,6 @@
 <fmt:bundle basename="pagecontent" prefix="admin_page.">
     <ul class="list-unstyled">
         <li><p class="text-danger"><fmt:message key="uncheckOrders" /> <strong>${countOrder}</strong></p></li>
-        <li><a class="nav-link" href=""><fmt:message key="orderList" /></a><br></li>
     </ul>
 
     <ul class="list-unstyled">
