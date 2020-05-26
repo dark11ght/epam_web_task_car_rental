@@ -13,6 +13,9 @@
         <fmt:setLocale value="ru"/>
     </c:if>
 </c:if>
+<c:if test="${empty sessionScope.role}">
+    <c:set var="role" scope="session" value="guest" />
+</c:if>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -27,6 +30,19 @@
                     </li>
 
                     <c:if test="${empty sessionScope.role}">
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="controller?command=SIGN_IN_PAGE">
+                                <fmt:message key="signIn"/> </a>
+                        </li>
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="controller?command=USER_REGISTRATION_PAGE"
+                               methods="POST"><fmt:message key="registration"/> </a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${sessionScope.role.equals('guest')}">
 
                         <li class="nav-item active">
                             <a class="nav-link" href="controller?command=SIGN_IN_PAGE">

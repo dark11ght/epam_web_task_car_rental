@@ -2,6 +2,7 @@ package by.shakhrai.epam.web.task.command.receiver.user;
 
 import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.PageEnum;
+import by.shakhrai.epam.web.task.command.RoleEnum;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.UserService;
@@ -18,8 +19,15 @@ public class DeleteUserFromDB implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+
+
         String page;
         HttpSession session = request.getSession();
+        //Check role
+        if(!session.getAttribute("role").equals(RoleEnum.ADMINISTRATOR.getValue())){
+            return PageEnum.INDEX_JSP.getValue();
+        }
+
         long userID = Long.parseLong(request.getParameter("userID"));
 
         if (session.getAttribute("role") != null) {

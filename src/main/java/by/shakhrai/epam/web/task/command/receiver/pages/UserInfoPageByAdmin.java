@@ -2,7 +2,7 @@ package by.shakhrai.epam.web.task.command.receiver.pages;
 
 import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.PageEnum;
-import by.shakhrai.epam.web.task.command.receiver.user.UserPage;
+import by.shakhrai.epam.web.task.command.RoleEnum;
 import by.shakhrai.epam.web.task.entity.User;
 import by.shakhrai.epam.web.task.exception.UserServiceEcxeption;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
@@ -20,6 +20,14 @@ public class UserInfoPageByAdmin implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+
+        HttpSession session = request.getSession();
+        //Check role
+        if(!session.getAttribute("role").equals(RoleEnum.ADMINISTRATOR.getValue())){
+            return PageEnum.INDEX_JSP.getValue();
+        }
+
+
         String page;
         long userID = Long.parseLong(request.getParameter("userID"));
         try {

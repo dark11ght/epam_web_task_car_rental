@@ -2,7 +2,7 @@ package by.shakhrai.epam.web.task.command.receiver.user;
 
 import by.shakhrai.epam.web.task.command.Command;
 import by.shakhrai.epam.web.task.command.PageEnum;
-import by.shakhrai.epam.web.task.command.receiver.order.CompleteOrder;
+import by.shakhrai.epam.web.task.command.RoleEnum;
 import by.shakhrai.epam.web.task.exception.OrderServiceException;
 import by.shakhrai.epam.web.task.factory.ServiceFactory;
 import by.shakhrai.epam.web.task.service.OrderService;
@@ -20,6 +20,13 @@ public class AdminPage implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+
+        HttpSession session = request.getSession();
+        //Check role
+        if(!session.getAttribute("role").equals(RoleEnum.ADMINISTRATOR.getValue())){
+            return PageEnum.INDEX_JSP.getValue();
+        }
+
         int countOrdersWhereAdminStatusFalse = 0;
 
         try {
