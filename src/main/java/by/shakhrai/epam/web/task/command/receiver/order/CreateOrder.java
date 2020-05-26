@@ -32,7 +32,7 @@ public class CreateOrder implements Command {
 
         try {
             orderServiceImpl.createOrderByUser(userID, orderCarID, rentHours, notes);
-           /* try {
+            try {
                 carServiceImpl.blockCarByOrder(orderCarID);
 
             } catch (CarServiceException e) {
@@ -40,16 +40,13 @@ public class CreateOrder implements Command {
                 request.setAttribute("informMessage", message);
                 page = PageEnum.INFORMER_PAGE_JSP.getValue();
                 return page;
-            }*/
+            }
         } catch (OrderServiceException e) {
             String message = "Can not create order";
             request.setAttribute("informMessage", message);
             page = PageEnum.INFORMER_PAGE_JSP.getValue();
             return page;
         }
-
-        //TODO
-
 
         List<Order> orders = null;
         try {

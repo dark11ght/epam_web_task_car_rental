@@ -71,20 +71,22 @@
 </div>
 
 <div>
-<fmt:bundle basename="pagecontent" prefix="orders_page.">
-    <c:if test="${!order.paymentStatus.equals(true)}">
-        <td>
-            <form action="controller" method="POST">
-                <input type="hidden" id="PayByOrder" name="paymentOrderID" value="${order.id}">
-                <input type="hidden" id="totalPrice" name="totalPrice" value="${order.totalPrice}">
-                <button type="submit" name="command" value="PAYMENT_ORDER_PAGE"
-                        class="btn btn-outline-danger">
-                    <fmt:message key="buttonPaymentOrder"/>
-                </button>
-            </form>
-        </td>
-    </c:if>
-</fmt:bundle>
+    <fmt:bundle basename="pagecontent" prefix="orders_page.">
+        <c:if test="${order.orderStatus.equals(true)}">
+            <c:if test="${!order.paymentStatus.equals(true)}">
+                <td>
+                    <form action="controller" method="POST">
+                        <input type="hidden" id="PayByOrder" name="paymentOrderID" value="${order.id}">
+                        <input type="hidden" id="totalPrice" name="totalPrice" value="${order.totalPrice}">
+                        <button type="submit" name="command" value="PAYMENT_ORDER_PAGE"
+                                class="btn btn-outline-danger">
+                            <fmt:message key="buttonPaymentOrder"/>
+                        </button>
+                    </form>
+                </td>
+            </c:if>
+        </c:if>
+    </fmt:bundle>
 </div>
 
 <div>

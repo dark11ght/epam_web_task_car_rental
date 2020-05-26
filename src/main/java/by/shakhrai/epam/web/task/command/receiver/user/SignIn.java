@@ -22,7 +22,7 @@ public class SignIn implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page;
+        String page = "";
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -39,29 +39,11 @@ public class SignIn implements Command {
         if (user != null) {
             HttpSession session = request.getSession();
             request.setAttribute("user", user);
-            if (user.getRole().getRole().equals("admin")) {
-                Long userId = user.getId();
-                session.setAttribute("ActiveUserId", userId);
-                session.setAttribute("activeUser", user);
-                session.setAttribute("role", user.getRole().getRole());
-                request.setAttribute("user", user);
-                int countOrdersWhereAdminStatusFalse = 0;
-
-                try {
-                    countOrdersWhereAdminStatusFalse = orderServiceImpl.getCountOrdersWhereAdminStatusFalse();
-                } catch (OrderServiceException e) {
-                    e.printStackTrace();
-                }
-                request.setAttribute("countOrder", countOrdersWhereAdminStatusFalse);
-                page = PageEnum.ADMIN_PAGE_JSP.getValue();
-            } else {
-                Long id = user.getId();
-                session.setAttribute("ActiveUserId", id);
-                session.setAttribute("activeUser", user);
-                session.setAttribute("role", user.getRole().getRole());
-                request.setAttribute("user", user);
-                page = PageEnum.USER_PAGE_JSP.getValue();
-            }
+            Long id = user.getId();
+            session.setAttribute("ActiveUserId", id);
+            session.setAttribute("activeUser", user);
+            session.setAttribute("role", user.getRole().getRole());
+            request.setAttribute("user", user);
         } else {
             String message = "User not found";
             request.setAttribute("informMessage", message);

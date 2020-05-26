@@ -40,20 +40,23 @@ public class MainController extends HttpServlet {
         if(session.getAttribute("role").equals(RoleEnum.GUEST.getValue()) || session.getAttribute("role") == null){
             Command command = COMMAND_FACTORY.defineCommand(request);
             String path = command.execute(request, response);
-            if (path.equals(PageEnum.SIGN_PAGE_JSP.getValue()) || path.equals(PageEnum.REGISTRATION_PAGE.getValue())) {
+            if (path.equals(PageEnum.SIGN_PAGE_JSP.getValue()) || path.equals(PageEnum.REGISTRATION_PAGE.getValue()) ||
+                    path.equals(PageEnum.INFORMER_PAGE_JSP.getValue()) || path.equals(PageEnum.ERROR_PAGE_JSP.getValue())) {
                 request.getRequestDispatcher(path).forward(request, response);
             }else {
                 request.getRequestDispatcher(PageEnum.INDEX_JSP.getValue()).forward(request, response);
             }
         }
 
-        Command command = COMMAND_FACTORY.defineCommand(request);
-        String path = command.execute(request, response);
-        if (path != null) {
-            request.getRequestDispatcher(path).forward(request, response);
-        }else {
-            request.getRequestDispatcher(PageEnum.INDEX_JSP.getValue()).forward(request, response);
-    }
+        if(session.getAttribute("role").equals(RoleEnum.USER.getValue()) || session.getAttribute("role").equals(RoleEnum.ADMINISTRATOR.getValue())){
+            Command command = COMMAND_FACTORY.defineCommand(request);
+            String path = command.execute(request, response);
+            if (path != null) {
+                request.getRequestDispatcher(path).forward(request, response);
+            } else {
+                request.getRequestDispatcher(PageEnum.INDEX_JSP.getValue()).forward(request, response);
+            }
+        }
     }
 
     @Override

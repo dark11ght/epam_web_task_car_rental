@@ -65,13 +65,13 @@
                 </form>
             </td>
 
-            <td>
+           <%-- <td>
                 <form action="controller" method="POST">
                     <button type="submit" name="command" value="USER_EDIT_PAGE" class="btn btn-outline-warning">
                         <fmt:message key="buttonChangeProfile"/>
                     </button>
                 </form>
-            </td>
+            </td>--%>
 
             <td>
                 <form action="controller" method="POST">

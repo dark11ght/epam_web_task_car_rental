@@ -20,7 +20,7 @@ public class UserRegistration implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         User user = null;
-        String page;
+        String page="";
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String firstName = request.getParameter("firstName");
@@ -53,7 +53,10 @@ public class UserRegistration implements Command {
             session.setAttribute("role", user.getRole().getRole());
             session.setAttribute("activeUser", user);
             request.setAttribute("user", user);
-            page = PageEnum.USER_PAGE_JSP.getValue();
+            String message = "Вы зарегестрированны";
+            request.setAttribute("informMessage", message);
+            page = PageEnum.INFORMER_PAGE_JSP.getValue();
+
         } else {
             String message = "User not found";
             request.setAttribute("informMessage", message);
